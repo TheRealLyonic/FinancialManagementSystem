@@ -8,6 +8,7 @@ target/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
+data/11.24.22-12.31.22.xlsx
 *.iws
 *.iml
 *.ipr
