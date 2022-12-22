@@ -1,10 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.HashMap;
 
 public class Frame extends JFrame {
 
-    Frame(){
+    Frame() throws IOException {
         this.setTitle("Financial Management System");
         this.setSize(650, 650);
         this.setIconImage(new ImageIcon("resources/icon.png").getImage());

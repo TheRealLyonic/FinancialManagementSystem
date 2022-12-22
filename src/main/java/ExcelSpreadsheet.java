@@ -88,6 +88,16 @@ public class ExcelSpreadsheet{
         return cellValue;
     }
 
+    /*
+    If this method is returning the wrong value, try the following;
+    1. Open Excel file and go to the expected sheet
+    2. Select the last row + 1. E.g you have 12 rows with data, then click on row 13.
+    3. Select the entire row [Shift]-[Space]
+    4. Select all rows to the bottom of the sheet [Ctrl]-[Shift]-[Arrow down]
+    5. Clear all selected rows [Ctrl]-[Minus]
+    6. Save your workbook
+    7. Rerun the code and check returned value
+    */
     public int getLastRow() throws IOException {
         XSSFWorkbook workBook = new XSSFWorkbook(new FileInputStream(filePath));
 
