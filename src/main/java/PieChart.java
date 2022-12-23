@@ -20,7 +20,7 @@ public class PieChart {
         data.forEach((key, value) -> dataset.setValue(key.toString(), (int) value));
 
         //Creates the pie-chart using the pre-specified dataset
-        chart = ChartFactory.createPieChart(chartTitle, dataset, true, true, false);
+        chart = ChartFactory.createPieChart(chartTitle, dataset, false, true, false);
 
         //Creates and presets info. for the chartPanel, decides placement and appearance of the pie-chart on a JFrame.
         chartPanel = new ChartPanel(chart);
