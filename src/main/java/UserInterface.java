@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,10 +38,9 @@ public class UserInterface extends JFrame implements ActionListener, Colors{
         newDepositButton.setContentAreaFilled(false);
         newDepositButton.addActionListener(this);
             //Deposit Text
-        newDepositText = new JLabel();
-        newDepositText.setText("New Deposit");
+        newDepositText = new JLabel("New Deposit");
         newDepositText.setFont(new Font("Roboto", 1, 35));
-        newDepositText.setForeground(new Color(222, 222, 222));
+        newDepositText.setForeground(SUBDUED_WHITE);
         newDepositText.setLocation(90, 46);
         newDepositText.setSize(225, 70);
 
