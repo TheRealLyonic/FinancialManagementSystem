@@ -1,4 +1,6 @@
+import org.apache.poi.ss.formula.functions.BaseNumberUtils;
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -78,10 +80,14 @@ public class ExcelSpreadsheet{
         }
 
         String cellValue;
-        try{
-            cellValue = row.getCell(cellNumber).getStringCellValue();
-        }catch(IllegalStateException e){
+
+        //Checks if the cell contains a date, number, or a string.
+        if(DateUtil.isCellDateFormatted(row.getCell(cellNumber))){
+            cellValue = row.getCell(cellNumber).getDateCellValue().toString();
+        }else if(row.getCell(cellNumber).getCellType() == Cell.CELL_TYPE_NUMERIC){
             cellValue = Double.toString(row.getCell(cellNumber).getNumericCellValue());
+        }else{
+            cellValue = row.getCell(cellNumber).getStringCellValue();
         }
 
         workBook.close();
