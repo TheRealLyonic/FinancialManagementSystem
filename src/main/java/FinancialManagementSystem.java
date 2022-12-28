@@ -58,7 +58,7 @@ public class FinancialManagementSystem{
         spent = new BigDecimal(((new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(lastDepositRow, 3))).setScale(2, RoundingMode.HALF_EVEN).doubleValue() - balance))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
     }
 
-    public void updateCurrentDate() throws IOException{
+    public void updateCurrentDate(){
         currentLocalDate = LocalDate.now();
     }
 
@@ -78,10 +78,13 @@ public class FinancialManagementSystem{
         int numberOfMissingEntries = currentLocalDate.getDayOfMonth() - lastSpreadsheetDate.getDayOfMonth();
 
         int currentRow = spreadsheet.getLastRow() + 1;
-        //Start at the first missing entry, go until it matches with the current day.
-        for(int i = lastSpreadsheetDate.getDayOfMonth() + 1; i < currentLocalDate.getDayOfMonth(); i++){
+        LocalDate currentDate = lastSpreadsheetDate.plusDays(1);
 
-        }
+        spreadsheet.writeToSpreadsheet(spreadsheet.getLastRow() + 1, 0, currentDate.toString(), "Date");
+//        for(int i = 0; i <= numberOfMissingEntries; i++){
+//            currentDate = currentDate.plusDays(i);
+//            spreadsheet.writeToSpreadsheet(currentRow, 0, currentDate.toString());
+//        }
     }
 
     //Getters + Setters

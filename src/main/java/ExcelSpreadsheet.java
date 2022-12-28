@@ -1,8 +1,5 @@
 import org.apache.poi.ss.formula.functions.BaseNumberUtils;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.DateUtil;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -10,6 +7,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class ExcelSpreadsheet{
 
@@ -22,7 +22,7 @@ public class ExcelSpreadsheet{
     }
 
     //Will write data to a specified spreadsheet, at a specific cell within a row in a workbook.
-    public void writeToSpreadsheet(int rowNumber, int cellNumber, String cellValue) throws IOException{
+    public void writeToSpreadsheet(int rowNumber, int cellNumber, String cellValue, String valueType) throws IOException{
         XSSFWorkbook workBook = new XSSFWorkbook(new FileInputStream(filePath));
 
         if(workBook == null){
@@ -45,10 +45,24 @@ public class ExcelSpreadsheet{
 
         Cell cell = row.createCell(cellNumber);
 
-        try{
+        //Made lower-case to account for developer-end errors involving the shift-key.
+        valueType = valueType.toLowerCase();
+        if(valueType.equals("date")){
+            cell.setCellValue(Date.from(LocalDate.parse(cellValue).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+
+            //Formats for a date
+            CellStyle cellStyle = workBook.createCellStyle();
+            CreationHelper creationHelper = workBook.getCreationHelper();
+            cellStyle.setDataFormat(creationHelper.createDataFormat().getFormat("m/d/yy"));
+
+            cell.setCellStyle(cellStyle);
+        }else if(valueType.equals("number")){
             cell.setCellValue(Double.parseDouble(cellValue));
-        }catch(NumberFormatException e){
+        }else if(valueType.equals("string")){
             cell.setCellValue(cellValue);
+        }else{
+            System.out.println("Invalid data-type parsed");
+            System.exit(-1);
         }
 
         workBook.write(new FileOutputStream(filePath));
