@@ -78,13 +78,29 @@ public class FinancialManagementSystem{
         int numberOfMissingEntries = currentLocalDate.getDayOfMonth() - lastSpreadsheetDate.getDayOfMonth();
 
         int currentRow = spreadsheet.getLastRow() + 1;
-        LocalDate currentDate = lastSpreadsheetDate.plusDays(1);
+        LocalDate currentDate = lastSpreadsheetDate;
 
-        spreadsheet.writeToSpreadsheet(spreadsheet.getLastRow() + 1, 0, currentDate.toString(), "Date");
-//        for(int i = 0; i <= numberOfMissingEntries; i++){
-//            currentDate = currentDate.plusDays(i);
-//            spreadsheet.writeToSpreadsheet(currentRow, 0, currentDate.toString());
-//        }
+        //Goes through each of the missing entries and automatically fills in the default information for uneventful
+        //days.
+        for(int i = 0; i < numberOfMissingEntries; i++){
+            currentDate = currentDate.plusDays(1);
+            spreadsheet.writeToSpreadsheet(currentRow, 0, currentDate.toString(), "Date");
+            enterDefaultInformation(currentRow);
+            currentRow++;
+        }
+    }
+
+    private void enterDefaultInformation(int row) throws IOException {
+        //Starting Balance
+        spreadsheet.writeToSpreadsheet(row, 1, String.valueOf(balance), "Number");
+        //Costs
+        spreadsheet.writeToSpreadsheet(row, 2, "0", "Number");
+        //Deposits
+        spreadsheet.writeToSpreadsheet(row, 3, "0", "Number");
+        //Remaining Balance
+        spreadsheet.writeToSpreadsheet(row, 4, String.valueOf(balance), "Number");
+        //Purchase Descriptions
+        spreadsheet.writeToSpreadsheet(row, 5, "No purchases for this day.", "String");
     }
 
     //Getters + Setters
