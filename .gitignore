@@ -8,7 +8,7 @@ target/
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
-data/2022.xlsx
+data/Financial_Data.xlsx
 *.iws
 *.iml
 *.ipr
@@ -36,4 +36,6 @@ build/
 .vscode/
 
 ### Mac OS ###
-.DS_Store
+.DS_StoreFinancial_Data.xlsx
+Financial_Data.xlsx
+Financial_Data.xlsx
