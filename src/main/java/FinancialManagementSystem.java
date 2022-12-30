@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.*;
+import java.util.Calendar;
 import java.util.Date;
 
 public class FinancialManagementSystem{
@@ -18,13 +19,10 @@ public class FinancialManagementSystem{
         spreadsheet = new ExcelSpreadsheet("data\\2022.xlsx", "Balance Sheet");
 
         //Necessary for successfully running the lastEntryIsCurrent() and addMissingEntries() methods.
+        updateCurrentDate();
         updateLastSpreadsheetDate();
 
-        //Checks to see if there is more than a one-day gap between the last entry in the spreadsheet and the current
-        //day. If there is, the addMissingEntries() method is called.
-        if(!lastEntryIsCurrent() && lastSpreadsheetDate.plusDays(1) != currentLocalDate){
-            addMissingEntries();
-        }
+        checkForMissingEntries();
 
         //Once we're sure all missing dates are accounted for, we can update all the class' variables.
         updateInformation();
@@ -37,13 +35,30 @@ public class FinancialManagementSystem{
         updateLastSpreadsheetDate();
         //Updates both the balance variable and the startingBalance variable.
         updateBalance();
+        updateStartingBalance();
         updateLastDepositRow();
         updateTotalSpent();
         updateCurrentDate();
     }
 
+    //Checks to see if there is more than a one-day gap between the last entry in the spreadsheet and the current
+    //day. If there is, the addMissingEntries() method is called.
+    private void checkForMissingEntries() throws IOException {
+        if(!lastEntryIsCurrent() && lastSpreadsheetDate.plusDays(1) != currentLocalDate){
+            addMissingEntries();
+        }
+    }
+
     public void updateBalance() throws IOException {
-        balance = new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 4))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+        updateStartingBalance();
+
+        double costs = new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 2))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+        double deposits = new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 3))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();;
+
+        balance = new BigDecimal(startingBalance + costs + deposits).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+    }
+
+    public void updateStartingBalance() throws IOException{
         startingBalance = new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 1))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
     }
 
@@ -85,7 +100,18 @@ public class FinancialManagementSystem{
     }
 
     private void addMissingEntries() throws IOException{
+//        if(lastSpreadsheetDate.plusDays(1) == currentLocalDate){
+//            createNewEntry();
+//        }else{
+//            if(lastSpreadsheetDate.getYear() != currentLocalDate.getYear()){
+//                fillRestOfYear();
+//                enterNewYear( String.valueOf(lastSpreadsheetDate.getYear() + 1) );
+//            }
+//        }
 
+        if(lastSpreadsheetDate.getYear() != 2023){
+            enterNewYear( String.valueOf(lastSpreadsheetDate.getYear() + 1) );
+        }
     }
 
     private void enterDefaultInformation(int row, LocalDate entryDate) throws IOException {
@@ -103,9 +129,40 @@ public class FinancialManagementSystem{
         spreadsheet.writeToSpreadsheet(row, 5, "No purchases for this day.", "String");
     }
 
-    private void enterNewYear() throws IOException {
-        spreadsheet.createNewSpreadsheet("2023", "Balance Sheet");
+    //Handles all of the necessary actions for entering a new year, including creating a new spreadsheet.
+    private void enterNewYear(String newYear) throws IOException {
+        //There's probably a better way to do this...But who knows.
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, Integer.parseInt(newYear));
+        calendar.set(Calendar.DAY_OF_YEAR, 1);
+        calendar.set(Calendar.DAY_OF_MONTH, 1);
+
+        LocalDate date = LocalDate.ofEpochDay(calendar.get(Calendar.DATE));
+        System.out.println(date);
+
+        spreadsheet.createNewSpreadsheet(newYear, "Balance Sheet");
         setupSheet();
+        enterDefaultInformation(1, date);
+        checkForMissingEntries();
+    }
+
+    //Creates a new entry for today's date, to be used if there is not currently an entry.
+    private void createNewEntry() throws IOException {
+        int row = spreadsheet.getLastRow() + 1;
+
+        //Date
+        spreadsheet.writeToSpreadsheet(row, 0, currentLocalDate.toString(), "Date");
+        //Starting Balance
+        spreadsheet.writeToSpreadsheet(row, 1, spreadsheet.readFromSpreadsheet(row - 1, 4), "Number");
+        //Costs
+        spreadsheet.writeToSpreadsheet(row, 2, "0", "Number");
+        //Deposits
+        spreadsheet.writeToSpreadsheet(row, 3, "0", "Number");
+        //Remaining Balance
+        updateBalance();
+        spreadsheet.writeToSpreadsheet(row, 4, String.valueOf(balance), "Number");
+        //Purchase Descriptions
+        spreadsheet.writeToSpreadsheet(row, 5, "No purchases for this day.", "String");
     }
 
     private void setupSheet() throws IOException {
