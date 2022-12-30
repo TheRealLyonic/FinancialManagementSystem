@@ -17,17 +17,17 @@ public class FinancialManagementSystem{
     FinancialManagementSystem() throws IOException {
         spreadsheet = new ExcelSpreadsheet("data\\2022.xlsx", "Balance Sheet");
 
-        //Necessary for successfully running the lastEntryIsCurrent() and addMissingEntires() methods.
-//        updateLastSpreadsheetDate();
+        //Necessary for successfully running the lastEntryIsCurrent() and addMissingEntries() methods.
+        updateLastSpreadsheetDate();
 
-//        if(!lastEntryIsCurrent()){
-//            addMissingEntries();
-//        }
-
-        System.out.println(spreadsheet.readFromSpreadsheet(3, 1));
+        //Checks to see if there is more than a one-day gap between the last entry in the spreadsheet and the current
+        //day. If there is, the addMissingEntries() method is called.
+        if(!lastEntryIsCurrent() && lastSpreadsheetDate.plusDays(1) != currentLocalDate){
+            addMissingEntries();
+        }
 
         //Once we're sure all missing dates are accounted for, we can update all the class' variables.
-//        updateInformation();
+        updateInformation();
 
         new UserInterface();
     }
@@ -85,47 +85,7 @@ public class FinancialManagementSystem{
     }
 
     private void addMissingEntries() throws IOException{
-        LocalDate currentDate = lastSpreadsheetDate.plusDays(1);
-        int currentRow = spreadsheet.getLastRow() + 1;
 
-        //The spreadsheet's last known entry was the last day of the year, so we should now enter a new year.
-        if(currentDate.getYear() != lastSpreadsheetDate.getYear()){
-            enterNewYear();
-        }else{
-            while(currentDate != currentLocalDate){
-                if(currentDate.getYear() != currentLocalDate.getYear()){
-                    //Fill out the current day's row with the default information and increment the current date by
-                    //one day for as long as it takes to have the years of the currentDate and the currentLocalDate
-                    //match.
-                    int startingYear = currentDate.getYear();
-                    while(currentDate.getYear() != currentLocalDate.getYear()){
-
-                        //This check is for if the gap between the currentLocalDate's year and the last accounted
-                        //for date's year is greater than one year. I.e. if the last time an entry was created was
-                        //in 2021, and the date is now 2023. A check is needed so that the year 2022 is not missed
-                        //(Even though it will be entirely filled with the default information)
-                        if(startingYear != currentDate.getYear()){
-                            updateLastSpreadsheetDate();
-                            enterNewYear();
-                            return;
-                        }
-
-                        //For each day in the remaining days of the month, enter the default information.
-                        for(; currentDate.getDayOfMonth() <= YearMonth.of(currentDate.getYear(), currentDate.getMonth()).lengthOfMonth(); currentDate.plusDays(1)){
-                            enterDefaultInformation(currentRow, currentDate);
-                            currentRow++;
-                        }
-                    }
-
-                    updateLastSpreadsheetDate();
-                    enterNewYear();
-                }else{
-                    enterDefaultInformation(currentRow, currentDate);
-                    currentRow++;
-                    currentDate.plusDays(1);
-                }
-            }
-        }
     }
 
     private void enterDefaultInformation(int row, LocalDate entryDate) throws IOException {

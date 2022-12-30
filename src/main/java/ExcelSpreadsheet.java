@@ -98,12 +98,14 @@ public class ExcelSpreadsheet{
         String cellValue;
 
         //Checks if the cell contains a date, number, or a string.
-        if(DateUtil.isCellDateFormatted(row.getCell(cellNumber))){
+        if(row.getCell(cellNumber).getCellType() == Cell.CELL_TYPE_STRING){
+            cellValue = row.getCell(cellNumber).getStringCellValue();
+        }else if(DateUtil.isCellDateFormatted(row.getCell(cellNumber))){
             cellValue = row.getCell(cellNumber).getDateCellValue().toString();
         }else if(row.getCell(cellNumber).getCellType() == Cell.CELL_TYPE_NUMERIC || row.getCell(cellNumber).getCellType() == Cell.CELL_TYPE_FORMULA){
             cellValue = Double.toString(row.getCell(cellNumber).getNumericCellValue());
         }else{
-            cellValue = row.getCell(cellNumber).getStringCellValue();
+            cellValue = "ERROR";
         }
 
         workBook.close();
