@@ -1,12 +1,9 @@
-import org.apache.poi.ss.formula.functions.BaseNumberUtils;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -15,6 +12,8 @@ public class ExcelSpreadsheet{
 
     private String filePath;
     private String sheetName;
+    private XSSFWorkbook workBook;
+    private XSSFSheet sheet;
 
     ExcelSpreadsheet(String filePath, String sheetName){
         this.filePath = filePath;
@@ -23,14 +22,14 @@ public class ExcelSpreadsheet{
 
     //Will write data to a specified spreadsheet, at a specific cell within a row in a workbook.
     public void writeToSpreadsheet(int rowNumber, int cellNumber, String cellValue, String valueType) throws IOException{
-        XSSFWorkbook workBook = new XSSFWorkbook(new FileInputStream(filePath));
+        workBook = new XSSFWorkbook(new FileInputStream(filePath));
 
         if(workBook == null){
             System.out.println("File not found.");
             System.exit(-1);
         }
 
-        Sheet sheet = workBook.getSheet(sheetName);
+        sheet = workBook.getSheet(sheetName);
 
         if(sheet == null){
             System.out.println("Sheet is null.");
@@ -60,6 +59,9 @@ public class ExcelSpreadsheet{
             cell.setCellValue(Double.parseDouble(cellValue));
         }else if(valueType.equals("string")){
             cell.setCellValue(cellValue);
+        }else if(valueType.equals("starting_value")){
+            cell.setCellValue(cellValue);
+            sheet.autoSizeColumn(cellNumber);
         }else{
             System.out.println("Invalid data-type parsed");
             System.exit(-1);
@@ -72,7 +74,7 @@ public class ExcelSpreadsheet{
     //Will read data from a specified spreadsheet, at a specific cell within a row in a workbook.
     public String readFromSpreadsheet(int rowNumber, int cellNumber) throws IOException{
         //Specifies the workbook info and reads from the requested cell
-        XSSFWorkbook workBook = new XSSFWorkbook(new FileInputStream(filePath));
+        workBook = new XSSFWorkbook(new FileInputStream(filePath));
 
         if(workBook == null){
             System.out.println("File not found.");
@@ -98,7 +100,7 @@ public class ExcelSpreadsheet{
         //Checks if the cell contains a date, number, or a string.
         if(DateUtil.isCellDateFormatted(row.getCell(cellNumber))){
             cellValue = row.getCell(cellNumber).getDateCellValue().toString();
-        }else if(row.getCell(cellNumber).getCellType() == Cell.CELL_TYPE_NUMERIC){
+        }else if(row.getCell(cellNumber).getCellType() == Cell.CELL_TYPE_NUMERIC || row.getCell(cellNumber).getCellType() == Cell.CELL_TYPE_FORMULA){
             cellValue = Double.toString(row.getCell(cellNumber).getNumericCellValue());
         }else{
             cellValue = row.getCell(cellNumber).getStringCellValue();
@@ -119,32 +121,34 @@ public class ExcelSpreadsheet{
     7. Rerun the code and check returned value
     */
     public int getLastRow() throws IOException {
-        XSSFWorkbook workBook = new XSSFWorkbook(new FileInputStream(filePath));
+        workBook = new XSSFWorkbook(new FileInputStream(filePath));
 
         if(workBook == null){
             System.out.println("File not found.");
             System.exit(-1);
         }
 
-        XSSFSheet sheet = workBook.getSheet(sheetName);
+        sheet = workBook.getSheet(sheetName);
 
         if(sheet == null){
             System.out.println("Sheet not found.");
             System.exit(-1);
         }
 
+        workBook.close();
+
         return sheet.getLastRowNum();
     }
 
     public int getLastCell(int rowNumber) throws IOException {
-        XSSFWorkbook workBook = new XSSFWorkbook(new FileInputStream(filePath));
+        workBook = new XSSFWorkbook(new FileInputStream(filePath));
 
         if(workBook == null){
             System.out.println("File not found.");
             System.exit(-1);
         }
 
-        XSSFSheet sheet = workBook.getSheet(sheetName);
+        sheet = workBook.getSheet(sheetName);
 
         if(sheet == null){
             System.out.println("Sheet not found.");
@@ -162,7 +166,24 @@ public class ExcelSpreadsheet{
         return row.getLastCellNum() - 1;
     }
 
+    public void createNewSpreadsheet(String fileName, String sheetName) throws IOException {
+        XSSFWorkbook workbook = new XSSFWorkbook();
+        workbook.createSheet(sheetName);
+
+        String filePath = "data\\" + fileName + ".xlsx";
+
+        //Creates file the at the given path
+        workbook.write(new FileOutputStream(filePath));
+
+        this.filePath = filePath;
+        this.sheetName = sheetName;
+    }
+
     //Getters + Setters
+    public XSSFSheet getSheet(){
+        return sheet;
+    }
+
     public void setSheetName(String sheetName){
         this.sheetName = sheetName;
     }

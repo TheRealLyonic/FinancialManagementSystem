@@ -1,11 +1,7 @@
 import org.jfree.chart.*;
-import org.jfree.data.*;
 import org.jfree.data.general.DefaultPieDataset;
-import org.jfree.data.general.PieDataset;
 
-import java.util.Dictionary;
 import java.util.HashMap;
-import java.util.Map;
 
 public class PieChart {
 
