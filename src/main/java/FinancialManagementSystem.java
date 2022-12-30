@@ -33,7 +33,6 @@ public class FinancialManagementSystem{
     //Updates all the basic information for the program
     private void updateInformation() throws IOException {
         updateLastSpreadsheetDate();
-        //Updates both the balance variable and the startingBalance variable.
         updateBalance();
         updateStartingBalance();
         updateLastDepositRow();
@@ -63,10 +62,12 @@ public class FinancialManagementSystem{
     }
 
     public void updateLastDepositRow() throws IOException{
-        for(int i = spreadsheet.getLastRow(); i >= 0; i--){
+        for(int i = spreadsheet.getLastRow(); i >= 1; i--){
             if(Double.parseDouble(spreadsheet.readFromSpreadsheet(i, 3)) > 0.00){
                 lastDepositRow = i;
                 break;
+            }else{
+                lastDepositRow = 1;
             }
         }
     }
@@ -100,17 +101,13 @@ public class FinancialManagementSystem{
     }
 
     private void addMissingEntries() throws IOException{
-//        if(lastSpreadsheetDate.plusDays(1) == currentLocalDate){
-//            createNewEntry();
-//        }else{
-//            if(lastSpreadsheetDate.getYear() != currentLocalDate.getYear()){
-//                fillRestOfYear();
-//                enterNewYear( String.valueOf(lastSpreadsheetDate.getYear() + 1) );
-//            }
-//        }
-
-        if(lastSpreadsheetDate.getYear() != 2023){
-            enterNewYear( String.valueOf(lastSpreadsheetDate.getYear() + 1) );
+        if(lastSpreadsheetDate.plusDays(1) == currentLocalDate){
+            createNewEntry();
+        }else{
+            if(lastSpreadsheetDate.getYear() != currentLocalDate.getYear()){
+                //fillRestOfYear();
+                enterNewYear( String.valueOf(lastSpreadsheetDate.getYear() + 1) );
+            }
         }
     }
 
@@ -131,18 +128,12 @@ public class FinancialManagementSystem{
 
     //Handles all of the necessary actions for entering a new year, including creating a new spreadsheet.
     private void enterNewYear(String newYear) throws IOException {
-        //There's probably a better way to do this...But who knows.
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, Integer.parseInt(newYear));
-        calendar.set(Calendar.DAY_OF_YEAR, 1);
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
-
-        LocalDate date = LocalDate.ofEpochDay(calendar.get(Calendar.DATE));
-        System.out.println(date);
+        LocalDate firstDayOfYear = LocalDate.of(Integer.parseInt(newYear), 1, 1);
 
         spreadsheet.createNewSpreadsheet(newYear, "Balance Sheet");
         setupSheet();
-        enterDefaultInformation(1, date);
+        enterDefaultInformation(1, firstDayOfYear);
+        updateInformation();
         checkForMissingEntries();
     }
 
@@ -167,7 +158,7 @@ public class FinancialManagementSystem{
 
     private void setupSheet() throws IOException {
         spreadsheet.writeToSpreadsheet(0, 0, "Date (MM/DD/YY)", "Starting_Value");
-        spreadsheet.writeToSpreadsheet(0, 1, "Starting Balance", "Starting_Value");
+        spreadsheet.writeToSpreadsheet(0, 1, "Starting Balance ($0000.00)", "Starting_Value");
         spreadsheet.writeToSpreadsheet(0, 2, "Costs ($0000.00)", "Starting_Value");
         spreadsheet.writeToSpreadsheet(0, 3, "Deposits ($0000.00)", "Starting_Value");
         spreadsheet.writeToSpreadsheet(0, 4, "Remaining Balance ($0000.00)", "Starting_Value");
