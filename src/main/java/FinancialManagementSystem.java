@@ -2,6 +2,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.*;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -101,14 +103,35 @@ public class FinancialManagementSystem{
     }
 
     private void addMissingEntries() throws IOException{
-        if(lastSpreadsheetDate.plusDays(1) == currentLocalDate){
-            createNewEntry();
-        }else{
-            if(lastSpreadsheetDate.getYear() != currentLocalDate.getYear()){
-                //fillRestOfYear();
-                enterNewYear( String.valueOf(lastSpreadsheetDate.getYear() + 1) );
-            }
+//        if(lastSpreadsheetDate.plusDays(1) == currentLocalDate && lastSpreadsheetDate.getYear() == currentLocalDate.getYear()){
+//            createNewEntry();
+//        }else{
+//            if(lastSpreadsheetDate.getYear() != currentLocalDate.getYear()){
+//                fillRestOfYear();
+//                enterNewYear( String.valueOf(lastSpreadsheetDate.getYear() + 1) );
+//            }
+//        }
+
+        fillRestOfYear();
+    }
+
+    //Completes the entries for the rest of the year in the currently accessed spreadsheet.
+    private void fillRestOfYear() throws IOException {
+        updateInformation();
+
+        LocalDate lastDayOfYear = LocalDate.of(lastSpreadsheetDate.getYear(), 1, 1).with(TemporalAdjusters.lastDayOfYear());
+        int row = spreadsheet.getLastRow() + 1;
+        lastSpreadsheetDate = lastSpreadsheetDate.plusDays(1);
+
+        //Loops so long as the spreadsheet's current date is not equal to the last day of the year
+        while(!lastSpreadsheetDate.equals(lastDayOfYear)){
+            enterDefaultInformation(row, lastSpreadsheetDate);
+            row++;
+            lastSpreadsheetDate = lastSpreadsheetDate.plusDays(1);
         }
+
+        //Enters the default information for the final day of the year.
+        enterDefaultInformation(row, lastSpreadsheetDate);
     }
 
     private void enterDefaultInformation(int row, LocalDate entryDate) throws IOException {

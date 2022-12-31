@@ -1,3 +1,4 @@
+import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -57,6 +58,28 @@ public class ExcelSpreadsheet{
             cell.setCellStyle(cellStyle);
         }else if(valueType.equals("number")){
             cell.setCellValue(Double.parseDouble(cellValue));
+
+            CellStyle cellStyle = workBook.createCellStyle();
+            CreationHelper creationHelper = workBook.getCreationHelper();
+            cellStyle.setDataFormat(creationHelper.createDataFormat().getFormat("$0.00"));
+
+            //If a cost is being added to the spreadsheet, the color is set to red, if a deposit is being added,
+            //it's green, and if it's neither, the default color of black is applied.
+            short index;
+            if(cellNumber == 2){
+                index = IndexedColors.RED.getIndex();
+            }else if(cellNumber == 3){
+                index = IndexedColors.GREEN.getIndex();
+            }else{
+                index = IndexedColors.BLACK.getIndex();
+            }
+
+            //Set the color
+            Font font = workBook.createFont();
+            font.setColor(index);
+            cellStyle.setFont(font);
+
+            cell.setCellStyle(cellStyle);
         }else if(valueType.equals("string")){
             cell.setCellValue(cellValue);
         }else if(valueType.equals("starting_value")){
