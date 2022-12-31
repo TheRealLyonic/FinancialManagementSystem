@@ -1,6 +1,8 @@
 import org.jfree.chart.*;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.data.general.DefaultPieDataset;
 
+import java.awt.*;
 import java.util.HashMap;
 
 public class PieChart {
@@ -22,6 +24,11 @@ public class PieChart {
         chartPanel = new ChartPanel(chart);
         chartPanel.setLocation(x, y);
         chartPanel.setSize(width, height);
+
+        //Sets the color of each part of the pie chart.
+        PiePlot plot = (PiePlot) chart.getPlot();
+        plot.setSectionPaint(dataset.getKey(0), new Color(0, 34, 227));
+        plot.setSectionPaint(dataset.getKey(1), new Color(196, 0, 16));
     }
 
     //Getters + Setters

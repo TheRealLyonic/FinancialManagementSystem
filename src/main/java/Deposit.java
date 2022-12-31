@@ -10,6 +10,7 @@ public class Deposit extends JFrame implements ActionListener, Colors{
     Deposit(){
         this.setTitle("New Deposit");
         this.setSize(650, 430);
+        this.setResizable(false);
         this.setLayout(null);
         this.getContentPane().setBackground(FINANCIAL_BLUE);
         this.setIconImage(new ImageIcon("resources\\deposit_icon.png").getImage());

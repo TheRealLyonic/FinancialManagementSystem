@@ -1,5 +1,4 @@
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -7,18 +6,16 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
-import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
-import java.util.Calendar;
 import java.util.Date;
 
 public class FinancialManagementSystem{
 
-    private ExcelSpreadsheet spreadsheet;
+    private static ExcelSpreadsheet spreadsheet;
     private double startingBalance;
-    private double balance;
-    private double spent;
-    private int lastDepositRow;
+    private static double balance;
+    private static double spentSinceLastDeposit;
+    private static int lastDepositRow;
     private LocalDate currentLocalDate;
     private LocalDate lastSpreadsheetDate;
 
@@ -58,7 +55,7 @@ public class FinancialManagementSystem{
         updateBalance();
         updateStartingBalance();
         updateLastDepositRow();
-        updateTotalSpent();
+        updateTotalSpentSinceLastDeposit();
         updateCurrentDate();
     }
 
@@ -74,7 +71,7 @@ public class FinancialManagementSystem{
         updateStartingBalance();
 
         double costs = new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 2))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
-        double deposits = new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 3))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();;
+        double deposits = new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 3))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
 
         balance = new BigDecimal(startingBalance + costs + deposits).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
     }
@@ -94,9 +91,24 @@ public class FinancialManagementSystem{
         }
     }
 
-    public void updateTotalSpent() throws IOException {
-        //Take the week's paycheck, subtract how much you have left, you get how much you spent
-        spent = new BigDecimal(((new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(lastDepositRow, 3))).setScale(2, RoundingMode.HALF_EVEN).doubleValue() - balance))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+    //Updates the spentSinceLastDeposit variable, by adding up all of the costs since your last deposit. Useful pretty
+    //much exclusively for the PieChart to be generated later.
+    public void updateTotalSpentSinceLastDeposit() throws IOException {
+        spentSinceLastDeposit = 0.00;
+
+        for(int i = lastDepositRow; i < lastDepositRow + 7; i++){
+
+            //Ensures that if less than 6 days has passed since your last deposit, a blank cell value is not
+            //attempted to be added to the spentSinceLastDeposit variable.
+            if(i > spreadsheet.getLastRow()){
+                return;
+            }
+
+            //Get the value from the spreadsheet, and times it by negative one, since all costs are negative values.
+            //Then add the new, positive value to the spentSinceLastDeposit variable to get a clear, positive
+            //representation of how much you have spent.
+            spentSinceLastDeposit += (new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(i, 2))).setScale(2, RoundingMode.HALF_EVEN).doubleValue()) * -1;
+        }
     }
 
     public void updateCurrentDate(){
@@ -224,16 +236,16 @@ public class FinancialManagementSystem{
     }
 
     //Getters + Setters
-    public double getBalance(){
+    public static double getBalance(){
         return balance;
     }
 
-    public double getSpent(){
-        return spent;
+    public static double getSpentSinceLastDeposit(){
+        return spentSinceLastDeposit;
     }
 
-    public int getLastDepositRow(){
-        return lastDepositRow;
+    public static double getLastDeposit() throws IOException {
+        return new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(lastDepositRow, 3))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
     }
 
 }

@@ -16,13 +16,27 @@ public class UserInterface extends JFrame implements ActionListener, Colors{
         this.setTitle("Financial Management System");
         this.setSize(850, 850);
         this.setIconImage(new ImageIcon("resources/icon.png").getImage());
+        this.setResizable(false);
         this.setLayout(null);
         this.getContentPane().setBackground(FINANCIAL_BLUE);
 
         //Pie-Chart stuff, the Dataset hashmap is used as reference for what to add to the pie-chart later
+        int percentSpent = (int) ((FinancialManagementSystem.getSpentSinceLastDeposit() / FinancialManagementSystem.getLastDeposit()) * 100);
+        int percentSaved = 100 - percentSpent;
+
+        System.out.println(FinancialManagementSystem.getSpentSinceLastDeposit());
+        System.out.println(FinancialManagementSystem.getLastDeposit());
+        if(FinancialManagementSystem.getSpentSinceLastDeposit() <= 0){
+            percentSpent = 0;
+            percentSaved = 100;
+        }else if(percentSpent >= 100.00){
+            percentSpent = 100;
+            percentSaved = 0;
+        }
+
         dataSet = new HashMap();
-        dataSet.put("Saved (62%)", 62);
-        dataSet.put("Spent (38%)", 38);
+        dataSet.put("Spent (" + percentSpent + "%)", percentSpent);
+        dataSet.put("Saved (" + percentSaved + "%)", percentSaved);
         pieChart = new PieChart("Weekly Update", dataSet, 490, 0, 350, 300);
 
         //New Deposit Stuff
