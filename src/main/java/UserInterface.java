@@ -24,8 +24,6 @@ public class UserInterface extends JFrame implements ActionListener, Colors{
         int percentSpent = (int) ((FinancialManagementSystem.getSpentSinceLastDeposit() / FinancialManagementSystem.getLastDeposit()) * 100);
         int percentSaved = 100 - percentSpent;
 
-        System.out.println(FinancialManagementSystem.getSpentSinceLastDeposit());
-        System.out.println(FinancialManagementSystem.getLastDeposit());
         if(FinancialManagementSystem.getSpentSinceLastDeposit() <= 0){
             percentSpent = 0;
             percentSaved = 100;
