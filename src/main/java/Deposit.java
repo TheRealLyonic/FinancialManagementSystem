@@ -18,7 +18,7 @@ public class Deposit extends JFrame implements ActionListener, Colors, Fonts{
 
         //New Deposit Text stuff
         newDepositText = new JLabel("New Deposit");
-        newDepositText.setFont(ROBOTO);
+        newDepositText.setFont(ROBOTO_MEDIUM);
         newDepositText.setForeground(SUBDUED_WHITE);
         newDepositText.setLocation(150, 15);
         newDepositText.setSize(300, 75);
@@ -26,7 +26,7 @@ public class Deposit extends JFrame implements ActionListener, Colors, Fonts{
         //New Deposit Text Field stuff
         newDepositTextField = new JTextField("0.00");
         newDepositTextField.setSize(325, 95);
-        newDepositTextField.setFont(ROBOTO);
+        newDepositTextField.setFont(ROBOTO_MEDIUM);
         newDepositTextField.setLocation(95, 250);
 
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

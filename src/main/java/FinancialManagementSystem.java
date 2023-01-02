@@ -142,6 +142,14 @@ public class FinancialManagementSystem{
             createNewEntry();
         }else{
             if(lastSpreadsheetDate.getYear() != currentLocalDate.getYear()){
+
+                //Edge-case for if the last date in the spreadsheet was the last day of that year. Without this
+                //the program would fill the old spreadsheet with the following year's dates.
+                if(lastSpreadsheetDate.equals(LocalDate.of(lastSpreadsheetDate.getYear(), 1, 1).with(TemporalAdjusters.lastDayOfYear()))){
+                    enterNewYear(String.valueOf(lastSpreadsheetDate.getYear() + 1));
+                    return;
+                }
+
                 //Fill all the entries for the rest of the year, create and set up a new spreadsheet, then call this
                 //method again to check for more missing entries.
                 fillRestOfYear();
@@ -164,7 +172,7 @@ public class FinancialManagementSystem{
     }
 
     //Completes the entries for the rest of the year in the currently accessed spreadsheet.
-    private void fillRestOfYear() throws IOException {
+    private void fillRestOfYear() throws IOException{
         LocalDate lastDayOfYear = LocalDate.of(lastSpreadsheetDate.getYear(), 1, 1).with(TemporalAdjusters.lastDayOfYear());
         int row = spreadsheet.getLastRow() + 1;
         lastSpreadsheetDate = lastSpreadsheetDate.plusDays(1);
@@ -226,11 +234,24 @@ public class FinancialManagementSystem{
     }
 
     private void setupSheet() throws IOException {
-        spreadsheet.writeToSpreadsheet(0, 0, "Date (MM/DD/YY)", "Starting_Value");
-        spreadsheet.writeToSpreadsheet(0, 1, "Starting Balance ($0000.00)", "Starting_Value");
-        spreadsheet.writeToSpreadsheet(0, 2, "Costs ($0000.00)", "Starting_Value");
-        spreadsheet.writeToSpreadsheet(0, 3, "Deposits ($0000.00)", "Starting_Value");
-        spreadsheet.writeToSpreadsheet(0, 4, "Remaining Balance ($0000.00)", "Starting_Value");
+        //Every entry here has two writeToSpreadsheet calls so that the column width is properly set, didn't like
+        //cluttering up the titles of each row with the actual formatting specifications, so this approach was taken
+        //instead.
+        spreadsheet.writeToSpreadsheet(0, 0, "12/31/9999", "Starting_Value");
+        spreadsheet.writeToSpreadsheet(0, 0, "Date", "String");
+
+        spreadsheet.writeToSpreadsheet(0, 1, "Starting BalanceX", "Starting_Value");
+        spreadsheet.writeToSpreadsheet(0, 1, "Starting Balance", "String");
+
+        spreadsheet.writeToSpreadsheet(0, 2, "CostsXXXXXXXXXXXX", "Starting_Value");
+        spreadsheet.writeToSpreadsheet(0, 2, "Costs", "String");
+
+        spreadsheet.writeToSpreadsheet(0, 3, "DepositsXXXXXXXXX", "Starting_Value");
+        spreadsheet.writeToSpreadsheet(0, 3, "Deposits", "String");
+
+        spreadsheet.writeToSpreadsheet(0, 4, "Remaining Balance", "Starting_Value");
+        spreadsheet.writeToSpreadsheet(0, 4, "Remaining Balance", "String");
+
         spreadsheet.writeToSpreadsheet(0, 5, "Purchase Descriptions DEFAULT TEXT FOR EXPANDING THE CURRENT WIDTH OF THE COLUMN.", "Starting_Value");
         spreadsheet.writeToSpreadsheet(0, 5, "Purchase Descriptions", "String");
     }

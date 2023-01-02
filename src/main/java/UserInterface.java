@@ -5,12 +5,12 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.HashMap;
 
-public class UserInterface extends JFrame implements ActionListener, Colors{
+public class UserInterface extends JFrame implements ActionListener, Colors, Fonts{
 
     private HashMap dataSet;
     private PieChart pieChart;
     private JButton newDepositButton;
-    private JLabel newDepositText;
+    private JLabel newDepositText, balanceText;
 
     UserInterface() throws IOException {
         this.setTitle("Financial Management System");
@@ -50,16 +50,25 @@ public class UserInterface extends JFrame implements ActionListener, Colors{
         newDepositButton.addActionListener(this);
             //Deposit Text
         newDepositText = new JLabel("New Deposit");
-        newDepositText.setFont(new Font("Roboto", 1, 35));
+        newDepositText.setFont(ROBOTO_SMALL);
         newDepositText.setForeground(SUBDUED_WHITE);
         newDepositText.setLocation(90, 46);
         newDepositText.setSize(225, 70);
+
+        //Balance Stuff
+        balanceText = new JLabel("Balance: $" + FinancialManagementSystem.getBalance());
+        System.out.println("Balance: $" + FinancialManagementSystem.getBalance());
+        balanceText.setFont(ROBOTO_LARGE);
+        balanceText.setForeground(SUBDUED_WHITE);
+        balanceText.setLocation(155, 225);
+        balanceText.setSize(700, 700);
 
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.add(pieChart.getChartPanel());
         this.add(newDepositButton);
         this.add(newDepositText);
+        this.add(balanceText);
         this.setVisible(true);
     }
 
