@@ -11,6 +11,7 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
     private PieChart pieChart;
     private JButton newDepositButton;
     private JLabel newDepositText, balanceText;
+    private static int percentSpent;
 
     UserInterface() throws IOException {
         this.setTitle("Financial Management System");
@@ -21,7 +22,7 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         this.getContentPane().setBackground(FINANCIAL_BLUE);
 
         //Pie-Chart stuff, the Dataset hashmap is used as reference for what to add to the pie-chart later
-        int percentSpent = (int) ((FinancialManagementSystem.getSpentSinceLastDeposit() / FinancialManagementSystem.getLastDeposit()) * 100);
+        percentSpent = (int) ((FinancialManagementSystem.getSpentSinceLastDeposit() / FinancialManagementSystem.getLastDeposit()) * 100);
         int percentSaved = 100 - percentSpent;
 
         if(FinancialManagementSystem.getSpentSinceLastDeposit() <= 0){
@@ -55,9 +56,8 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         newDepositText.setLocation(90, 46);
         newDepositText.setSize(225, 70);
 
-        //Balance Stuff
+        //Balance Display Stuff
         balanceText = new JLabel("Balance: $" + FinancialManagementSystem.getBalance());
-        System.out.println("Balance: $" + FinancialManagementSystem.getBalance());
         balanceText.setFont(ROBOTO_LARGE);
         balanceText.setForeground(SUBDUED_WHITE);
         balanceText.setLocation(155, 225);
@@ -77,5 +77,10 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         if(e.getSource() == newDepositButton){
             new Deposit();
         }
+    }
+
+    //Getters + Setters
+    public static int getPercentSpent(){
+        return percentSpent;
     }
 }
