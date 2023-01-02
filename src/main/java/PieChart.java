@@ -34,8 +34,6 @@ public class PieChart {
             plot.setSectionPaint(dataset.getKey(0), new Color(45, 65, 150));
             plot.setSectionPaint(dataset.getKey(1), new Color(191, 65, 55));
         }else{
-            System.out.println(dataset.getKey(0));
-            System.out.println(dataset.getValue(0));
             plot.setSectionPaint(dataset.getKey(0), new Color(191, 65, 55));
             plot.setSectionPaint(dataset.getKey(1), new Color(45, 65, 150));
         }

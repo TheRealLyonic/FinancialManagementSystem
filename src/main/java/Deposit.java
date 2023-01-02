@@ -29,6 +29,7 @@ public class Deposit extends JFrame implements ActionListener, Colors, Fonts{
         newDepositTextField.setFont(ROBOTO_MEDIUM);
         newDepositTextField.setLocation(95, 250);
 
+        //Final JFrame Preparations
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setLocation(this.getX(), 85);

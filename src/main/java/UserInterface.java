@@ -3,14 +3,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.HashMap;
 
 public class UserInterface extends JFrame implements ActionListener, Colors, Fonts{
 
     private HashMap dataSet;
     private PieChart pieChart;
-    private JButton newDepositButton;
-    private JLabel newDepositText, balanceText;
+    private JButton newDepositButton, newExpenditureButton;
+    private JLabel newDepositText, newExpenditureText, balanceText;
     private static int percentSpent;
 
     UserInterface() throws IOException {
@@ -56,18 +57,53 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         newDepositText.setLocation(90, 46);
         newDepositText.setSize(225, 70);
 
+        //New Expenditure Stuff
+            //Expenditure Button
+        newExpenditureButton = new JButton();
+        newExpenditureButton.setIcon(new ImageIcon("resources\\new_expenditure_icon.png"));
+        newExpenditureButton.setFocusable(false);
+        newExpenditureButton.setLocation(25, 165);
+        newExpenditureButton.setSize(55, 55);
+        //Transparency stuff for the button
+        newExpenditureButton.setOpaque(false);
+        newExpenditureButton.setContentAreaFilled(false);
+        newExpenditureButton.addActionListener(this);
+            //Expenditure Text
+        newExpenditureText = new JLabel("New Expenditure");
+        newExpenditureText.setFont(ROBOTO_SMALL);
+        newExpenditureText.setForeground(SUBDUED_WHITE);
+        newExpenditureText.setLocation(90, 156);
+        newExpenditureText.setSize(350, 70);
+
         //Balance Display Stuff
-        balanceText = new JLabel("Balance: $" + FinancialManagementSystem.getBalance());
+        double balance = FinancialManagementSystem.getBalance();
+
+        balanceText = new JLabel("Balance: " + NumberFormat.getCurrencyInstance().format(balance));
         balanceText.setFont(ROBOTO_LARGE);
         balanceText.setForeground(SUBDUED_WHITE);
-        balanceText.setLocation(155, 225);
-        balanceText.setSize(700, 700);
 
+        //Changes the size and location of the balanceText object depending on the rough dollar amount. This is so that
+        //regardless of what your current balance is (within reasonable standard), it will still appear relatively
+        //centered within the JFrame.
+        if(balance < 1000.00){
+            balanceText.setSize(700, 700);
+            balanceText.setLocation(155, 295);
+        }else if(balance < 1000000.00){
+            balanceText.setSize(700, 700);
+            balanceText.setLocation(125, 295);
+        }else{
+            balanceText.setSize(825, 700);
+            balanceText.setLocation(75, 295);
+        }
+
+        //Final JFrame preparations
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.add(pieChart.getChartPanel());
         this.add(newDepositButton);
         this.add(newDepositText);
+        this.add(newExpenditureButton);
+        this.add(newExpenditureText);
         this.add(balanceText);
         this.setVisible(true);
     }
@@ -76,6 +112,8 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == newDepositButton){
             new Deposit();
+        }else if(e.getSource() == newExpenditureButton){
+            new Expenditure();
         }
     }
 
