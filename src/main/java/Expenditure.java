@@ -6,6 +6,9 @@ public class Expenditure extends JFrame implements ActionListener, Colors, Fonts
 
     private JLabel newExpenditureText;
     private JTextField newExpenditureTextField;
+    private JTextArea purchaseSummaryTextArea;
+    private JButton confirmButton;
+    private JLabel redDollarIcon;
 
     Expenditure(){
         this.setTitle("New Expenditure");
@@ -22,11 +25,31 @@ public class Expenditure extends JFrame implements ActionListener, Colors, Fonts
         newExpenditureText.setLocation(125, 15);
         newExpenditureText.setSize(425, 75);
 
+        //Red dollar icon stuff
+        redDollarIcon = new JLabel();
+        redDollarIcon.setIcon(new ImageIcon("resources\\red_dollar_icon.png"));
+        redDollarIcon.setSize(95, 95);
+        redDollarIcon.setLocation(35, 85);
+
         //New expenditure text field stuff
         newExpenditureTextField = new JTextField("0.00");
         newExpenditureTextField.setSize(325, 95);
         newExpenditureTextField.setFont(ROBOTO_MEDIUM);
-        newExpenditureTextField.setLocation(95, 250);
+        newExpenditureTextField.setLocation(125, 85);
+
+        //Confirm button
+        confirmButton = new JButton("Confirm");
+        confirmButton.setSize(125, 75);
+        confirmButton.setLocation(485, 295);
+        confirmButton.setFont(ROBOTO_BUTTON);
+        confirmButton.setFocusable(false);
+
+        //Purchase summary text field stuff
+        purchaseSummaryTextArea = new JTextArea("Purchase Summary");
+        purchaseSummaryTextArea.setFont(ROBOTO_BUTTON);
+        purchaseSummaryTextArea.setSize(450, 185);
+        purchaseSummaryTextArea.setLocation(10, 190);
+        purchaseSummaryTextArea.setLineWrap(true);
 
 
         //Final JFrame Preparations
@@ -35,6 +58,9 @@ public class Expenditure extends JFrame implements ActionListener, Colors, Fonts
         this.setLocation(this.getX(), 85);
         this.add(newExpenditureText);
         this.add(newExpenditureTextField);
+        this.add(confirmButton);
+        this.add(redDollarIcon);
+        this.add(purchaseSummaryTextArea);
         this.setVisible(true);
     }
 
