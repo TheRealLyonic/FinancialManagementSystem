@@ -11,6 +11,7 @@ public class PieChart {
     private DefaultPieDataset dataset;
     private JFreeChart chart;
     private ChartPanel chartPanel;
+    private PiePlot plot;
 
     PieChart(String chartTitle, HashMap data, int x, int y, int width, int height) throws IOException {
         //Dataset information - What's stored on the Pie-Chart
@@ -27,7 +28,7 @@ public class PieChart {
         chartPanel.setSize(width, height);
 
         //Sets the color of each part of the pie chart.
-        PiePlot plot = (PiePlot) chart.getPlot();
+        plot = (PiePlot) chart.getPlot();
 
         //If dataset[0] is not equal to the percentSpent, then make dataset[0]'s color blue, else make it red.
         if (!dataset.getValue(0).equals((double) UserInterface.getPercentSpent())){
@@ -42,5 +43,9 @@ public class PieChart {
     //Getters + Setters
     public ChartPanel getChartPanel(){
         return chartPanel;
+    }
+
+    public DefaultPieDataset getDataset(){
+        return dataset;
     }
 }

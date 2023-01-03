@@ -1,3 +1,5 @@
+import org.jfree.data.general.DefaultPieDataset;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,10 +11,11 @@ import java.util.HashMap;
 public class UserInterface extends JFrame implements ActionListener, Colors, Fonts{
 
     private HashMap dataSet;
-    private PieChart pieChart;
+    private static PieChart pieChart;
     private JButton newDepositButton, newExpenditureButton;
-    private JLabel newDepositText, newExpenditureText, balanceText;
-    private static int percentSpent;
+    private JLabel newDepositText, newExpenditureText;
+    private static JLabel balanceText;
+    private static int percentSpent, percentSaved;
 
     UserInterface() throws IOException {
         this.setTitle("Financial Management System");
@@ -23,16 +26,7 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         this.getContentPane().setBackground(FINANCIAL_BLUE);
 
         //Pie-Chart stuff, the Dataset hashmap is used as reference for what to add to the pie-chart later
-        percentSpent = (int) ((FinancialManagementSystem.getSpentSinceLastDeposit() / FinancialManagementSystem.getLastDeposit()) * 100);
-        int percentSaved = 100 - percentSpent;
-
-        if(FinancialManagementSystem.getSpentSinceLastDeposit() <= 0){
-            percentSpent = 0;
-            percentSaved = 100;
-        }else if(percentSpent >= 100.00){
-            percentSpent = 100;
-            percentSaved = 0;
-        }
+        updatePercentSpentAndSaved();
 
         dataSet = new HashMap();
         dataSet.put("Spent (" + percentSpent + "%)", percentSpent);
@@ -106,6 +100,36 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         this.add(newExpenditureText);
         this.add(balanceText);
         this.setVisible(true);
+    }
+
+    public static void updateBalanceText() throws IOException {
+        double balance = FinancialManagementSystem.getBalance();
+
+        balanceText.setText("Balance: " + NumberFormat.getCurrencyInstance().format(balance));
+
+        if(balance < 1000.00){
+            balanceText.setSize(700, 700);
+            balanceText.setLocation(155, 295);
+        }else if(balance < 1000000.00){
+            balanceText.setSize(700, 700);
+            balanceText.setLocation(125, 295);
+        }else{
+            balanceText.setSize(825, 700);
+            balanceText.setLocation(75, 295);
+        }
+    }
+
+    public static void updatePercentSpentAndSaved() throws IOException {
+        percentSpent = (int) ((FinancialManagementSystem.getSpentSinceLastDeposit() / FinancialManagementSystem.getLastDeposit()) * 100);
+        percentSaved = 100 - percentSpent;
+
+        if(FinancialManagementSystem.getSpentSinceLastDeposit() <= 0){
+            percentSpent = 0;
+            percentSaved = 100;
+        }else if(percentSpent >= 100.00){
+            percentSpent = 100;
+            percentSaved = 0;
+        }
     }
 
     @Override

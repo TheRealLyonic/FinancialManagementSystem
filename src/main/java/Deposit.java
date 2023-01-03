@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class Deposit extends JFrame implements ActionListener, Colors, Fonts{
 
@@ -41,6 +42,7 @@ public class Deposit extends JFrame implements ActionListener, Colors, Fonts{
         confirmButton = new JButton("Confirm");
         confirmButton.setSize(125, 75);
         confirmButton.setLocation(460, 260);
+        confirmButton.addActionListener(this);
         confirmButton.setFont(ROBOTO_BUTTON);
         confirmButton.setFocusable(false);
 
@@ -57,6 +59,14 @@ public class Deposit extends JFrame implements ActionListener, Colors, Fonts{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(e.getSource() == confirmButton){
+            try {
+                FinancialManagementSystem.addDeposit(newDepositTextField.getText());
+                UserInterface.updateBalanceText();
+                this.dispose();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
     }
 }

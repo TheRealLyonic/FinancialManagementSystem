@@ -12,12 +12,11 @@ import java.util.Date;
 public class FinancialManagementSystem{
 
     private static ExcelSpreadsheet spreadsheet;
-    private double startingBalance;
-    private static double balance;
+    private static double startingBalance, balance;
     private static double spentSinceLastDeposit;
     private static int lastDepositRow;
-    private LocalDate currentLocalDate;
-    private LocalDate lastSpreadsheetDate;
+    private static LocalDate currentLocalDate;
+    private static LocalDate lastSpreadsheetDate;
 
     FinancialManagementSystem() throws IOException, ParseException {
         updateCurrentDate();
@@ -50,7 +49,7 @@ public class FinancialManagementSystem{
     }
 
     //Updates all the basic information for the program
-    private void updateInformation() throws IOException, ParseException {
+    private static void updateInformation() throws IOException, ParseException {
         updateLastSpreadsheetDate();
         updateBalance();
         updateStartingBalance();
@@ -67,20 +66,22 @@ public class FinancialManagementSystem{
         }
     }
 
-    public void updateBalance() throws IOException {
+    public static void updateBalance() throws IOException {
         updateStartingBalance();
 
         double costs = new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 2))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
         double deposits = new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 3))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
 
         balance = new BigDecimal(startingBalance + costs + deposits).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+
+        spreadsheet.writeToSpreadsheet(spreadsheet.getLastRow(), 4, String.valueOf(balance), "Number");
     }
 
-    public void updateStartingBalance() throws IOException{
+    public static void updateStartingBalance() throws IOException{
         startingBalance = new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 1))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
     }
 
-    public void updateLastDepositRow() throws IOException{
+    public static void updateLastDepositRow() throws IOException{
         for(int i = spreadsheet.getLastRow(); i >= 1; i--){
             if(Double.parseDouble(spreadsheet.readFromSpreadsheet(i, 3)) > 0.00){
                 lastDepositRow = i;
@@ -93,7 +94,7 @@ public class FinancialManagementSystem{
 
     //Updates the spentSinceLastDeposit variable, by adding up all of the costs since your last deposit. Useful pretty
     //much exclusively for the PieChart to be generated later.
-    public void updateTotalSpentSinceLastDeposit() throws IOException {
+    public static void updateTotalSpentSinceLastDeposit() throws IOException {
         spentSinceLastDeposit = 0.00;
 
         for(int i = lastDepositRow; i < lastDepositRow + 7; i++){
@@ -111,11 +112,11 @@ public class FinancialManagementSystem{
         }
     }
 
-    public void updateCurrentDate(){
+    public static void updateCurrentDate(){
         currentLocalDate = LocalDate.now();
     }
 
-    private void updateLastSpreadsheetDate() throws IOException, ParseException {
+    private static void updateLastSpreadsheetDate() throws IOException, ParseException {
         //This little work around is needed to essentially convert the given instance of the Date class to an instance
         //of the localDate class, which is far easier to work with and read dates from.
 
@@ -256,16 +257,47 @@ public class FinancialManagementSystem{
         spreadsheet.writeToSpreadsheet(0, 5, "Purchase Descriptions", "String");
     }
 
+    public static void addDeposit(String amount) throws IOException{
+        if(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 3)) == 0.00){
+            spreadsheet.writeToSpreadsheet(spreadsheet.getLastRow(), 3, amount, "Number");
+        }else{
+            double total = Double.parseDouble(amount) + Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 3));
+            spreadsheet.writeToSpreadsheet(spreadsheet.getLastRow(), 3, String.valueOf(total), "Number");
+        }
+
+        updateBalance();
+    }
+
+    public static void addExpenditure(String amount) throws IOException{
+        double cost = Double.parseDouble(amount);
+
+        if(cost >= 0){
+            cost *= -1;
+        }
+
+        if(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 2)) != 0.00){
+            cost += Double.valueOf(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 2));
+        }
+
+        spreadsheet.writeToSpreadsheet(spreadsheet.getLastRow(), 2, String.valueOf(cost), "Number");
+
+        updateTotalSpentSinceLastDeposit();
+        updateBalance();
+    }
+
     //Getters + Setters
-    public static double getBalance(){
+    public static double getBalance() throws IOException {
+        updateBalance();
         return balance;
     }
 
-    public static double getSpentSinceLastDeposit(){
+    public static double getSpentSinceLastDeposit() throws IOException {
+        updateTotalSpentSinceLastDeposit();
         return spentSinceLastDeposit;
     }
 
     public static double getLastDeposit() throws IOException {
+        updateLastDepositRow();
         return new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(lastDepositRow, 3))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
     }
 

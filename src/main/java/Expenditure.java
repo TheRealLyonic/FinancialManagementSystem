@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 public class Expenditure extends JFrame implements ActionListener, Colors, Fonts {
 
@@ -42,6 +43,7 @@ public class Expenditure extends JFrame implements ActionListener, Colors, Fonts
         confirmButton.setSize(125, 75);
         confirmButton.setLocation(485, 295);
         confirmButton.setFont(ROBOTO_BUTTON);
+        confirmButton.addActionListener(this);
         confirmButton.setFocusable(false);
 
         //Purchase summary text field stuff
@@ -66,6 +68,14 @@ public class Expenditure extends JFrame implements ActionListener, Colors, Fonts
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(e.getSource() == confirmButton){
+            try {
+                FinancialManagementSystem.addExpenditure(newExpenditureTextField.getText());
+                UserInterface.updateBalanceText();
+                this.dispose();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
     }
 }
