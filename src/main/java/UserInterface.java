@@ -10,6 +10,7 @@ import java.util.HashMap;
 
 public class UserInterface extends JFrame implements ActionListener, Colors, Fonts{
 
+    private static JFrame frame;
     private HashMap dataSet;
     private static PieChart pieChart;
     private JButton newDepositButton, newExpenditureButton;
@@ -18,12 +19,14 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
     private static int percentSpent, percentSaved;
 
     UserInterface() throws IOException {
-        this.setTitle("Financial Management System");
-        this.setSize(850, 850);
-        this.setIconImage(new ImageIcon("resources/icon.png").getImage());
-        this.setResizable(false);
-        this.setLayout(null);
-        this.getContentPane().setBackground(FINANCIAL_BLUE);
+        frame = this;
+
+        frame.setTitle("Financial Management System");
+        frame.setSize(850, 850);
+        frame.setIconImage(new ImageIcon("resources/icon.png").getImage());
+        frame.setResizable(false);
+        frame.setLayout(null);
+        frame.getContentPane().setBackground(FINANCIAL_BLUE);
 
         //Pie-Chart stuff, the Dataset hashmap is used as reference for what to add to the pie-chart later
         updatePercentSpentAndSaved();
@@ -91,32 +94,20 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         }
 
         //Final JFrame preparations
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.add(pieChart.getChartPanel());
-        this.add(newDepositButton);
-        this.add(newDepositText);
-        this.add(newExpenditureButton);
-        this.add(newExpenditureText);
-        this.add(balanceText);
-        this.setVisible(true);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(pieChart.getChartPanel());
+        frame.add(newDepositButton);
+        frame.add(newDepositText);
+        frame.add(newExpenditureButton);
+        frame.add(newExpenditureText);
+        frame.add(balanceText);
+        frame.setVisible(true);
     }
 
-    public static void updateBalanceText() throws IOException {
-        double balance = FinancialManagementSystem.getBalance();
-
-        balanceText.setText("Balance: " + NumberFormat.getCurrencyInstance().format(balance));
-
-        if(balance < 1000.00){
-            balanceText.setSize(700, 700);
-            balanceText.setLocation(155, 295);
-        }else if(balance < 1000000.00){
-            balanceText.setSize(700, 700);
-            balanceText.setLocation(125, 295);
-        }else{
-            balanceText.setSize(825, 700);
-            balanceText.setLocation(75, 295);
-        }
+    public static void refreshWindow() throws IOException {
+        frame.dispose();
+        new UserInterface();
     }
 
     public static void updatePercentSpentAndSaved() throws IOException {

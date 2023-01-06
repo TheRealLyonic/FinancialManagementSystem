@@ -62,7 +62,7 @@ public class Deposit extends JFrame implements ActionListener, Colors, Fonts{
         if(e.getSource() == confirmButton){
             try {
                 FinancialManagementSystem.addDeposit(newDepositTextField.getText());
-                UserInterface.updateBalanceText();
+                UserInterface.refreshWindow();
                 this.dispose();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);

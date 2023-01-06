@@ -285,6 +285,18 @@ public class FinancialManagementSystem{
         updateBalance();
     }
 
+    public static void addPurchaseSummary(String amount, String description) throws IOException{
+        String fullString = "";
+
+        if(!spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 5).equals("No purchases for this day.")){
+            fullString = spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 5);
+        }
+
+        fullString += "$" + amount + " - " + description + " || ";
+
+        spreadsheet.writeToSpreadsheet(spreadsheet.getLastRow(), 5, fullString, "String");
+    }
+
     //Getters + Setters
     public static double getBalance() throws IOException {
         updateBalance();

@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -10,6 +11,7 @@ public class Expenditure extends JFrame implements ActionListener, Colors, Fonts
     private JTextArea purchaseSummaryTextArea;
     private JButton confirmButton;
     private JLabel redDollarIcon;
+    private JLabel purchaseSummaryWarningText;
 
     Expenditure(){
         this.setTitle("New Expenditure");
@@ -53,6 +55,16 @@ public class Expenditure extends JFrame implements ActionListener, Colors, Fonts
         purchaseSummaryTextArea.setLocation(10, 190);
         purchaseSummaryTextArea.setLineWrap(true);
 
+        //Purchase summary warning text stuff
+        //Adding the HTML tags here because it makes the text wrap. Why is this not a default feature for the JLabel
+        //class? Beats me.
+        purchaseSummaryWarningText = new JLabel("<html>ERROR: You must enter a purchase summary in order to create a" +
+                " new expenditure.</html>");
+        purchaseSummaryWarningText.setFont(ROBOTO_BUTTON);
+        purchaseSummaryWarningText.setForeground(ERROR_RED);
+        purchaseSummaryWarningText.setLocation(480, 50);
+        purchaseSummaryWarningText.setSize(150, 250);
+        purchaseSummaryWarningText.setVisible(false);
 
         //Final JFrame Preparations
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -63,6 +75,7 @@ public class Expenditure extends JFrame implements ActionListener, Colors, Fonts
         this.add(confirmButton);
         this.add(redDollarIcon);
         this.add(purchaseSummaryTextArea);
+        this.add(purchaseSummaryWarningText);
         this.setVisible(true);
     }
 
@@ -70,12 +83,23 @@ public class Expenditure extends JFrame implements ActionListener, Colors, Fonts
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == confirmButton){
             try {
+
+                if(purchaseSummaryTextArea.getText().equals("Purchase Summary")){
+                    displayPurchaseSummaryWarning();
+                    return;
+                }
+
                 FinancialManagementSystem.addExpenditure(newExpenditureTextField.getText());
-                UserInterface.updateBalanceText();
+                FinancialManagementSystem.addPurchaseSummary(newExpenditureTextField.getText(), purchaseSummaryTextArea.getText());
+                UserInterface.refreshWindow();
                 this.dispose();
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
         }
+    }
+
+    private void displayPurchaseSummaryWarning(){
+        purchaseSummaryWarningText.setVisible(true);
     }
 }
