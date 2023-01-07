@@ -1,12 +1,11 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
 public class Deposit extends JFrame implements ActionListener, Colors, Fonts{
 
-    private JLabel newDepositText;
+    private JLabel newDepositText, emptyDepositWarningText, invalidNumberWarningText;
     private JTextField newDepositTextField;
     private JButton confirmButton;
     private JLabel greenDollarIcon;
@@ -46,6 +45,24 @@ public class Deposit extends JFrame implements ActionListener, Colors, Fonts{
         confirmButton.setFont(ROBOTO_BUTTON);
         confirmButton.setFocusable(false);
 
+        //Empty deposit warning text stuff
+        emptyDepositWarningText = new JLabel("<html>ERROR: You must enter a dollar amount above 0 to make a new" +
+                " deposit.</html>");
+        emptyDepositWarningText.setFont(ROBOTO_BUTTON);
+        emptyDepositWarningText.setForeground(ERROR_RED);
+        emptyDepositWarningText.setLocation(180, 100);
+        emptyDepositWarningText.setSize(250, 150);
+        emptyDepositWarningText.setVisible(false);
+
+        //Invalid number warning text stuff
+        invalidNumberWarningText = new JLabel("<html>ERROR: You must enter a valid number to make a new " +
+                "deposit.</html>");
+        invalidNumberWarningText.setFont(ROBOTO_BUTTON);
+        invalidNumberWarningText.setForeground(ERROR_RED);
+        invalidNumberWarningText.setLocation(180, 100);
+        invalidNumberWarningText.setSize(250, 150);
+        invalidNumberWarningText.setVisible(false);
+
         //Final JFrame Preparations
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -54,6 +71,8 @@ public class Deposit extends JFrame implements ActionListener, Colors, Fonts{
         this.add(newDepositTextField);
         this.add(greenDollarIcon);
         this.add(confirmButton);
+        this.add(emptyDepositWarningText);
+        this.add(invalidNumberWarningText);
         this.setVisible(true);
     }
 
@@ -61,11 +80,21 @@ public class Deposit extends JFrame implements ActionListener, Colors, Fonts{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == confirmButton){
             try {
+
+                if(Double.valueOf(newDepositTextField.getText()) <= 0.00){
+                    invalidNumberWarningText.setVisible(false);
+                    emptyDepositWarningText.setVisible(true);
+                    return;
+                }
+
                 FinancialManagementSystem.addDeposit(newDepositTextField.getText());
                 UserInterface.refreshWindow();
                 this.dispose();
-            } catch (IOException ex) {
+            } catch(IOException ex){
                 throw new RuntimeException(ex);
+            } catch(NumberFormatException ex){
+                emptyDepositWarningText.setVisible(false);
+                invalidNumberWarningText.setVisible(true);
             }
         }
     }

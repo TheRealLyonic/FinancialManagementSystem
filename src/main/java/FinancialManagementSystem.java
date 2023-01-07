@@ -271,7 +271,7 @@ public class FinancialManagementSystem{
     public static void addExpenditure(String amount) throws IOException{
         double cost = Double.parseDouble(amount);
 
-        if(cost >= 0){
+        if(cost >= 0.00){
             cost *= -1;
         }
 
@@ -286,6 +286,11 @@ public class FinancialManagementSystem{
     }
 
     public static void addPurchaseSummary(String amount, String description) throws IOException{
+
+        if(Double.valueOf(amount) < 0.00){
+            amount = String.valueOf(Double.valueOf(amount) * -1);
+        }
+
         String fullString = "";
 
         if(!spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 5).equals("No purchases for this day.")){

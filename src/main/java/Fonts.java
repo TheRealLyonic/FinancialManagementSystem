@@ -1,4 +1,4 @@
-import java.awt.*;
+import java.awt.Font;
 
 public interface Fonts {
 

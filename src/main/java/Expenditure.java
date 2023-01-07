@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -11,7 +10,7 @@ public class Expenditure extends JFrame implements ActionListener, Colors, Fonts
     private JTextArea purchaseSummaryTextArea;
     private JButton confirmButton;
     private JLabel redDollarIcon;
-    private JLabel purchaseSummaryWarningText;
+    private JLabel purchaseSummaryWarningText, emptyExpenditureWarningText, invalidNumberWarningText;
 
     Expenditure(){
         this.setTitle("New Expenditure");
@@ -66,6 +65,24 @@ public class Expenditure extends JFrame implements ActionListener, Colors, Fonts
         purchaseSummaryWarningText.setSize(150, 250);
         purchaseSummaryWarningText.setVisible(false);
 
+        //Empty expenditure warning text stuff
+        emptyExpenditureWarningText = new JLabel("<html>ERROR: You must enter a dollar amount above 0" +
+                " to create a new expenditure.</html>");
+        emptyExpenditureWarningText.setFont(ROBOTO_BUTTON);
+        emptyExpenditureWarningText.setForeground(ERROR_RED);
+        emptyExpenditureWarningText.setLocation(480, 50);
+        emptyExpenditureWarningText.setSize(150, 250);
+        emptyExpenditureWarningText.setVisible(false);
+
+        //Invalid number warning text stuff
+        invalidNumberWarningText = new JLabel("<html>ERROR: You must enter a valid number to make a new " +
+                "deposit.</html>");
+        invalidNumberWarningText.setFont(ROBOTO_BUTTON);
+        invalidNumberWarningText.setForeground(ERROR_RED);
+        invalidNumberWarningText.setLocation(480, 50);
+        invalidNumberWarningText.setSize(150, 250);
+        invalidNumberWarningText.setVisible(false);
+
         //Final JFrame Preparations
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
@@ -76,6 +93,8 @@ public class Expenditure extends JFrame implements ActionListener, Colors, Fonts
         this.add(redDollarIcon);
         this.add(purchaseSummaryTextArea);
         this.add(purchaseSummaryWarningText);
+        this.add(emptyExpenditureWarningText);
+        this.add(invalidNumberWarningText);
         this.setVisible(true);
     }
 
@@ -84,8 +103,15 @@ public class Expenditure extends JFrame implements ActionListener, Colors, Fonts
         if(e.getSource() == confirmButton){
             try {
 
-                if(purchaseSummaryTextArea.getText().equals("Purchase Summary")){
-                    displayPurchaseSummaryWarning();
+                if(Double.valueOf(newExpenditureTextField.getText()) == 0.00){
+                    purchaseSummaryWarningText.setVisible(false);
+                    invalidNumberWarningText.setVisible(false);
+                    emptyExpenditureWarningText.setVisible(true);
+                    return;
+                }else if(purchaseSummaryTextArea.getText().equals("Purchase Summary")){
+                    emptyExpenditureWarningText.setVisible(false);
+                    invalidNumberWarningText.setVisible(false);
+                    purchaseSummaryWarningText.setVisible(true);
                     return;
                 }
 
@@ -93,13 +119,13 @@ public class Expenditure extends JFrame implements ActionListener, Colors, Fonts
                 FinancialManagementSystem.addPurchaseSummary(newExpenditureTextField.getText(), purchaseSummaryTextArea.getText());
                 UserInterface.refreshWindow();
                 this.dispose();
-            } catch (IOException ex) {
+            }catch(IOException ex){
                 throw new RuntimeException(ex);
+            }catch(NumberFormatException ex){
+                purchaseSummaryWarningText.setVisible(false);
+                emptyExpenditureWarningText.setVisible(false);
+                invalidNumberWarningText.setVisible(true);
             }
         }
-    }
-
-    private void displayPurchaseSummaryWarning(){
-        purchaseSummaryWarningText.setVisible(true);
     }
 }
