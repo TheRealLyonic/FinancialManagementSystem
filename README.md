@@ -1,4 +1,4 @@
-This project is mostly just for personal use, but I have added an installer that I made for the program, so feel free to try it out if you'd like!
+This project is mostly just for personal use, but I have added an installer that I made for the program in the releases section, so feel free to try it out if you'd like!
 
 The basic premis is for the program to act as a sort of register for any and all financial transactions one may make. It does this by keeping a spreadsheet of each year
 stored in the 'data' folder of it's installation directory (this folder is kept locally only, so you don't have to worry about anything you enter getting stored on
