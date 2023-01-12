@@ -76,7 +76,7 @@ public class Expenditure extends JFrame implements ActionListener, Colors, Fonts
 
         //Invalid number warning text stuff
         invalidNumberWarningText = new JLabel("<html>ERROR: You must enter a valid number to make a new " +
-                "deposit.</html>");
+                "expenditure.</html>");
         invalidNumberWarningText.setFont(ROBOTO_BUTTON);
         invalidNumberWarningText.setForeground(ERROR_RED);
         invalidNumberWarningText.setLocation(480, 50);
