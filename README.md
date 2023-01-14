@@ -3,7 +3,7 @@ This project is mostly just for personal use, but I have added an installer that
 The basic premis is for the program to act as a sort of register for any and all financial transactions one may make. It does this by keeping a spreadsheet of each year
 stored in the 'data' folder of it's installation directory (this folder is kept locally only, so you don't have to worry about anything you enter getting stored on
 some datacenter or something). So for this year, it would keep a spreadsheet simply named '2023'. When a new year comes, say moving from 2023 -> 2024, the program will
-automatically create a new spreadsheet for the appropriet year, set it up so that it is formatted correctly, and use that one for the rest of the year. The earlier
+automatically create a new spreadsheet for the appropriate year, set it up so that it is formatted correctly, and use that one for the rest of the year. The earlier
 year's spreadsheet is kept so that you may keep a record of your financial transactions for that year, which can be helpful primarily for tax purposes.
 
 Also, since the program is meant to be used to keep track of your transactions for the entirety of a year, if you don't make any purchases or deposits for a few days,
