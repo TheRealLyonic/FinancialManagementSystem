@@ -1,6 +1,11 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
@@ -17,23 +22,38 @@ public class FinancialManagementSystem{
     private LocalDate currentLocalDate;
     private LocalDate lastSpreadsheetDate;
 
-    FinancialManagementSystem() throws IOException {
-        spreadsheet = new ExcelSpreadsheet("data\\2022.xlsx", "Balance Sheet");
+    FinancialManagementSystem() throws IOException, ParseException {
+        updateCurrentDate();
+
+        //Finds the correct spreadsheet for the program to first begin operation.
+        findSpreadsheet();
 
         //Necessary for successfully running the lastEntryIsCurrent() and addMissingEntries() methods.
-        updateCurrentDate();
-        updateLastSpreadsheetDate();
+        updateInformation();
 
         checkForMissingEntries();
 
-        //Once we're sure all missing dates are accounted for, we can update all the class' variables.
+        //Once we're sure all missing dates are accounted for, we can update all the class' variables again.
         updateInformation();
 
         new UserInterface();
     }
 
+    //Will loop through all the years (Starting at the system's current year) until 2000 checking for a spreadsheet
+    //with the name of that given year.
+    private void findSpreadsheet(){
+        for(int spreadsheetYear = currentLocalDate.getYear(); spreadsheetYear > 2000; spreadsheetYear--){
+            File spreadsheetFile = new File("data\\" + spreadsheetYear + ".xlsx");
+
+            if(spreadsheetFile.exists()){
+                spreadsheet = new ExcelSpreadsheet("data\\" + spreadsheetYear + ".xlsx", "Balance Sheet");
+                return;
+            }
+        }
+    }
+
     //Updates all the basic information for the program
-    private void updateInformation() throws IOException {
+    private void updateInformation() throws IOException, ParseException {
         updateLastSpreadsheetDate();
         updateBalance();
         updateStartingBalance();
@@ -44,7 +64,7 @@ public class FinancialManagementSystem{
 
     //Checks to see if there is more than a one-day gap between the last entry in the spreadsheet and the current
     //day. If there is, the addMissingEntries() method is called.
-    private void checkForMissingEntries() throws IOException {
+    private void checkForMissingEntries() throws IOException, ParseException {
         if(!lastEntryIsCurrent() && lastSpreadsheetDate.plusDays(1) != currentLocalDate){
             addMissingEntries();
         }
@@ -83,10 +103,13 @@ public class FinancialManagementSystem{
         currentLocalDate = LocalDate.now();
     }
 
-    private void updateLastSpreadsheetDate() throws IOException {
+    private void updateLastSpreadsheetDate() throws IOException, ParseException {
         //This little work around is needed to essentially convert the given instance of the Date class to an instance
         //of the localDate class, which is far easier to work with and read dates from.
-        Date rawSpreadsheetDate = new Date(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 0));
+
+        DateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
+
+        Date rawSpreadsheetDate = formatter.parse(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 0));
         lastSpreadsheetDate = LocalDate.ofInstant(rawSpreadsheetDate.toInstant(), ZoneId.systemDefault());
     }
 
@@ -102,23 +125,34 @@ public class FinancialManagementSystem{
         }
     }
 
-    private void addMissingEntries() throws IOException{
-//        if(lastSpreadsheetDate.plusDays(1) == currentLocalDate && lastSpreadsheetDate.getYear() == currentLocalDate.getYear()){
-//            createNewEntry();
-//        }else{
-//            if(lastSpreadsheetDate.getYear() != currentLocalDate.getYear()){
-//                fillRestOfYear();
-//                enterNewYear( String.valueOf(lastSpreadsheetDate.getYear() + 1) );
-//            }
-//        }
+    private void addMissingEntries() throws IOException, ParseException {
+        if(lastSpreadsheetDate.plusDays(1).equals(currentLocalDate) && lastSpreadsheetDate.getYear() == currentLocalDate.getYear()){
+            createNewEntry();
+        }else{
+            if(lastSpreadsheetDate.getYear() != currentLocalDate.getYear()){
+                //Fill all the entries for the rest of the year, create and set up a new spreadsheet, then call this
+                //method again to check for more missing entries.
+                fillRestOfYear();
+                enterNewYear( String.valueOf(lastSpreadsheetDate.getYear() + 1) );
+            }else{
+                //Fill up to the current date
+                int row = spreadsheet.getLastRow() + 1;
+                lastSpreadsheetDate = lastSpreadsheetDate.plusDays(1);
 
-        fillRestOfYear();
+                while(!lastSpreadsheetDate.equals(currentLocalDate)){
+                    enterDefaultInformation(row, lastSpreadsheetDate);
+                    row++;
+                    lastSpreadsheetDate = lastSpreadsheetDate.plusDays(1);
+                }
+
+                //Creates a new entry for today's date.
+                createNewEntry();
+            }
+        }
     }
 
     //Completes the entries for the rest of the year in the currently accessed spreadsheet.
     private void fillRestOfYear() throws IOException {
-        updateInformation();
-
         LocalDate lastDayOfYear = LocalDate.of(lastSpreadsheetDate.getYear(), 1, 1).with(TemporalAdjusters.lastDayOfYear());
         int row = spreadsheet.getLastRow() + 1;
         lastSpreadsheetDate = lastSpreadsheetDate.plusDays(1);
@@ -150,7 +184,7 @@ public class FinancialManagementSystem{
     }
 
     //Handles all of the necessary actions for entering a new year, including creating a new spreadsheet.
-    private void enterNewYear(String newYear) throws IOException {
+    private void enterNewYear(String newYear) throws IOException, ParseException {
         LocalDate firstDayOfYear = LocalDate.of(Integer.parseInt(newYear), 1, 1);
 
         spreadsheet.createNewSpreadsheet(newYear, "Balance Sheet");
@@ -185,7 +219,8 @@ public class FinancialManagementSystem{
         spreadsheet.writeToSpreadsheet(0, 2, "Costs ($0000.00)", "Starting_Value");
         spreadsheet.writeToSpreadsheet(0, 3, "Deposits ($0000.00)", "Starting_Value");
         spreadsheet.writeToSpreadsheet(0, 4, "Remaining Balance ($0000.00)", "Starting_Value");
-        spreadsheet.writeToSpreadsheet(0, 5, "Purchase Descriptions", "Starting_Value");
+        spreadsheet.writeToSpreadsheet(0, 5, "Purchase Descriptions DEFAULT TEXT FOR EXPANDING THE CURRENT WIDTH OF THE COLUMN.", "Starting_Value");
+        spreadsheet.writeToSpreadsheet(0, 5, "Purchase Descriptions", "String");
     }
 
     //Getters + Setters
