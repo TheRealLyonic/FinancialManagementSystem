@@ -1,9 +1,15 @@
+import com.dropbox.core.DbxException;
+import com.dropbox.core.DbxRequestConfig;
+import com.dropbox.core.oauth.DbxCredential;
+import com.dropbox.core.v2.DbxClientV2;
+import com.dropbox.core.v2.files.GetMetadataErrorException;
+
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.io.*;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -11,16 +17,17 @@ import java.security.spec.KeySpec;
 import java.text.ParseException;
 import java.util.Base64;
 
-public class Login extends JFrame implements Colors, Fonts, ActionListener {
+public class Login extends JFrame implements Colors, Fonts, ActionListener, APIInfo{
 
     private String firstName, lastName;
-    private String username;
+    private static String username;
     private char[] password;
     private JLabel usernameText, passwordText;
     private JTextField usernameTextField;
     private JPasswordField passwordTextField;
     private JButton loginButton, createNewAccountButton;
     private final Serializer SERIALIZER = new Serializer();
+    private final DbxClientV2 DBXCLIENT = new DbxClientV2(new DbxRequestConfig(DBX_CLIENT_ID), new DbxCredential(DBX_ACCESS_TOKEN));
 
     Login(){
         this.setTitle("Login");
@@ -72,7 +79,6 @@ public class Login extends JFrame implements Colors, Fonts, ActionListener {
         createNewAccountButton.setForeground(LINK_BLUE);
         createNewAccountButton.addActionListener(this);
 
-
         this.add(usernameText);
         this.add(passwordText);
         this.add(usernameTextField);
@@ -91,12 +97,12 @@ public class Login extends JFrame implements Colors, Fonts, ActionListener {
                 boolean loginSuccessful = authenticateUser(usernameTextField.getText(), passwordTextField.getPassword());
 
                 if(loginSuccessful){
-                    //Download spreadsheet from user's directory
-                    new FinancialManagementSystem();
+                    this.dispose();
+                    new DownloadSpreadsheetPrompt();
                 }
 
-            } catch (NoSuchAlgorithmException | InvalidKeySpecException | IOException | ParseException |
-                     ClassNotFoundException ex) {
+            } catch (NoSuchAlgorithmException | InvalidKeySpecException | IOException |
+                     ClassNotFoundException | DbxException ex) {
                 throw new RuntimeException(ex);
             }
         }else if(e.getSource() == createNewAccountButton){
@@ -105,10 +111,11 @@ public class Login extends JFrame implements Colors, Fonts, ActionListener {
         }
     }
 
-    public void signUp() throws NoSuchAlgorithmException, InvalidKeySpecException, IOException, ClassNotFoundException {
+    public void signUp() throws NoSuchAlgorithmException, InvalidKeySpecException, IOException, ClassNotFoundException, DbxException {
 
         if(getUser(username) != null){
             //Display error saying that username already exists
+            System.out.println("This user already exists.");
         }else{
             String salt = getNewSalt();
             String encryptedPassword = getEncryptedPassword(password, salt);
@@ -127,11 +134,11 @@ public class Login extends JFrame implements Colors, Fonts, ActionListener {
 
     }
 
-    public boolean authenticateUser(String givenUsername, char[] givenPassword) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException, ClassNotFoundException {
+    public boolean authenticateUser(String givenUsername, char[] givenPassword) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException, ClassNotFoundException, DbxException {
         User user = getUser(givenUsername);
 
         if(user == null){
-            //Display GUI for nonexistent user.
+            JOptionPane.showMessageDialog(this, "I'm sorry, the username you entered does not exist in our database.", "Invalid Username", JOptionPane.ERROR_MESSAGE);
             return false;
         }else{
             String salt = user.getSalt();
@@ -139,9 +146,12 @@ public class Login extends JFrame implements Colors, Fonts, ActionListener {
 
             //Verifies that the entered password is correct
             if(calculatedHash.equals(user.getEncryptedPassword())){
+                //The username assignment here is so that we can get the current user's username later in other parts
+                //of the program. Also important that this is assigned only *AFTER* credentials have been verified.
+                username = user.getUsername();
                 return true;
             }else{
-                //Display GUI for incorrect password.
+                JOptionPane.showMessageDialog(this, "I'm sorry, that password is incorrect. Please try again, or reset your password.", "Invalid Password", JOptionPane.ERROR_MESSAGE);
                 return false;
             }
 
@@ -170,18 +180,66 @@ public class Login extends JFrame implements Colors, Fonts, ActionListener {
         return Base64.getEncoder().encodeToString(encodedBytes);
     }
 
-    private User getUser(String username) throws IOException, ClassNotFoundException {
-        //Get a user from the database using the given username
+    /*
+    This method will search the database for a directory with a title that matches the given username, if it finds
+    such a directory, it'll retrieve the UserInfo.ser file from that user's directory and use it to make a User
+    object with that user's details. This file will promptly be deleted from the user's computer as soon as the
+    necessary details are obtained.
+    */
+    private User getUser(String username) throws IOException, ClassNotFoundException, DbxException {
+        String serverPath = "/" + username + "/UserInfo.ser";
 
-        return (User) SERIALIZER.deserializeObject("resources/UserInfo.ser");
+        if(doesFileExist(serverPath)){
+            OutputStream downloadFile = new FileOutputStream("resources/UserInfo.ser");
+
+            DBXCLIENT.files().downloadBuilder(serverPath).download(downloadFile);
+
+            downloadFile.close();
+
+            User foundUser = (User) SERIALIZER.deserializeObject("resources/UserInfo.ser");
+
+            new File("resources/UserInfo.ser").delete();
+
+            return foundUser;
+        }else{
+            return null;
+        }
     }
 
-    private void saveUser(User user) throws IOException {
+    private boolean doesFileExist(String path){
+        try{
+            DBXCLIENT.files().getMetadata(path);
+        } catch (GetMetadataErrorException e) {
+            if(e.errorValue.isPath()){
+                if(e.errorValue.getPathValue().isNotFound()){
+                    return false;
+                }
+            }
+        } catch (DbxException e) {
+            throw new RuntimeException(e);
+        }
+
+        return true;
+    }
+
+    private void saveUser(User user) throws IOException, DbxException {
         //Add the user into the database
+        String serverPath = "/" + user.getUsername() + "/UserInfo.ser";
+
         SERIALIZER.SerializeObject(user, "resources/UserInfo.ser");
+
+        InputStream uploadFile = new FileInputStream("resources/UserInfo.ser");
+
+        DBXCLIENT.files().uploadBuilder(serverPath).uploadAndFinish(uploadFile);
+
+        uploadFile.close();
     }
 
     //Getters + Setters
+    public static String getUsername(){
+        return username;
+    }
+
     public void setFirstName(String firstName){
         this.firstName = firstName;
     }

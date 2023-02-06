@@ -1,4 +1,6 @@
-public class User{
+import java.io.Serializable;
+
+public class User implements Serializable {
 
     private String firstName, lastName;
     private String encryptedPassword;
@@ -12,6 +14,10 @@ public class User{
 
     public String getSalt(){
         return salt;
+    }
+
+    public String getUsername(){
+        return username;
     }
 
     public void setFirstName(String firstName){

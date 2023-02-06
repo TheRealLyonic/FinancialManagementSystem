@@ -1,12 +1,13 @@
+import com.dropbox.core.DbxException;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.Arrays;
 
-public class AccountCreator extends JFrame implements Colors, Fonts, ActionListener {
+public class AccountCreator extends JFrame implements Colors, Fonts, ActionListener{
 
     private JLabel firstNameText, lastNameText, usernameText, passwordText;
     private JTextField firstNameTextField, lastNameTextField, usernameTextField;
@@ -116,9 +117,8 @@ public class AccountCreator extends JFrame implements Colors, Fonts, ActionListe
 
             try {
                 login.signUp();
-            } catch (NoSuchAlgorithmException | InvalidKeySpecException | IOException ex) {
-                throw new RuntimeException(ex);
-            } catch (ClassNotFoundException ex) {
+            } catch (NoSuchAlgorithmException | InvalidKeySpecException | IOException | ClassNotFoundException |
+                     DbxException ex) {
                 throw new RuntimeException(ex);
             }
         }else if(e.getSource() == backButton){

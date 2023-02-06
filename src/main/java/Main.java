@@ -31,14 +31,6 @@ public class Main implements APIInfo{
         //FROM THE SERVER, *UPLOAD THE CURRENT VERSION OF THE SPREADSHEET, OR NEITHER
         //*ADD VERY OBVIOUS WARNING THAT ONCE THIS IS DONE, THE PREVIOUS VERSION OF THE SPREADSHEET THAT WAS ON THE
         //SERVER CAN NOT BE RECOVERED
-
-//        OutputStream downloadFile = new FileOutputStream("C:\\Users\\rwbyf\\Desktop\\ruby.png");
-//
-//        DbxClientV2 client = new DbxClientV2(new DbxRequestConfig(DBX_CLIENT_ID), new DbxCredential(DBX_ACCESS_TOKEN));
-//
-//        client.files().downloadBuilder("/Qrow.png").download(downloadFile);
-//
-//        downloadFile.close();
     }
 
 }
