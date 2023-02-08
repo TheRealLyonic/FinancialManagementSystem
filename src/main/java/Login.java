@@ -27,7 +27,7 @@ public class Login extends JFrame implements Colors, Fonts, ActionListener, APII
     private JButton loginButton, createNewAccountButton;
     private final Serializer SERIALIZER = new Serializer();
     private static DbxClientV2 dbxClient;
-    private DbxCredential dbxCredential;
+    private static DbxCredential dbxCredential;
 
     Login() throws DbxException {
         dbxCredential = new DbxCredential(DBX_ACCESS_TOKEN, 5000l, DBX_REFRESH_TOKEN, DBX_CLIENT_ID, DBX_APP_SECRET);
@@ -129,7 +129,7 @@ public class Login extends JFrame implements Colors, Fonts, ActionListener, APII
 
                     if(loginSuccessful){
                         this.dispose();
-                        new DownloadSpreadsheetPrompt();
+                        new SpreadsheetDownloader();
                     }
                 }
 
@@ -224,7 +224,7 @@ public class Login extends JFrame implements Colors, Fonts, ActionListener, APII
     necessary details are obtained.
     */
     private User getUser(String username) throws IOException, ClassNotFoundException, DbxException {
-        checkIfExpired();
+        checkIfExpired(dbxCredential, dbxClient);
 
         String serverPath = "/" + username + "/UserInfo.ser";
 
@@ -245,8 +245,8 @@ public class Login extends JFrame implements Colors, Fonts, ActionListener, APII
         }
     }
 
-    private boolean doesFileExist(String path) throws DbxException {
-        checkIfExpired();
+    public static boolean doesFileExist(String path) throws DbxException {
+        checkIfExpired(dbxCredential, dbxClient);
 
         try{
             dbxClient.files().getMetadata(path);
@@ -264,7 +264,7 @@ public class Login extends JFrame implements Colors, Fonts, ActionListener, APII
     }
 
     private void saveUser(User user) throws IOException, DbxException {
-        checkIfExpired();
+        checkIfExpired(dbxCredential, dbxClient);
 
         //UserInfo upload process
         String userInfoServerPath = "/" + user.getUsername() + "/UserInfo.ser";
@@ -300,7 +300,7 @@ public class Login extends JFrame implements Colors, Fonts, ActionListener, APII
         spreadsheetFile.delete();
     }
 
-    private void checkIfExpired() throws DbxException {
+    public static void checkIfExpired(DbxCredential dbxCredential, DbxClientV2 dbxClient) throws DbxException {
         if(dbxCredential.aboutToExpire()){
             dbxClient.refreshAccessToken();
         }
@@ -323,6 +323,10 @@ public class Login extends JFrame implements Colors, Fonts, ActionListener, APII
 
     public static DbxClientV2 getDbxClient(){
         return dbxClient;
+    }
+
+    public static DbxCredential getDbxCredential(){
+        return dbxCredential;
     }
 
     public void setFirstName(String firstName){
