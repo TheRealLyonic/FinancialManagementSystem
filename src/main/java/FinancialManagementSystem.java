@@ -161,7 +161,7 @@ public class FinancialManagementSystem{
                 lastSpreadsheetDate = lastSpreadsheetDate.plusDays(1);
 
                 while(!lastSpreadsheetDate.equals(currentLocalDate)){
-                    enterDefaultInformation(row, lastSpreadsheetDate);
+                    enterDefaultInformation(row, lastSpreadsheetDate, spreadsheet);
                     row++;
                     lastSpreadsheetDate = lastSpreadsheetDate.plusDays(1);
                 }
@@ -180,16 +180,16 @@ public class FinancialManagementSystem{
 
         //Loops so long as the spreadsheet's current date is not equal to the last day of the year
         while(!lastSpreadsheetDate.equals(lastDayOfYear)){
-            enterDefaultInformation(row, lastSpreadsheetDate);
+            enterDefaultInformation(row, lastSpreadsheetDate, spreadsheet);
             row++;
             lastSpreadsheetDate = lastSpreadsheetDate.plusDays(1);
         }
 
         //Enters the default information for the final day of the year.
-        enterDefaultInformation(row, lastSpreadsheetDate);
+        enterDefaultInformation(row, lastSpreadsheetDate, spreadsheet);
     }
 
-    private void enterDefaultInformation(int row, LocalDate entryDate) throws IOException {
+    public static void enterDefaultInformation(int row, LocalDate entryDate, ExcelSpreadsheet spreadsheet) throws IOException {
         //The Date of the Entry
         spreadsheet.writeToSpreadsheet(row, 0, String.valueOf(entryDate), "Date");
         //Starting Balance
@@ -208,9 +208,9 @@ public class FinancialManagementSystem{
     private void enterNewYear(String newYear) throws IOException, ParseException {
         LocalDate firstDayOfYear = LocalDate.of(Integer.parseInt(newYear), 1, 1);
 
-        spreadsheet.createNewSpreadsheet(newYear, "Balance Sheet");
-        setupSheet();
-        enterDefaultInformation(1, firstDayOfYear);
+        spreadsheet.createNewSpreadsheet("data\\" + newYear + ".xlsx", "Balance Sheet");
+        setupSheet(spreadsheet);
+        enterDefaultInformation(1, firstDayOfYear, spreadsheet);
         updateInformation();
         checkForMissingEntries();
     }
@@ -234,7 +234,7 @@ public class FinancialManagementSystem{
         spreadsheet.writeToSpreadsheet(row, 5, "No purchases for this day.", "String");
     }
 
-    private void setupSheet() throws IOException {
+    public static void setupSheet(ExcelSpreadsheet spreadsheet) throws IOException {
         //Every entry here has two writeToSpreadsheet calls so that the column width is properly set, didn't like
         //cluttering up the titles of each row with the actual formatting specifications, so this approach was taken
         //instead.

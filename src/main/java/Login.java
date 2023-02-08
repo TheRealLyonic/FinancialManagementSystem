@@ -13,6 +13,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
+import java.time.LocalDate;
 import java.util.Base64;
 
 public class Login extends JFrame implements Colors, Fonts, ActionListener, APIInfo{
@@ -265,16 +266,38 @@ public class Login extends JFrame implements Colors, Fonts, ActionListener, APII
     private void saveUser(User user) throws IOException, DbxException {
         checkIfExpired();
 
-        //Add the user into the database
-        String serverPath = "/" + user.getUsername() + "/UserInfo.ser";
+        //UserInfo upload process
+        String userInfoServerPath = "/" + user.getUsername() + "/UserInfo.ser";
+        String spreadsheetServerPath = "/" + user.getUsername() + "/" + LocalDate.now().getYear() + ".xlsx";
 
         SERIALIZER.SerializeObject(user, "resources/UserInfo.ser");
 
         InputStream uploadFile = new FileInputStream("resources/UserInfo.ser");
 
-        dbxClient.files().uploadBuilder(serverPath).uploadAndFinish(uploadFile);
+        dbxClient.files().uploadBuilder(userInfoServerPath).uploadAndFinish(uploadFile);
 
         uploadFile.close();
+
+        File userInfoFile = new File("resources/UserInfo.ser");
+        userInfoFile.delete();
+
+        //Spreadsheet upload process
+        ExcelSpreadsheet spreadsheet = new ExcelSpreadsheet("", "");
+
+        spreadsheet.createNewSpreadsheet("resources\\" + LocalDate.now().getYear() + ".xlsx", "Balance Sheet");
+
+        //Ensures that the spreadsheet assigned to the newly created user is formatted properly.
+        FinancialManagementSystem.setupSheet(spreadsheet);
+        FinancialManagementSystem.enterDefaultInformation(1, LocalDate.of(LocalDate.now().getYear(), 1, 1), spreadsheet);
+
+        InputStream uploadSpreadsheet = new FileInputStream("resources\\" + LocalDate.now().getYear() + ".xlsx");
+
+        dbxClient.files().uploadBuilder(spreadsheetServerPath).uploadAndFinish(uploadSpreadsheet);
+
+        uploadSpreadsheet.close();
+
+        File spreadsheetFile = new File("resources/" + LocalDate.now().getYear() + ".xlsx");
+        spreadsheetFile.delete();
     }
 
     private void checkIfExpired() throws DbxException {

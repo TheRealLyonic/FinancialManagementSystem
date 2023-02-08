@@ -190,11 +190,9 @@ public class ExcelSpreadsheet{
         return row.getLastCellNum() - 1;
     }
 
-    public void createNewSpreadsheet(String fileName, String sheetName) throws IOException {
+    public void createNewSpreadsheet(String filePath, String sheetName) throws IOException {
         XSSFWorkbook workbook = new XSSFWorkbook();
         workbook.createSheet(sheetName);
-
-        String filePath = "data\\" + fileName + ".xlsx";
 
         //Creates file the at the given path
         workbook.write(new FileOutputStream(filePath));
