@@ -13,6 +13,7 @@ public class AccountCreator extends JFrame implements Colors, Fonts, ActionListe
     private JTextField firstNameTextField, lastNameTextField, usernameTextField;
     private JPasswordField passwordTextField;
     private JButton confirmButton, backButton;
+    private JTextField[] textFields;
 
     AccountCreator(){
         this.setTitle("Account Creator");
@@ -85,8 +86,10 @@ public class AccountCreator extends JFrame implements Colors, Fonts, ActionListe
         backButton.setLocation(10, 505);
         backButton.setFont(ROBOTO_BUTTON);
         backButton.setFocusable(false);
-        backButton.setForeground(BACK_RED);
+        backButton.setForeground(BUTTON_RED);
         backButton.addActionListener(this);
+
+        textFields = new JTextField[]{firstNameTextField, lastNameTextField, usernameTextField};
 
         this.add(firstNameText);
         this.add(firstNameTextField);
@@ -105,10 +108,38 @@ public class AccountCreator extends JFrame implements Colors, Fonts, ActionListe
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        boolean hasBlank = false;
 
         if(e.getSource() == confirmButton){
+
+            for(JTextField textField : textFields){
+                if(textField.getText().isBlank()){
+                    Login.visualizeError(textField);
+                    hasBlank = true;
+                }else if(textField.getBackground() == ERROR_RED){
+                    Login.devisualizeError(textField);
+                }
+            }
+
+            if(passwordTextField.getPassword().length == 0){
+                Login.visualizeError(passwordTextField);
+                hasBlank = true;
+            }else if(passwordTextField.getBackground() == ERROR_RED){
+                Login.devisualizeError(passwordTextField);
+            }
+
+            if(hasBlank){
+                return;
+            }
+
             this.dispose();
-            Login login = new Login();
+            Login login;
+
+            try {
+                login = new Login();
+            } catch (DbxException ex) {
+                throw new RuntimeException(ex);
+            }
 
             login.setFirstName(firstNameTextField.getText());
             login.setLastName(lastNameTextField.getText());
@@ -123,7 +154,11 @@ public class AccountCreator extends JFrame implements Colors, Fonts, ActionListe
             }
         }else if(e.getSource() == backButton){
             this.dispose();
-            new Login();
+            try {
+                new Login();
+            } catch (DbxException ex) {
+                throw new RuntimeException(ex);
+            }
         }
 
     }
