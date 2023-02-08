@@ -10,9 +10,9 @@ import java.time.LocalDate;
 
 public class SpreadsheetDownloader extends JFrame implements Colors, Fonts, ActionListener {
 
-    private JLabel questionText, warningText;
-    private JButton yesButton, noButton;
-    private final DbxClientV2 dbxClient = Login.getDbxClient();
+    protected JLabel questionText, warningText;
+    protected JButton yesButton, noButton;
+    protected final DbxClientV2 dbxClient = Login.getDbxClient();
 
     SpreadsheetDownloader(){
         this.setTitle("Spreadsheet Downloader");
@@ -86,6 +86,7 @@ public class SpreadsheetDownloader extends JFrame implements Colors, Fonts, Acti
                 this.dispose();
                 new FinancialManagementSystem();
             } catch (DbxException | IOException | ParseException ex) {
+                Login.displayException(this, "IO");
                 throw new RuntimeException(ex);
             }
         }else if(e.getSource() == noButton){
@@ -93,6 +94,7 @@ public class SpreadsheetDownloader extends JFrame implements Colors, Fonts, Acti
                 this.dispose();
                 new FinancialManagementSystem();
             } catch (IOException | ParseException ex) {
+                Login.displayException(this, "IO");
                 throw new RuntimeException(ex);
             }
         }

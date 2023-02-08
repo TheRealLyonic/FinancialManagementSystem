@@ -18,6 +18,7 @@ import java.util.Base64;
 
 public class Login extends JFrame implements Colors, Fonts, ActionListener, APIInfo{
 
+    private static JFrame frame;
     private String firstName, lastName;
     private static String username;
     private char[] password;
@@ -96,6 +97,8 @@ public class Login extends JFrame implements Colors, Fonts, ActionListener, APII
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
+
+        frame = this;
     }
 
     @Override
@@ -135,6 +138,7 @@ public class Login extends JFrame implements Colors, Fonts, ActionListener, APII
 
             } catch (NoSuchAlgorithmException | InvalidKeySpecException | IOException |
                      ClassNotFoundException | DbxException ex) {
+                displayException(frame, "Dbx");
                 throw new RuntimeException(ex);
             }
         }else if(e.getSource() == createNewAccountButton){
@@ -257,6 +261,7 @@ public class Login extends JFrame implements Colors, Fonts, ActionListener, APII
                 }
             }
         } catch (DbxException e) {
+            displayException(frame, "Dbx");
             throw new RuntimeException(e);
         }
 
@@ -314,6 +319,11 @@ public class Login extends JFrame implements Colors, Fonts, ActionListener, APII
     public static void devisualizeError(JTextField textField){
         textField.setBackground(STANDARD_WHITE);
         textField.setForeground(STANDARD_BLACK);
+    }
+
+    public static void displayException(JFrame frame, String typeOfException){
+        JOptionPane.showMessageDialog(frame, "Critical Error: A(n) " + typeOfException + " Exception has occurred, please contact the " +
+                "program owner.", typeOfException + " Exception", JOptionPane.ERROR_MESSAGE);
     }
 
     //Getters + Setters

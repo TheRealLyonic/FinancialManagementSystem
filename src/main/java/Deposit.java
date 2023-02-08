@@ -91,6 +91,7 @@ public class Deposit extends JFrame implements ActionListener, Colors, Fonts{
                 UserInterface.refreshWindow();
                 this.dispose();
             } catch(IOException ex){
+                Login.displayException(this, "IO");
                 throw new RuntimeException(ex);
             } catch(NumberFormatException ex){
                 emptyDepositWarningText.setVisible(false);
