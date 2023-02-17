@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="FinancialManagementSystem:jar" />
+    </artifacts-to-build>
+  </component>
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Added the SpreadsheetUploader class as well as implemented its core functionality. The program is now runnable from start to finish with the new changes and everything works as expected." />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="3a10277f-746f-4e2d-ab64-59bbc234175d" />
+        <option name="url" value="https://github.com/TheRealLyonic/FinancialManagementSystem.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="2JFXocHi2Yw7tJciSEsEJwNG0bC" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Documents/Java Projects/FinancialManagementSystem&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="FinancialManagementSystemPublic" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="" />
+      <created>1671674981119</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1671674981119</updated>
+      <workItem from="1674710699190" duration="83000" />
+      <workItem from="1674710789589" duration="105000" />
+      <workItem from="1675573516292" duration="544000" />
+      <workItem from="1675574070943" duration="28000" />
+      <workItem from="1675574107777" duration="2051000" />
+      <workItem from="1675621459672" duration="9163000" />
+      <workItem from="1675636035263" duration="786000" />
+      <workItem from="1675640098062" duration="1949000" />
+      <workItem from="1675648727090" duration="753000" />
+      <workItem from="1675655608823" duration="9168000" />
+      <workItem from="1675711774271" duration="459000" />
+      <workItem from="1675714173563" duration="5780000" />
+      <workItem from="1675735811480" duration="2441000" />
+      <workItem from="1675800481655" duration="18441000" />
+      <workItem from="1675833114956" duration="3356000" />
+      <workItem from="1675887734362" duration="4212000" />
+      <workItem from="1676079770349" duration="3033000" />
+      <workItem from="1676269928920" duration="309000" />
+      <workItem from="1676317371088" duration="20000" />
+      <workItem from="1676666907707" duration="399000" />
+      <workItem from="1676667397555" duration="1058000" />
+      <workItem from="1676668692723" duration="102000" />
+    </task>
+    <task id="LOCAL-00001" summary="Project Created.">
+      <created>1671685002082</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1671685002082</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Project Created.">
+      <created>1671685122489</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1671685122489</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Project Created.">
+      <created>1671686449651</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1671686449651</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added the ability to read from and write to Excel spreadsheets via a separate class.">
+      <created>1671695134222</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1671695134222</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Added some small improvements to the spreadsheet class.">
+      <created>1671696708588</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1671696708588</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Updated .gitIgnore">
+      <created>1671701197520</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1671701197520</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Updated .gitIgnore">
+      <created>1671701341069</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1671701341069</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Begun work on the FinancialManagementSystem class">
+      <created>1671706486545</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1671706486545</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Program now runs primarily out of the FinancialManagementSystem class, which Main calls when the program is first started. Added a new interface called 'Colors' to hold specialized color choices for the program, I.e. 'Financial Blue' for the JFrame backgrounds. Also begun work on the Deposit class and updated icon images a bit.">
+      <created>1671830702050</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1671830702050</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Small Developments with U.I.">
+      <created>1672023358536</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1672023358536</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Update Date method added to FMS">
+      <created>1672253659928</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1672253659928</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Begun work on keeping track of dates and adding entries for missed days.">
+      <created>1672256893764</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1672256893764</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Spreadsheet class can now correctly enter dates into the spreadsheet with proper formatting.">
+      <created>1672262665611</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1672262665611</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Added functionality to correctly enter default information for missing entries.">
+      <created>1672264418515</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1672264418515</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Made improvements to date management and the FinancialManagementSystem class in general.">
+      <created>1672372671901</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1672372671901</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Fixed a bug in the ExcelSpreadsheet class where trying to display pure text information from a spreadsheet would cause an error. Also cleared out the addMissingEntries() method in the FinancialManagementSystem class to begin a complete rework on how the process is handled.">
+      <created>1672381976880</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1672381976880</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Started work on accounting for missing entries.">
+      <created>1672429308575</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1672429308575</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Continued losing my mind trying to fix the addMissingEntries() method, but made progress and got the enterNewYear() method working completely as expected.">
+      <created>1672430604751</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1672430604752</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Completed functionality for filling out the rest of the entries in a spreadsheet for a given year, as well as added proper formatting for currency being written to a spreadsheet.">
+      <created>1672466389915</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1672466389915</updated>
+    </task>
+    <task id="LOCAL-00020" summary="The program can now account for any missing dates within a given spreadsheet. Additionally, if the program hasn't been used since the previous year, and there does not exist a spreadsheet with the system's current year as it's name, an error will no longer be thrown. Instead, the findSpreadsheet() method which has been added to the FinancialManagementSystem class will now use a for-loop (Starting at the system's current year and ending at the year 2001) to decrement through previous years until it finds an Excel file with the given year as its name. As of now, regardless of how long it has been since the user has last used the program, everything should run correctly, and then continue as normal after a new spreadsheet has been created for that year, and all missing entries have been accounted for in all spreadsheets in-between.">
+      <created>1674231322745</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1674231322745</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Various small improvements, including setting custom colors for the pie chart, still displays a red and blue, but the red will now consistently be representative of how much you've spent, while blue shows how much you have saved, previously the colors would be assigned randomly.">
+      <created>1672529800167</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1672529800167</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Fixed bug in the pie chart class.">
+      <created>1672552397100</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1672552397100</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Fixed a bug in the FinancialManagementSystem class where if the last date of a spreadsheet was the last day of that year (I.e. 12/31/2022), the program would enter all of the information for the following year (I.e. 2023) in that spreadsheet, and continue endlessly. It now functions as expected and will simply create a new spreadsheet for the following year in such an event. Also continued work on the U.I. in both the UserInterface and Deposit class, as well as adjusted the Fonts interface to include different size options for the Roboto font.">
+      <created>1672646635502</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1672646635502</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Turns out there was still a problem with the Pie chart displaying colors correctly, fixed all bugs in that department, and now it will always color the spent percentage red, and the saved percentage blue.">
+      <created>1672658673700</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1672658673700</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Improved rendering of the balance text by making its size and position dynamic, based on how large it's quantity is, so the text always appears mostly centered. Also began work on the Expenditure class, and made an icon for the new window. It's JFrame appearance will be more or less the same as the Deposit class, with minor differences where necessary.">
+      <created>1672662993719</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1672662993719</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Continued work on the Deposit class.">
+      <created>1672695426605</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1672695426605</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Added purchase summary JTextArea in the Expenditure class.">
+      <created>1672721132367</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1672721132368</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Added functionality for the confirm button in both the Deposit and Expenditure class. Balance will now automatically refresh upon submitting a new deposit or expenditure, the pie-chart, however, will not. Lots of problems trying to get that to work, removed all efforts for now, will have to return to this problem later. Everything else looking great, will probably aim to get purchase summaries working next.">
+      <created>1672736927996</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1672736927996</updated>
+    </task>
+    <task id="LOCAL-00029" summary="The primary UserInterface now refreshes when a new expenditure is added, so both the balance text and pie-chart is updated without needing additional methods for each of them. Also implemented the correct functionality for adding purchase descriptions, and made the program display a basic error message within the Expenditure JFrame if the user tries to submit a new expenditure with the default text in the TextArea. The Error message is displayed in a new color added to the Colors interface, ERROR_RED.">
+      <created>1672981371414</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1672981371414</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Added some more error checks to both the Deposit and Expenditure class, so that now, no matter what input the user tries to give within the text boxes, if it is not usable by the program, it will be rejected with a clear explanation as to why. Also cleaned up some things and added small optimizations all over the map. The project is now officially ready for version 1.0 release. In future version, I'd like to focus primarily on adding new functionality, I.e. a way to view your purchase and deposit history, and maybe even things to keep track of different reoccurring payments. But for the time being, I'm satisfied enough with how things are to officially give the release of the program.">
+      <created>1673093632410</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1673093632410</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Updated to .gitignore and the pom.xml, taken for final release.">
+      <created>1673251092603</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1673251092603</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Fixed mistake with the Expenditure class, where if the user entered letters&#10;into the expenditure text box, the error message that appeared would state&#10;that a valid number is required in order to make a new 'deposit'. Changed&#10;it to say expenditure as it should.">
+      <created>1673519197184</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1673519197184</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Added a file to gitIgnore.">
+      <created>1675574286821</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1675574286821</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Officially began work on Version 2.0 of the Financial Management System; which will include a secure login functionality to allow the user's spreadsheet to be stored on a Dropbox server and downloaded anytime they run the application and login. This is so that if one user is using the program between multiple computers, changes made to their financial data on one are uploaded to the server, then downloaded when they run the FMS on the other computer, resulting in consistency between computers without having to manually transfer spreadsheets.">
+      <created>1675666963566</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1675666963566</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Finished work on implementing the basic login, download, and upload systems, and have now begun work on a 'DownloadSpreadsheetPrompt' class, which will allow the user, after they've successfully logged-in, to decide if they want to download the most recent version of the spreadsheet on the server to replace the one currently on their computer.">
+      <created>1675719905889</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1675719905889</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Fixed the expiring credentials problem with the Dropbox API, access token is now refreshed automatically when the program is run, and validity of that token is checked just before any API call is made, ensuring an expired token will never be an issue. Also re-formatted and added some new colors to the color class, and touched on visually displaying errors that may occur throughout the registration and login processes.">
+      <created>1675823962535</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1675823962535</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Finished the GetUser() method in the Login class, and made general improvements to methods in both the ExcelSpreadsheet and the FinancialManagementSystem class.">
+      <created>1675827977891</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1675827977891</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Updated the DownloadSpreadsheetPrompt class to the SpreadsheetDownloader class, and added its base functionality. A user could now login securely, and then decide whether or not to download the last uploaded version of their spreadsheet from the database before opening the main portion of the program.">
+      <created>1675835985632</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1675835985632</updated>
+    </task>
+    <task id="LOCAL-00039" summary="Added the SpreadsheetUploader class as well as implemented its core functionality. The program is now runnable from start to finish with the new changes and everything works as expected.">
+      <created>1675892183172</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1675892183172</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Added the SpreadsheetUploader class as well as implemented its core functionality. The program is now runnable from start to finish with the new changes and everything works as expected.">
+      <created>1676668387672</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1676668387672</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+    <MESSAGE value="Made improvements to date management and the FinancialManagementSystem class in general." />
+    <MESSAGE value="Fixed a bug in the ExcelSpreadsheet class where trying to display pure text information from a spreadsheet would cause an error. Also cleared out the addMissingEntries() method in the FinancialManagementSystem class to begin a complete rework on how the process is handled." />
+    <MESSAGE value="Started work on accounting for missing entries." />
+    <MESSAGE value="Continued losing my mind trying to fix the addMissingEntries() method, but made progress and got the enterNewYear() method working completely as expected." />
+    <MESSAGE value="Completed functionality for filling out the rest of the entries in a spreadsheet for a given year, as well as added proper formatting for currency being written to a spreadsheet." />
+    <MESSAGE value="The program can now account for any missing dates within a given spreadsheet. Additionally, if the program hasn't been used since the previous year, and there does not exist a spreadsheet with the system's current year as it's name, an error will no longer be thrown. Instead, the findSpreadsheet() method which has been added to the FinancialManagementSystem class will now use a for-loop (Starting at the system's current year and ending at the year 2001) to decrement through previous years until it finds an Excel file with the given year as its name. As of now, regardless of how long it has been since the user has last used the program, everything should run correctly, and then continue as normal after a new spreadsheet has been created for that year, and all missing entries have been accounted for in all spreadsheets in-between." />
+    <MESSAGE value="Various small improvements, including setting custom colors for the pie chart, still displays a red and blue, but the red will now consistently be representative of how much you've spent, while blue shows how much you have saved, previously the colors would be assigned randomly." />
+    <MESSAGE value="Fixed bug in the pie chart class." />
+    <MESSAGE value="Fixed a bug in the FinancialManagementSystem class where if the last date of a spreadsheet was the last day of that year (I.e. 12/31/2022), the program would enter all of the information for the following year (I.e. 2023) in that spreadsheet, and continue endlessly. It now functions as expected and will simply create a new spreadsheet for the following year in such an event. Also continued work on the U.I. in both the UserInterface and Deposit class, as well as adjusted the Fonts interface to include different size options for the Roboto font." />
+    <MESSAGE value="Turns out there was still a problem with the Pie chart displaying colors correctly, fixed all bugs in that department, and now it will always color the spent percentage red, and the saved percentage blue." />
+    <MESSAGE value="Improved rendering of the balance text by making its size and position dynamic, based on how large it's quantity is, so the text always appears mostly centered. Also began work on the Expenditure class, and made an icon for the new window. It's JFrame appearance will be more or less the same as the Deposit class, with minor differences where necessary." />
+    <MESSAGE value="Continued work on the Deposit class." />
+    <MESSAGE value="Added purchase summary JTextArea in the Expenditure class." />
+    <MESSAGE value="Added functionality for the confirm button in both the Deposit and Expenditure class. Balance will now automatically refresh upon submitting a new deposit or expenditure, the pie-chart, however, will not. Lots of problems trying to get that to work, removed all efforts for now, will have to return to this problem later. Everything else looking great, will probably aim to get purchase summaries working next." />
+    <MESSAGE value="The primary UserInterface now refreshes when a new expenditure is added, so both the balance text and pie-chart is updated without needing additional methods for each of them. Also implemented the correct functionality for adding purchase descriptions, and made the program display a basic error message within the Expenditure JFrame if the user tries to submit a new expenditure with the default text in the TextArea. The Error message is displayed in a new color added to the Colors interface, ERROR_RED." />
+    <MESSAGE value="Added some more error checks to both the Deposit and Expenditure class, so that now, no matter what input the user tries to give within the text boxes, if it is not usable by the program, it will be rejected with a clear explanation as to why. Also cleaned up some things and added small optimizations all over the map. The project is now officially ready for version 1.0 release. In future version, I'd like to focus primarily on adding new functionality, I.e. a way to view your purchase and deposit history, and maybe even things to keep track of different reoccurring payments. But for the time being, I'm satisfied enough with how things are to officially give the release of the program." />
+    <MESSAGE value="Updated to .gitignore and the pom.xml, taken for final release." />
+    <MESSAGE value="Fixed mistake with the Expenditure class, where if the user entered letters&#10;into the expenditure text box, the error message that appeared would state&#10;that a valid number is required in order to make a new 'deposit'. Changed&#10;it to say expenditure as it should." />
+    <MESSAGE value="Added a file to gitIgnore." />
+    <MESSAGE value="Officially began work on Version 2.0 of the Financial Management System; which will include a secure login functionality to allow the user's spreadsheet to be stored on a Dropbox server and downloaded anytime they run the application and login. This is so that if one user is using the program between multiple computers, changes made to their financial data on one are uploaded to the server, then downloaded when they run the FMS on the other computer, resulting in consistency between computers without having to manually transfer spreadsheets." />
+    <MESSAGE value="Finished work on implementing the basic login, download, and upload systems, and have now begun work on a 'DownloadSpreadsheetPrompt' class, which will allow the user, after they've successfully logged-in, to decide if they want to download the most recent version of the spreadsheet on the server to replace the one currently on their computer." />
+    <MESSAGE value="Fixed the expiring credentials problem with the Dropbox API, access token is now refreshed automatically when the program is run, and validity of that token is checked just before any API call is made, ensuring an expired token will never be an issue. Also re-formatted and added some new colors to the color class, and touched on visually displaying errors that may occur throughout the registration and login processes." />
+    <MESSAGE value="Finished the GetUser() method in the Login class, and made general improvements to methods in both the ExcelSpreadsheet and the FinancialManagementSystem class." />
+    <MESSAGE value="Updated the DownloadSpreadsheetPrompt class to the SpreadsheetDownloader class, and added its base functionality. A user could now login securely, and then decide whether or not to download the last uploaded version of their spreadsheet from the database before opening the main portion of the program." />
+    <MESSAGE value="Added the SpreadsheetUploader class as well as implemented its core functionality. The program is now runnable from start to finish with the new changes and everything works as expected." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added the SpreadsheetUploader class as well as implemented its core functionality. The program is now runnable from start to finish with the new changes and everything works as expected." />
+  </component>
+</project>
