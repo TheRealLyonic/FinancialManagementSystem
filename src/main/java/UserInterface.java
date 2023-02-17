@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.HashMap;
@@ -95,12 +93,6 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         //Final JFrame preparations
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                new SpreadsheetUploader();
-            }
-        });
         frame.add(pieChart.getChartPanel());
         frame.add(newDepositButton);
         frame.add(newDepositText);

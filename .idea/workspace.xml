@@ -9,7 +9,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="New Project Directory Created." />
+    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="New Project Directory Created.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/AccountCreator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Colors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Deposit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Deposit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Fonts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Fonts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Login.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SpreadsheetDownloader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/SpreadsheetUploader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserInterface.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,8 +60,8 @@
   <component name="GithubPullRequestsUISettings">
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
-        <option name="accountId" value="3a10277f-746f-4e2d-ab64-59bbc234175d" />
-        <option name="url" value="https://github.com/TheRealLyonic/FinancialManagementSystem.git" />
+        <option name="accountId" value="73419348-636e-4cbc-8632-1f4b41587145" />
+        <option name="url" value="https://github.com/TheRealLyonic/FinancialManagementSystem" />
       </UrlAndAccount>
     </option>
   </component>
@@ -125,7 +138,7 @@
       <workItem from="1676317371088" duration="20000" />
       <workItem from="1676666907707" duration="399000" />
       <workItem from="1676667397555" duration="1058000" />
-      <workItem from="1676668692723" duration="821000" />
+      <workItem from="1676668692723" duration="1302000" />
     </task>
     <task id="LOCAL-00001" summary="Project Created.">
       <created>1671685002082</created>
@@ -421,7 +434,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676669207131</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="New Project Directory Created.">
+      <created>1676669634604</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1676669634604</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

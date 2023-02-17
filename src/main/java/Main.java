@@ -1,9 +1,10 @@
-import com.dropbox.core.DbxException;
+import java.io.IOException;
+import java.text.ParseException;
 
 public class Main{
 
-    public static void main(String[] args) throws DbxException {
-        new Login();
+    public static void main(String[] args) throws IOException, ParseException {
+        new FinancialManagementSystem();
     }
 
 }
