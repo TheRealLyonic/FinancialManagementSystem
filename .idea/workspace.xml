@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Added the SpreadsheetUploader class as well as implemented its core functionality. The program is now runnable from start to finish with the new changes and everything works as expected." />
+    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="New Project Directory Created." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -62,25 +62,24 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Documents/Java Projects/FinancialManagementSystem&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Documents/Java Projects/FinancialManagementSystemPublic",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -119,7 +118,7 @@
       <workItem from="1676317371088" duration="20000" />
       <workItem from="1676666907707" duration="399000" />
       <workItem from="1676667397555" duration="1058000" />
-      <workItem from="1676668692723" duration="102000" />
+      <workItem from="1676668692723" duration="411000" />
     </task>
     <task id="LOCAL-00001" summary="Project Created.">
       <created>1671685002082</created>
@@ -401,7 +400,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676668387672</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="New Project Directory Created.">
+      <created>1676668958033</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1676668958033</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -423,7 +429,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Made improvements to date management and the FinancialManagementSystem class in general." />
     <MESSAGE value="Fixed a bug in the ExcelSpreadsheet class where trying to display pure text information from a spreadsheet would cause an error. Also cleared out the addMissingEntries() method in the FinancialManagementSystem class to begin a complete rework on how the process is handled." />
     <MESSAGE value="Started work on accounting for missing entries." />
     <MESSAGE value="Continued losing my mind trying to fix the addMissingEntries() method, but made progress and got the enterNewYear() method working completely as expected." />
@@ -448,6 +453,7 @@
     <MESSAGE value="Finished the GetUser() method in the Login class, and made general improvements to methods in both the ExcelSpreadsheet and the FinancialManagementSystem class." />
     <MESSAGE value="Updated the DownloadSpreadsheetPrompt class to the SpreadsheetDownloader class, and added its base functionality. A user could now login securely, and then decide whether or not to download the last uploaded version of their spreadsheet from the database before opening the main portion of the program." />
     <MESSAGE value="Added the SpreadsheetUploader class as well as implemented its core functionality. The program is now runnable from start to finish with the new changes and everything works as expected." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added the SpreadsheetUploader class as well as implemented its core functionality. The program is now runnable from start to finish with the new changes and everything works as expected." />
+    <MESSAGE value="New Project Directory Created." />
+    <option name="LAST_COMMIT_MESSAGE" value="New Project Directory Created." />
   </component>
 </project>
