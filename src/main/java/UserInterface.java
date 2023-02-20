@@ -10,8 +10,8 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
     private static JFrame frame;
     private HashMap dataSet;
     private static PieChart pieChart;
-    private JButton newDepositButton, newExpenditureButton;
-    private JLabel newDepositText, newExpenditureText;
+    private JButton newDepositButton, newExpenditureButton, newMonthlyPaymentButton;
+    private JLabel newDepositText, newExpenditureText, newMonthlyPaymentText;
     private static JLabel balanceText;
     private static int percentSpent, percentSaved;
 
@@ -40,10 +40,10 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         newDepositButton.setFocusable(false);
         newDepositButton.setLocation(25, 55);
         newDepositButton.setSize(55, 55);
+        newDepositButton.addActionListener(this);
         //Makes the JButton transparent, so that only the selected icon is visible.
         newDepositButton.setOpaque(false);
         newDepositButton.setContentAreaFilled(false);
-        newDepositButton.addActionListener(this);
             //Deposit Text
         newDepositText = new JLabel("New Deposit");
         newDepositText.setFont(ROBOTO_SMALL);
@@ -58,16 +58,34 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         newExpenditureButton.setFocusable(false);
         newExpenditureButton.setLocation(25, 165);
         newExpenditureButton.setSize(55, 55);
+        newExpenditureButton.addActionListener(this);
         //Transparency stuff for the button
         newExpenditureButton.setOpaque(false);
         newExpenditureButton.setContentAreaFilled(false);
-        newExpenditureButton.addActionListener(this);
             //Expenditure Text
         newExpenditureText = new JLabel("New Expenditure");
         newExpenditureText.setFont(ROBOTO_SMALL);
         newExpenditureText.setForeground(SUBDUED_WHITE);
         newExpenditureText.setLocation(90, 156);
         newExpenditureText.setSize(350, 70);
+
+        //New Monthly Payment Stuff
+            //Monthly payment button
+        newMonthlyPaymentButton = new JButton();
+        newMonthlyPaymentButton.setIcon(new ImageIcon("resources\\new_monthly_payment_icon.png"));
+        newMonthlyPaymentButton.setFocusable(false);
+        newMonthlyPaymentButton.setLocation(25, 275);
+        newMonthlyPaymentButton.setSize(55, 55);
+        newMonthlyPaymentButton.addActionListener(this);
+            //Transparency for the button
+        newMonthlyPaymentButton.setOpaque(false);
+        newMonthlyPaymentButton.setContentAreaFilled(false);
+            //Monthly payment text
+        newMonthlyPaymentText = new JLabel("New Monthly Payment");
+        newMonthlyPaymentText.setFont(ROBOTO_SMALL);
+        newMonthlyPaymentText.setForeground(SUBDUED_WHITE);
+        newMonthlyPaymentText.setLocation(90, 266);
+        newMonthlyPaymentText.setSize(550, 70);
 
         //Balance Display Stuff
         double balance = FinancialManagementSystem.getBalance();
@@ -92,12 +110,14 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
 
         //Final JFrame preparations
         frame.setLocationRelativeTo(null);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.add(pieChart.getChartPanel());
         frame.add(newDepositButton);
         frame.add(newDepositText);
         frame.add(newExpenditureButton);
         frame.add(newExpenditureText);
+        frame.add(newMonthlyPaymentButton);
+        frame.add(newMonthlyPaymentText);
         frame.add(balanceText);
         frame.setVisible(true);
     }
@@ -126,6 +146,8 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
             new Deposit();
         }else if(e.getSource() == newExpenditureButton){
             new Expenditure();
+        }else if(e.getSource() == newMonthlyPaymentButton){
+            new MonthlyPayment();
         }
     }
 

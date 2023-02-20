@@ -9,18 +9,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="New Project Directory Created.">
+    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Removed remnants of previous version of project.">
+      <change afterPath="$PROJECT_DIR$/resources/monthly_payment_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/new_monthly_payment_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/MonthlyPayment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AccountCreator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Colors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/account_creator_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/download_spreadsheet_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/login_icon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/upload_spreadsheet_icon.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Deposit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Deposit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Fonts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Fonts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Login.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SpreadsheetDownloader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/SpreadsheetUploader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Expenditure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Expenditure.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,24 +81,24 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/Documents/Java Projects/FinancialManagementSystemPublic",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Documents/Java Projects/FinancialManagementSystemPublic&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -138,7 +137,8 @@
       <workItem from="1676317371088" duration="20000" />
       <workItem from="1676666907707" duration="399000" />
       <workItem from="1676667397555" duration="1058000" />
-      <workItem from="1676668692723" duration="1302000" />
+      <workItem from="1676668692723" duration="1363000" />
+      <workItem from="1676869611858" duration="5751000" />
     </task>
     <task id="LOCAL-00001" summary="Project Created.">
       <created>1671685002082</created>
@@ -441,7 +441,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676669634604</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Removed remnants of previous version of project.">
+      <created>1676670027396</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1676670027396</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -463,7 +470,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Fixed a bug in the ExcelSpreadsheet class where trying to display pure text information from a spreadsheet would cause an error. Also cleared out the addMissingEntries() method in the FinancialManagementSystem class to begin a complete rework on how the process is handled." />
     <MESSAGE value="Started work on accounting for missing entries." />
     <MESSAGE value="Continued losing my mind trying to fix the addMissingEntries() method, but made progress and got the enterNewYear() method working completely as expected." />
     <MESSAGE value="Completed functionality for filling out the rest of the entries in a spreadsheet for a given year, as well as added proper formatting for currency being written to a spreadsheet." />
@@ -488,6 +494,7 @@
     <MESSAGE value="Updated the DownloadSpreadsheetPrompt class to the SpreadsheetDownloader class, and added its base functionality. A user could now login securely, and then decide whether or not to download the last uploaded version of their spreadsheet from the database before opening the main portion of the program." />
     <MESSAGE value="Added the SpreadsheetUploader class as well as implemented its core functionality. The program is now runnable from start to finish with the new changes and everything works as expected." />
     <MESSAGE value="New Project Directory Created." />
-    <option name="LAST_COMMIT_MESSAGE" value="New Project Directory Created." />
+    <MESSAGE value="Removed remnants of previous version of project." />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed remnants of previous version of project." />
   </component>
 </project>

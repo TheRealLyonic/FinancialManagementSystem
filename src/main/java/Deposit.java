@@ -64,7 +64,7 @@ public class Deposit extends JFrame implements ActionListener, Colors, Fonts{
         invalidNumberWarningText.setVisible(false);
 
         //Final JFrame Preparations
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setLocation(this.getX(), 85);
         this.add(newDepositText);
