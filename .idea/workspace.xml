@@ -9,18 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Removed remnants of previous version of project.">
-      <change afterPath="$PROJECT_DIR$/resources/monthly_payment_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/new_monthly_payment_icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/MonthlyPayment.java" afterDir="false" />
+    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Begun work on monthly payment functionality, and removed additional resources used for deprecated login system.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/account_creator_icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/download_spreadsheet_icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/login_icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/upload_spreadsheet_icon.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Deposit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Deposit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Expenditure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Expenditure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,7 +130,8 @@
       <workItem from="1676666907707" duration="399000" />
       <workItem from="1676667397555" duration="1058000" />
       <workItem from="1676668692723" duration="1363000" />
-      <workItem from="1676869611858" duration="5751000" />
+      <workItem from="1676869611858" duration="6191000" />
+      <workItem from="1676921811607" duration="1939000" />
     </task>
     <task id="LOCAL-00001" summary="Project Created.">
       <created>1671685002082</created>
@@ -448,7 +441,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676670027396</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Begun work on monthly payment functionality, and removed additional resources used for deprecated login system.">
+      <created>1676876404831</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1676876404831</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -470,7 +470,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Started work on accounting for missing entries." />
     <MESSAGE value="Continued losing my mind trying to fix the addMissingEntries() method, but made progress and got the enterNewYear() method working completely as expected." />
     <MESSAGE value="Completed functionality for filling out the rest of the entries in a spreadsheet for a given year, as well as added proper formatting for currency being written to a spreadsheet." />
     <MESSAGE value="The program can now account for any missing dates within a given spreadsheet. Additionally, if the program hasn't been used since the previous year, and there does not exist a spreadsheet with the system's current year as it's name, an error will no longer be thrown. Instead, the findSpreadsheet() method which has been added to the FinancialManagementSystem class will now use a for-loop (Starting at the system's current year and ending at the year 2001) to decrement through previous years until it finds an Excel file with the given year as its name. As of now, regardless of how long it has been since the user has last used the program, everything should run correctly, and then continue as normal after a new spreadsheet has been created for that year, and all missing entries have been accounted for in all spreadsheets in-between." />
@@ -495,6 +494,7 @@
     <MESSAGE value="Added the SpreadsheetUploader class as well as implemented its core functionality. The program is now runnable from start to finish with the new changes and everything works as expected." />
     <MESSAGE value="New Project Directory Created." />
     <MESSAGE value="Removed remnants of previous version of project." />
-    <option name="LAST_COMMIT_MESSAGE" value="Removed remnants of previous version of project." />
+    <MESSAGE value="Begun work on monthly payment functionality, and removed additional resources used for deprecated login system." />
+    <option name="LAST_COMMIT_MESSAGE" value="Begun work on monthly payment functionality, and removed additional resources used for deprecated login system." />
   </component>
 </project>

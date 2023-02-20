@@ -5,8 +5,9 @@ import java.io.IOException;
 
 public class Deposit extends JFrame implements ActionListener, Colors, Fonts{
 
-    private JLabel newDepositText, emptyDepositWarningText, invalidNumberWarningText;
+    private JLabel newDepositText;
     private JTextField newDepositTextField;
+    private JTextArea newDepositTextArea;
     private JButton confirmButton;
     private JLabel greenDollarIcon;
 
@@ -22,46 +23,35 @@ public class Deposit extends JFrame implements ActionListener, Colors, Fonts{
         newDepositText = new JLabel("New Deposit");
         newDepositText.setFont(ROBOTO_MEDIUM);
         newDepositText.setForeground(SUBDUED_WHITE);
-        newDepositText.setLocation(150, 15);
+        newDepositText.setLocation(160, 10);
         newDepositText.setSize(300, 75);
 
         //New Deposit Text Field stuff
         newDepositTextField = new JTextField("0.00");
         newDepositTextField.setSize(325, 95);
         newDepositTextField.setFont(ROBOTO_MEDIUM);
-        newDepositTextField.setLocation(95, 250);
+        newDepositTextField.setLocation(125, 85);
+
+        //New Deposit Text Area Stuff
+        newDepositTextArea = new JTextArea("Deposit Summary");
+        newDepositTextArea.setLocation(10, 190);
+        newDepositTextArea.setSize(450, 185);
+        newDepositTextArea.setFont(ROBOTO_BUTTON);
+        newDepositTextArea.setLineWrap(true);
 
         //Green Dollar Icon stuff
         greenDollarIcon = new JLabel();
         greenDollarIcon.setIcon(new ImageIcon("resources\\green_dollar_icon.png"));
         greenDollarIcon.setSize(95, 95);
-        greenDollarIcon.setLocation(5, 250);
+        greenDollarIcon.setLocation(35, 85);
 
         //Confirm button stuff
         confirmButton = new JButton("Confirm");
         confirmButton.setSize(125, 75);
-        confirmButton.setLocation(460, 260);
+        confirmButton.setLocation(485, 295);
         confirmButton.addActionListener(this);
         confirmButton.setFont(ROBOTO_BUTTON);
         confirmButton.setFocusable(false);
-
-        //Empty deposit warning text stuff
-        emptyDepositWarningText = new JLabel("<html>ERROR: You must enter a dollar amount above 0 to make a new" +
-                " deposit.</html>");
-        emptyDepositWarningText.setFont(ROBOTO_BUTTON);
-        emptyDepositWarningText.setForeground(ERROR_RED);
-        emptyDepositWarningText.setLocation(180, 100);
-        emptyDepositWarningText.setSize(250, 150);
-        emptyDepositWarningText.setVisible(false);
-
-        //Invalid number warning text stuff
-        invalidNumberWarningText = new JLabel("<html>ERROR: You must enter a valid number to make a new " +
-                "deposit.</html>");
-        invalidNumberWarningText.setFont(ROBOTO_BUTTON);
-        invalidNumberWarningText.setForeground(ERROR_RED);
-        invalidNumberWarningText.setLocation(180, 100);
-        invalidNumberWarningText.setSize(250, 150);
-        invalidNumberWarningText.setVisible(false);
 
         //Final JFrame Preparations
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -69,10 +59,9 @@ public class Deposit extends JFrame implements ActionListener, Colors, Fonts{
         this.setLocation(this.getX(), 85);
         this.add(newDepositText);
         this.add(newDepositTextField);
+        this.add(newDepositTextArea);
         this.add(greenDollarIcon);
         this.add(confirmButton);
-        this.add(emptyDepositWarningText);
-        this.add(invalidNumberWarningText);
         this.setVisible(true);
     }
 
@@ -81,18 +70,20 @@ public class Deposit extends JFrame implements ActionListener, Colors, Fonts{
         if(e.getSource() == confirmButton){
             try {
 
+                //ERROR: You must enter " +
+                //                        "a valid number to make a new deposit.
                 if(Double.valueOf(newDepositTextField.getText()) <= 0.00){
-                    invalidNumberWarningText.setVisible(false);
-                    emptyDepositWarningText.setVisible(true);
+                    JOptionPane.showMessageDialog(this, "ERROR: You must enter a dollar " +
+                            "amount above 0 to make a new deposit.", "Empty Deposit", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
                 FinancialManagementSystem.addDeposit(newDepositTextField.getText());
                 UserInterface.refreshWindow();
                 this.dispose();
-            } catch(IOException ex){
-                emptyDepositWarningText.setVisible(false);
-                invalidNumberWarningText.setVisible(true);
+            } catch(NumberFormatException | IOException ex){
+                JOptionPane.showMessageDialog(this, "ERROR: You must enter a valid number " +
+                        "to make a new deposit.", "Format Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
