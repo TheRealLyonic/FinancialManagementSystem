@@ -9,10 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Begun work on monthly payment functionality, and removed additional resources used for deprecated login system.">
+    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Continued work on monthly payments, beginning to optimize the way error handling works, by replacing the 'WarningText' objects with error dialogs via the JOptionPane class">
+      <change afterPath="$PROJECT_DIR$/resources/default_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/AdditionalWindow.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Deposit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Deposit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Expenditure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Expenditure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MonthlyPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MonthlyPayment.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +134,10 @@
       <workItem from="1676667397555" duration="1058000" />
       <workItem from="1676668692723" duration="1363000" />
       <workItem from="1676869611858" duration="6191000" />
-      <workItem from="1676921811607" duration="1939000" />
+      <workItem from="1676921811607" duration="1989000" />
+      <workItem from="1676945812546" duration="1199000" />
+      <workItem from="1677010156505" duration="657000" />
+      <workItem from="1677027062723" duration="3875000" />
     </task>
     <task id="LOCAL-00001" summary="Project Created.">
       <created>1671685002082</created>
@@ -448,7 +454,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676876404831</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Continued work on monthly payments, beginning to optimize the way error handling works, by replacing the 'WarningText' objects with error dialogs via the JOptionPane class">
+      <created>1676923800316</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1676923800316</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -470,7 +483,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Continued losing my mind trying to fix the addMissingEntries() method, but made progress and got the enterNewYear() method working completely as expected." />
     <MESSAGE value="Completed functionality for filling out the rest of the entries in a spreadsheet for a given year, as well as added proper formatting for currency being written to a spreadsheet." />
     <MESSAGE value="The program can now account for any missing dates within a given spreadsheet. Additionally, if the program hasn't been used since the previous year, and there does not exist a spreadsheet with the system's current year as it's name, an error will no longer be thrown. Instead, the findSpreadsheet() method which has been added to the FinancialManagementSystem class will now use a for-loop (Starting at the system's current year and ending at the year 2001) to decrement through previous years until it finds an Excel file with the given year as its name. As of now, regardless of how long it has been since the user has last used the program, everything should run correctly, and then continue as normal after a new spreadsheet has been created for that year, and all missing entries have been accounted for in all spreadsheets in-between." />
     <MESSAGE value="Various small improvements, including setting custom colors for the pie chart, still displays a red and blue, but the red will now consistently be representative of how much you've spent, while blue shows how much you have saved, previously the colors would be assigned randomly." />
@@ -495,6 +507,7 @@
     <MESSAGE value="New Project Directory Created." />
     <MESSAGE value="Removed remnants of previous version of project." />
     <MESSAGE value="Begun work on monthly payment functionality, and removed additional resources used for deprecated login system." />
-    <option name="LAST_COMMIT_MESSAGE" value="Begun work on monthly payment functionality, and removed additional resources used for deprecated login system." />
+    <MESSAGE value="Continued work on monthly payments, beginning to optimize the way error handling works, by replacing the 'WarningText' objects with error dialogs via the JOptionPane class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Continued work on monthly payments, beginning to optimize the way error handling works, by replacing the 'WarningText' objects with error dialogs via the JOptionPane class" />
   </component>
 </project>
