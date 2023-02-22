@@ -10,8 +10,8 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
     private static JFrame frame;
     private HashMap dataSet;
     private static PieChart pieChart;
-    private JButton newDepositButton, newExpenditureButton, newMonthlyPaymentButton;
-    private JLabel newDepositText, newExpenditureText, newMonthlyPaymentText;
+    private JButton newDepositButton, newExpenditureButton, newScheduledPaymentButton;
+    private JLabel newDepositText, newExpenditureText, newScheduledPaymentText;
     private static JLabel balanceText;
     private static int percentSpent, percentSaved;
 
@@ -71,21 +71,21 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
 
         //New Monthly Payment Stuff
             //Monthly payment button
-        newMonthlyPaymentButton = new JButton();
-        newMonthlyPaymentButton.setIcon(new ImageIcon("resources\\new_monthly_payment_icon.png"));
-        newMonthlyPaymentButton.setFocusable(false);
-        newMonthlyPaymentButton.setLocation(25, 275);
-        newMonthlyPaymentButton.setSize(55, 55);
-        newMonthlyPaymentButton.addActionListener(this);
+        newScheduledPaymentButton = new JButton();
+        newScheduledPaymentButton.setIcon(new ImageIcon("resources\\new_scheduled_payment_icon.png"));
+        newScheduledPaymentButton.setFocusable(false);
+        newScheduledPaymentButton.setLocation(25, 425);
+        newScheduledPaymentButton.setSize(55, 55);
+        newScheduledPaymentButton.addActionListener(this);
             //Transparency for the button
-        newMonthlyPaymentButton.setOpaque(false);
-        newMonthlyPaymentButton.setContentAreaFilled(false);
+        newScheduledPaymentButton.setOpaque(false);
+        newScheduledPaymentButton.setContentAreaFilled(false);
             //Monthly payment text
-        newMonthlyPaymentText = new JLabel("New Monthly Payment");
-        newMonthlyPaymentText.setFont(ROBOTO_SMALL);
-        newMonthlyPaymentText.setForeground(SUBDUED_WHITE);
-        newMonthlyPaymentText.setLocation(90, 266);
-        newMonthlyPaymentText.setSize(550, 70);
+        newScheduledPaymentText = new JLabel("New Scheduled Payment");
+        newScheduledPaymentText.setFont(ROBOTO_SMALL);
+        newScheduledPaymentText.setForeground(SUBDUED_WHITE);
+        newScheduledPaymentText.setLocation(90, 416);
+        newScheduledPaymentText.setSize(550, 70);
 
         //Balance Display Stuff
         double balance = FinancialManagementSystem.getBalance();
@@ -116,8 +116,8 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         frame.add(newDepositText);
         frame.add(newExpenditureButton);
         frame.add(newExpenditureText);
-        frame.add(newMonthlyPaymentButton);
-        frame.add(newMonthlyPaymentText);
+        frame.add(newScheduledPaymentButton);
+        frame.add(newScheduledPaymentText);
         frame.add(balanceText);
         frame.setVisible(true);
     }
@@ -146,8 +146,8 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
             new Deposit();
         }else if(e.getSource() == newExpenditureButton){
             new Expenditure();
-        }else if(e.getSource() == newMonthlyPaymentButton){
-            new MonthlyPayment();
+        }else if(e.getSource() == newScheduledPaymentButton){
+            new ScheduledPayment();
         }
     }
 

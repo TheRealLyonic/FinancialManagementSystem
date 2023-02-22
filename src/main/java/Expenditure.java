@@ -46,7 +46,7 @@ public class Expenditure extends AdditionalWindow implements ActionListener{
                 throw new RuntimeException(ex);
             }catch(NumberFormatException ex){
                 JOptionPane.showMessageDialog(this, "ERROR: You must enter a valid number " +
-                        "to make a new expenditure.", "Invalid Number", JOptionPane.ERROR_MESSAGE);
+                        "to make a new expenditure.", "Format Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

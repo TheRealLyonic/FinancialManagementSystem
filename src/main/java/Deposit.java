@@ -28,7 +28,7 @@ public class Deposit extends AdditionalWindow implements ActionListener{
             try {
                 if(Double.valueOf(currencyTextField.getText()) <= 0.00){
                     JOptionPane.showMessageDialog(this, "ERROR: You must enter a dollar " +
-                            "amount above 0 to make a new deposit.", "Empty Deposit", JOptionPane.ERROR_MESSAGE);
+                            "amount above 0 to make a new deposit.", "Invalid Amount", JOptionPane.ERROR_MESSAGE);
                     return;
                 }else if(summaryTextArea.getText().equals("Deposit Summary")){
                     JOptionPane.showMessageDialog(this, "ERROR: You must provide a deposit " +
