@@ -32,13 +32,9 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         dataSet.put("Saved (" + percentSaved + "%)", percentSaved);
         pieChart = new PieChart("Weekly Update", dataSet, 490, 0, 350, 300);
 
-        //New Deposit Option stuff
+        //Menu Options
         newDepositOption = new MenuOption(this, 25, 55, "New Deposit", new ImageIcon("resources\\new_deposit_icon.png"));
-
-        //New Expenditure Option stuff
         newExpenditureOption = new MenuOption(this, 25, 165, "New Expenditure", new ImageIcon("resources\\new_expenditure_icon.png"));
-
-        //New Scheduled Payment Option stuff
         newScheduledPaymentOption = new MenuOption(this, 25, 340, "New Scheduled Payment", new ImageIcon("resources\\new_scheduled_payment_icon.png"));
 
         //Balance Display Stuff

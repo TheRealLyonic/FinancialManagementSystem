@@ -9,8 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Started work on basic error-handling in the ScheduledPayment class, as well as finished refactoring all instances of 'MonthlyPayment' to 'ScheduledPayment' to better reflect the purpose of the new feature. Massive UI changes to-be done in the ScheduledPayment class, so that all the necessary information may be collected.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/MenuOption.java" afterDir="false" />
+    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Optimized the UserInterface class by adding a MenuOption class, which handles all of the repetitive details involved in created a new 'menu option' automatically.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserInterface.java" afterDir="false" />
     </list>
@@ -135,7 +134,7 @@
       <workItem from="1676945812546" duration="1199000" />
       <workItem from="1677010156505" duration="657000" />
       <workItem from="1677027062723" duration="9402000" />
-      <workItem from="1677094280950" duration="4090000" />
+      <workItem from="1677094280950" duration="5075000" />
     </task>
     <task id="LOCAL-00001" summary="Project Created.">
       <created>1671685002082</created>
@@ -473,7 +472,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677041453181</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Optimized the UserInterface class by adding a MenuOption class, which handles all of the repetitive details involved in created a new 'menu option' automatically.">
+      <created>1677101559284</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1677101559285</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -495,7 +501,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Various small improvements, including setting custom colors for the pie chart, still displays a red and blue, but the red will now consistently be representative of how much you've spent, while blue shows how much you have saved, previously the colors would be assigned randomly." />
     <MESSAGE value="Fixed bug in the pie chart class." />
     <MESSAGE value="Fixed a bug in the FinancialManagementSystem class where if the last date of a spreadsheet was the last day of that year (I.e. 12/31/2022), the program would enter all of the information for the following year (I.e. 2023) in that spreadsheet, and continue endlessly. It now functions as expected and will simply create a new spreadsheet for the following year in such an event. Also continued work on the U.I. in both the UserInterface and Deposit class, as well as adjusted the Fonts interface to include different size options for the Roboto font." />
     <MESSAGE value="Turns out there was still a problem with the Pie chart displaying colors correctly, fixed all bugs in that department, and now it will always color the spent percentage red, and the saved percentage blue." />
@@ -520,6 +525,7 @@
     <MESSAGE value="Continued work on monthly payments, beginning to optimize the way error handling works, by replacing the 'WarningText' objects with error dialogs via the JOptionPane class" />
     <MESSAGE value="Finally optimized the way in which additional windows are created within the program, so that any class which requires its own interface will extend AdditionalWindow.java as opposed to the JFrame class itself, so that the more redundant operations and common formatting are taken care of without repeated lines of code in each class." />
     <MESSAGE value="Started work on basic error-handling in the ScheduledPayment class, as well as finished refactoring all instances of 'MonthlyPayment' to 'ScheduledPayment' to better reflect the purpose of the new feature. Massive UI changes to-be done in the ScheduledPayment class, so that all the necessary information may be collected." />
-    <option name="LAST_COMMIT_MESSAGE" value="Started work on basic error-handling in the ScheduledPayment class, as well as finished refactoring all instances of 'MonthlyPayment' to 'ScheduledPayment' to better reflect the purpose of the new feature. Massive UI changes to-be done in the ScheduledPayment class, so that all the necessary information may be collected." />
+    <MESSAGE value="Optimized the UserInterface class by adding a MenuOption class, which handles all of the repetitive details involved in created a new 'menu option' automatically." />
+    <option name="LAST_COMMIT_MESSAGE" value="Optimized the UserInterface class by adding a MenuOption class, which handles all of the repetitive details involved in created a new 'menu option' automatically." />
   </component>
 </project>
