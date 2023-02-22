@@ -10,8 +10,7 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
     private static JFrame frame;
     private HashMap dataSet;
     private static PieChart pieChart;
-    private JButton newDepositButton, newExpenditureButton, newScheduledPaymentButton;
-    private JLabel newDepositText, newExpenditureText, newScheduledPaymentText;
+    private MenuOption newDepositOption, newExpenditureOption, newScheduledPaymentOption;
     private static JLabel balanceText;
     private static int percentSpent, percentSaved;
 
@@ -33,59 +32,14 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         dataSet.put("Saved (" + percentSaved + "%)", percentSaved);
         pieChart = new PieChart("Weekly Update", dataSet, 490, 0, 350, 300);
 
-        //New Deposit Stuff
-            //Deposit Button
-        newDepositButton = new JButton();
-        newDepositButton.setIcon(new ImageIcon("resources\\new_deposit_icon.png"));
-        newDepositButton.setFocusable(false);
-        newDepositButton.setLocation(25, 55);
-        newDepositButton.setSize(55, 55);
-        newDepositButton.addActionListener(this);
-        //Makes the JButton transparent, so that only the selected icon is visible.
-        newDepositButton.setOpaque(false);
-        newDepositButton.setContentAreaFilled(false);
-            //Deposit Text
-        newDepositText = new JLabel("New Deposit");
-        newDepositText.setFont(ROBOTO_SMALL);
-        newDepositText.setForeground(SUBDUED_WHITE);
-        newDepositText.setLocation(90, 46);
-        newDepositText.setSize(225, 70);
+        //New Deposit Option stuff
+        newDepositOption = new MenuOption(this, 25, 55, "New Deposit", new ImageIcon("resources\\new_deposit_icon.png"));
 
-        //New Expenditure Stuff
-            //Expenditure Button
-        newExpenditureButton = new JButton();
-        newExpenditureButton.setIcon(new ImageIcon("resources\\new_expenditure_icon.png"));
-        newExpenditureButton.setFocusable(false);
-        newExpenditureButton.setLocation(25, 165);
-        newExpenditureButton.setSize(55, 55);
-        newExpenditureButton.addActionListener(this);
-        //Transparency stuff for the button
-        newExpenditureButton.setOpaque(false);
-        newExpenditureButton.setContentAreaFilled(false);
-            //Expenditure Text
-        newExpenditureText = new JLabel("New Expenditure");
-        newExpenditureText.setFont(ROBOTO_SMALL);
-        newExpenditureText.setForeground(SUBDUED_WHITE);
-        newExpenditureText.setLocation(90, 156);
-        newExpenditureText.setSize(350, 70);
+        //New Expenditure Option stuff
+        newExpenditureOption = new MenuOption(this, 25, 165, "New Expenditure", new ImageIcon("resources\\new_expenditure_icon.png"));
 
-        //New Monthly Payment Stuff
-            //Monthly payment button
-        newScheduledPaymentButton = new JButton();
-        newScheduledPaymentButton.setIcon(new ImageIcon("resources\\new_scheduled_payment_icon.png"));
-        newScheduledPaymentButton.setFocusable(false);
-        newScheduledPaymentButton.setLocation(25, 425);
-        newScheduledPaymentButton.setSize(55, 55);
-        newScheduledPaymentButton.addActionListener(this);
-            //Transparency for the button
-        newScheduledPaymentButton.setOpaque(false);
-        newScheduledPaymentButton.setContentAreaFilled(false);
-            //Monthly payment text
-        newScheduledPaymentText = new JLabel("New Scheduled Payment");
-        newScheduledPaymentText.setFont(ROBOTO_SMALL);
-        newScheduledPaymentText.setForeground(SUBDUED_WHITE);
-        newScheduledPaymentText.setLocation(90, 416);
-        newScheduledPaymentText.setSize(550, 70);
+        //New Scheduled Payment Option stuff
+        newScheduledPaymentOption = new MenuOption(this, 25, 340, "New Scheduled Payment", new ImageIcon("resources\\new_scheduled_payment_icon.png"));
 
         //Balance Display Stuff
         double balance = FinancialManagementSystem.getBalance();
@@ -112,12 +66,9 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.add(pieChart.getChartPanel());
-        frame.add(newDepositButton);
-        frame.add(newDepositText);
-        frame.add(newExpenditureButton);
-        frame.add(newExpenditureText);
-        frame.add(newScheduledPaymentButton);
-        frame.add(newScheduledPaymentText);
+        frame.add(newDepositOption);
+        frame.add(newExpenditureOption);
+        frame.add(newScheduledPaymentOption);
         frame.add(balanceText);
         frame.setVisible(true);
     }
@@ -142,11 +93,11 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == newDepositButton){
+        if(e.getSource() == newDepositOption.getOptionButton()){
             new Deposit();
-        }else if(e.getSource() == newExpenditureButton){
+        }else if(e.getSource() == newExpenditureOption.getOptionButton()){
             new Expenditure();
-        }else if(e.getSource() == newScheduledPaymentButton){
+        }else if(e.getSource() == newScheduledPaymentOption.getOptionButton()){
             new ScheduledPayment();
         }
     }
