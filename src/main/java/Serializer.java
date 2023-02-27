@@ -2,7 +2,7 @@ import java.io.*;
 
 public class Serializer<O>{
 
-    public void SerializeObject(O object, String filePath) throws IOException {
+    public void serializeObject(O object, String filePath) throws IOException {
         FileOutputStream fileOut = new FileOutputStream(filePath);
 
         ObjectOutputStream out = new ObjectOutputStream(fileOut);

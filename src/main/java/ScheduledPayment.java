@@ -1,28 +1,35 @@
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
+import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Dictionary;
+import java.util.HashMap;
 
-public class ScheduledPayment extends AdditionalWindow implements Colors{
+public class ScheduledPayment extends AdditionalWindow implements Colors, Serializable {
 
     private JComboBox<String> frequencyDropdownBox = new JComboBox(new String[]{
             "Day(s)",
             "Month(s)",
             "Year(s)"
     });
-    private JLabel frequencyDisplayText;
+    private JComboBox<String> notifyTypeDropdownBox = new JComboBox(new String[]{
+            "Automatically Deduct",
+            "Give Reminder"
+    });
+    private JLabel frequencyDisplayText, notifyTypeDisplayText;
     private JTextField frequencyTextField;
-    private static LocalDate subscriptionStartDate;
-    private Dictionary<Integer, String> frequencyOfPayment; //Key = Number of...; Value = "Days"/"Months"/"Years".
+    private LocalDate startDate;
+    private String measureOfFrequency;
+    private int quantityOfFrequency;
 
     ScheduledPayment(){
-        this.setTitle("Scheduled Payment");
+        this.setTitle("New Scheduled Payment");
         this.setIconImage(new ImageIcon("resources\\scheduled_payment_icon.png").getImage());
         this.setSize(710, 620);
         this.getContentPane().setBackground(FINANCIAL_ORANGE);
 
-        subscriptionStartDate = LocalDate.now();
+        startDate = LocalDate.now();
 
         //Frequency display text stuff
         frequencyDisplayText = new JLabel("Occurs Every:");
@@ -48,24 +55,39 @@ public class ScheduledPayment extends AdditionalWindow implements Colors{
         components.add(frequencyDropdownBox);
 
         //Heading text adjustments
-        headingText.setText("Scheduled Payment");
+        headingText.setText("New Scheduled Payment");
         headingText.setSize(headingText.getWidth() + 125, headingText.getHeight());
-        headingText.setLocation(headingText.getX() - 20, headingText.getY());
+        headingText.setLocation(headingText.getX() - 80, headingText.getY());
         headingText.setForeground(DEFAULT_BLACK);
 
         //Summary textArea adjustments
         summaryTextArea.setText("Payment Summary");
-        summaryTextArea.setLocation(summaryTextArea.getX(), summaryTextArea.getY() + 200);
+        summaryTextArea.setLocation(summaryTextArea.getX() - 2, summaryTextArea.getY() + 196);
 
         //Confirm Button adjustments
-        confirmButton.setLocation(confirmButton.getX(), confirmButton.getY() + 200);
+        confirmButton.setLocation(confirmButton.getX() + 28, confirmButton.getY() + 207);
+
+        //Notify type display text stuff
+        notifyTypeDisplayText = new JLabel("Notify Type:");
+        notifyTypeDisplayText.setSize(225, 85);
+        notifyTypeDisplayText.setLocation(471, 315);
+        notifyTypeDisplayText.setFont(ROBOTO_SMALL);
+        notifyTypeDisplayText.setForeground(DEFAULT_BLACK);
+        components.add(notifyTypeDisplayText);
+
+        //Notify type dropdown box stuff
+        notifyTypeDropdownBox.setSize(227, 55);
+        notifyTypeDropdownBox.setLocation(463, 385);
+        notifyTypeDropdownBox.setFont(ROBOTO_BUTTON);
+        notifyTypeDropdownBox.setFocusable(false);
+        components.add(notifyTypeDropdownBox);
 
         //Currency textField adjustments
-        currencyTextField.setLocation(currencyTextField.getX() + 75, currencyTextField.getY() + 32);
+        currencyTextField.setLocation(currencyTextField.getX() + 74, currencyTextField.getY() + 34);
 
         //Dollar-symbol adjustments
         dollarSymbol.setIcon(new ImageIcon("resources\\red_dollar_icon.png"));
-        dollarSymbol.setLocation(dollarSymbol.getX() + 75, dollarSymbol.getY() + 32);
+        dollarSymbol.setLocation(dollarSymbol.getX() + 74, dollarSymbol.getY() + 34);
 
         //Add all components to the frame and make it visible
         showFrame();
@@ -85,11 +107,34 @@ public class ScheduledPayment extends AdditionalWindow implements Colors{
                 return;
             }
 
-            //Add the new monthly payment information to the spreadsheet
-            //DO NOT FORGET TO ACCOUNT FOR IF A NEGATIVE NUMBER IS GIVEN. SINCE WE'RE LOSING MONEY, THAT SHOULD
-            //BE AN ACCEPTED FORMAT, BUT MUST BE ACCOUNTED FOR LATER IN THE PROGRAM.
-            System.out.println("TEMP LOG");
+            quantityOfFrequency = Integer.parseInt(frequencyTextField.getText());
+            measureOfFrequency = frequencyDropdownBox.getSelectedItem().toString();
+
+            try {
+                FinancialManagementSystem.addScheduledPayment(this);
+                UserInterface.refreshWindow();
+            } catch (IOException ex) {
+                UserInterface.showErrorMessage("I/o Exception", "ERROR: An I/o Exception " +
+                        "has occurred.");
+            } catch (ClassNotFoundException ex) {
+                UserInterface.showErrorMessage("Class Not Found", "ERROR: The ScheduledPayment " +
+                        "class was not found.");
+            }
+
             this.dispose();
         }
     }
+
+    public LocalDate getStartDate(){
+        return startDate;
+    }
+
+    public int getQuantityOfFrequency(){
+        return quantityOfFrequency;
+    }
+
+    public String getMeasureOfFrequency(){
+        return measureOfFrequency;
+    }
+
 }

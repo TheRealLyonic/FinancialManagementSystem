@@ -79,6 +79,15 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         frame.add(pieChart.getChartPanel());
 
         frame.setVisible(true);
+
+
+        if(FinancialManagementSystem.getScheduledPayments().size() != 0){
+            for(ScheduledPayment scheduledPayment : FinancialManagementSystem.getScheduledPayments()){
+                System.out.println(scheduledPayment.getStartDate());
+                System.out.println(scheduledPayment.getQuantityOfFrequency());
+                System.out.println(scheduledPayment.getMeasureOfFrequency());
+            }
+        }
     }
 
     //Updates the variables necessary for the creation of the Pie-chart.

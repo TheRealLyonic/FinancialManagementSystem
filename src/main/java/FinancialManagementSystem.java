@@ -7,19 +7,22 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class FinancialManagementSystem{
 
     private static ExcelSpreadsheet spreadsheet;
-    private static final int NUM_OF_COLUMNS = 7; //The number of used columns in the spreadsheet
     private static double startingBalance, balance;
     private static double spentSinceLastDeposit;
     private static int lastDepositRow;
     private static LocalDate currentLocalDate;
     private static LocalDate lastSpreadsheetDate;
+    private static final int NUM_OF_COLUMNS = 7; //The number of used columns in the spreadsheet
+    private static final Serializer SERIALIZER = new Serializer();
+    private static ArrayList<ScheduledPayment> scheduledPayments = new ArrayList();
 
-    FinancialManagementSystem() throws IOException, ParseException {
+    FinancialManagementSystem() throws IOException, ParseException, ClassNotFoundException {
         //Basic variable assignments and operations needed for the program to begin, keep in mind that the order of
         //these is important, because some of these methods require variables assigned in earlier methods to work.
         updateCurrentDate();
@@ -50,13 +53,14 @@ public class FinancialManagementSystem{
     }
 
     //!Update information stuff!
-    private static void updateInformation() throws IOException, ParseException {
+    private static void updateInformation() throws IOException, ParseException, ClassNotFoundException {
         updateLastSpreadsheetDate();
         updateBalance();
         updateStartingBalance();
         updateLastDepositRow();
         updateTotalSpentSinceLastDeposit();
         updateCurrentDate();
+        updateScheduledPayments();
     }
 
     private static void updateLastSpreadsheetDate() throws IOException, ParseException {
@@ -123,6 +127,23 @@ public class FinancialManagementSystem{
         currentLocalDate = LocalDate.now();
     }
 
+    public static void updateScheduledPayments() throws IOException, ClassNotFoundException {
+        scheduledPayments.clear(); //Zeros out the scheduledPayments array list.
+
+        File directory = new File("serialized");
+        File[] directoryFiles = directory.listFiles();
+
+        if(directoryFiles == null){
+            UserInterface.showErrorMessage("Missing Directory", "ERROR: serialized folder does " +
+                    "not exist in project directory.");
+            return; //This shouldn't be necessary, since showErrorMessage ends the program, but just in-case.
+        }
+
+        for(int i = 0; i < directoryFiles.length; i++){
+            scheduledPayments.add( (ScheduledPayment) SERIALIZER.deserializeObject("serialized\\scheduled_payment_" + i + ".ser") );
+        }
+    }
+
     private boolean lastEntryIsCurrent(){
         boolean yearMatch = lastSpreadsheetDate.getYear() == currentLocalDate.getYear();
         boolean monthMatch = lastSpreadsheetDate.getMonthValue() == currentLocalDate.getMonthValue();
@@ -138,13 +159,13 @@ public class FinancialManagementSystem{
     //!Missing entries stuff!
         //Checks to see if there is more than a one-day gap between the last entry in the spreadsheet and the current
         //day. If there is, the addMissingEntries() method is called.
-    private void checkForMissingEntries() throws IOException, ParseException {
+    private void checkForMissingEntries() throws IOException, ParseException, ClassNotFoundException {
         if(!lastEntryIsCurrent() && lastSpreadsheetDate.plusDays(1) != currentLocalDate){
             addMissingEntries();
         }
     }
 
-    private void addMissingEntries() throws IOException, ParseException {
+    private void addMissingEntries() throws IOException, ParseException, ClassNotFoundException {
         if(lastSpreadsheetDate.plusDays(1).equals(currentLocalDate) && lastSpreadsheetDate.getYear() == currentLocalDate.getYear()){
             createNewEntry();
         }else{
@@ -213,7 +234,7 @@ public class FinancialManagementSystem{
     }
 
         //Handles all of the necessary actions for entering a new year, including creating a new spreadsheet.
-    private void enterNewYear(String newYear) throws IOException, ParseException {
+    private void enterNewYear(String newYear) throws IOException, ParseException, ClassNotFoundException {
         LocalDate firstDayOfYear = LocalDate.of(Integer.parseInt(newYear), 1, 1);
 
         spreadsheet.createNewSpreadsheet("data\\" + newYear + ".xlsx", "Balance Sheet");
@@ -296,6 +317,11 @@ public class FinancialManagementSystem{
         updateBalance();
     }
 
+    public static void addScheduledPayment(ScheduledPayment scheduledPayment) throws IOException, ClassNotFoundException {
+        SERIALIZER.serializeObject(scheduledPayment, "serialized\\scheduled_payment_" + scheduledPayments.size() + ".ser");
+        updateScheduledPayments();
+    }
+
     public static void addSummary(String amount, String description, String summaryType) throws IOException {
         String summaryDefault;
         int cellNumber;
@@ -340,6 +366,10 @@ public class FinancialManagementSystem{
     public static double getLastDeposit() throws IOException {
         updateLastDepositRow();
         return new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(lastDepositRow, 3))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+    }
+
+    public static ArrayList<ScheduledPayment> getScheduledPayments(){
+        return scheduledPayments;
     }
 
 }

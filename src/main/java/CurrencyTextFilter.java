@@ -1,8 +1,9 @@
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;
+import java.io.Serializable;
 
-public class CurrencyTextFilter extends DocumentFilter {
+public class CurrencyTextFilter extends DocumentFilter implements Serializable {
 
     private int maxLength = 0;
 
