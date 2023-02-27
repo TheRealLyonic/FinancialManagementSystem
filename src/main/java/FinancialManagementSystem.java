@@ -262,7 +262,10 @@ public class FinancialManagementSystem{
         //Automatically formats the width of each column to perfectly fit the entered text.
     public static void autoSizeColumns() throws IOException {
         for(int i = 0; i < NUM_OF_COLUMNS; i++){
-            spreadsheet.writeToSpreadsheet(0, i, spreadsheet.readFromSpreadsheet(0, i) + "            ", "Format");
+            //Adds the value at row 0 for each column (The heading row) back into the spreadsheet as itself, adding
+            //some buffer-space for extra formatting purposes, also 'trims' the result from reading the spreadsheet
+            //to avoid duplicating buffer-space.
+            spreadsheet.writeToSpreadsheet(0, i, spreadsheet.readFromSpreadsheet(0, i).trim() + "            ", "Format");
         }
     }
 
@@ -279,14 +282,12 @@ public class FinancialManagementSystem{
     }
 
     public static void addExpenditure(String amount) throws IOException{
-        double cost = Double.parseDouble(amount);
-
-        if(cost >= 0.00){
-            cost *= -1;
-        }
+        //Makes the value of 'cost' negative, so that when it's added to the spreadsheet, the amount is deducted from
+        //our total balance instead of added.
+        double cost = (Double.parseDouble(amount) * -1);
 
         if(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 2)) != 0.00){
-            cost += Double.valueOf(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 2));
+            cost += Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 2));
         }
 
         spreadsheet.writeToSpreadsheet(spreadsheet.getLastRow(), 2, String.valueOf(cost), "Number");
@@ -299,10 +300,10 @@ public class FinancialManagementSystem{
         String summaryDefault;
         int cellNumber;
 
-        if(summaryType.toLowerCase().equals("purchase")){
+        if(summaryType.equalsIgnoreCase("purchase")){
             summaryDefault = "No purchases for this day.";
             cellNumber = 6;
-        }else if(summaryType.toLowerCase().equals("deposit")){
+        }else if(summaryType.equalsIgnoreCase("deposit")){
             summaryDefault = "No deposits for this day.";
             cellNumber = 5;
         }else{
@@ -311,10 +312,6 @@ public class FinancialManagementSystem{
             UserInterface.showErrorMessage("Invalid summaryType", "ERROR: Class gave invalid " +
                     "summaryType when trying to create a new summary in the spreadsheet.");
             System.exit(1);
-        }
-
-        if(Double.valueOf(amount) < 0.00){
-            amount = String.valueOf(Double.valueOf(amount) * -1);
         }
 
         String fullString = "";

@@ -11,6 +11,7 @@ public class ScheduledPayment extends AdditionalWindow implements Colors{
             "Month(s)",
             "Year(s)"
     });
+    private JLabel frequencyDisplayText;
     private JTextField frequencyTextField;
     private static LocalDate subscriptionStartDate;
     private Dictionary<Integer, String> frequencyOfPayment; //Key = Number of...; Value = "Days"/"Months"/"Years".
@@ -23,17 +24,25 @@ public class ScheduledPayment extends AdditionalWindow implements Colors{
 
         subscriptionStartDate = LocalDate.now();
 
+        //Frequency display text stuff
+        frequencyDisplayText = new JLabel("Occurs Every:");
+        frequencyDisplayText.setLocation(5, 245);
+        frequencyDisplayText.setSize(325, 85);
+        frequencyDisplayText.setFont(ROBOTO_MEDIUM);
+        frequencyDisplayText.setForeground(DEFAULT_BLACK);
+        components.add(frequencyDisplayText);
+
         //Frequency Text-field stuff
         frequencyTextField = new JTextField();
         ( (AbstractDocument) frequencyTextField.getDocument()).setDocumentFilter(new NumberTextFilter(2));
         frequencyTextField.setSize(90, 75);
-        frequencyTextField.setLocation(20, 245);
+        frequencyTextField.setLocation(325, 253);
         frequencyTextField.setFont(ROBOTO_MEDIUM);
         components.add(frequencyTextField);
 
         //Frequency Dropdown box stuff
         frequencyDropdownBox.setSize(112, 55);
-        frequencyDropdownBox.setLocation(325, 245);
+        frequencyDropdownBox.setLocation(425, 261);
         frequencyDropdownBox.setFont(ROBOTO_BUTTON);
         frequencyDropdownBox.setFocusable(false);
         components.add(frequencyDropdownBox);
@@ -41,7 +50,7 @@ public class ScheduledPayment extends AdditionalWindow implements Colors{
         //Heading text adjustments
         headingText.setText("Scheduled Payment");
         headingText.setSize(headingText.getWidth() + 125, headingText.getHeight());
-        headingText.setLocation(headingText.getX() - 15, headingText.getY());
+        headingText.setLocation(headingText.getX() - 20, headingText.getY());
         headingText.setForeground(DEFAULT_BLACK);
 
         //Summary textArea adjustments
@@ -51,8 +60,12 @@ public class ScheduledPayment extends AdditionalWindow implements Colors{
         //Confirm Button adjustments
         confirmButton.setLocation(confirmButton.getX(), confirmButton.getY() + 200);
 
+        //Currency textField adjustments
+        currencyTextField.setLocation(currencyTextField.getX() + 75, currencyTextField.getY() + 32);
+
         //Dollar-symbol adjustments
         dollarSymbol.setIcon(new ImageIcon("resources\\red_dollar_icon.png"));
+        dollarSymbol.setLocation(dollarSymbol.getX() + 75, dollarSymbol.getY() + 32);
 
         //Add all components to the frame and make it visible
         showFrame();

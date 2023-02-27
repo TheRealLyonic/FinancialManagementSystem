@@ -33,7 +33,7 @@ public class NumberTextFilter extends DocumentFilter {
             return;
         }
 
-        if( (filterBypass.getDocument().getLength() + string.length() - length) <= maxLength){
+        if( ((filterBypass.getDocument().getLength() + string.length() - length) <= maxLength) && !string.contains(".")){
             super.replace(filterBypass, offset, length, string, attributeSet);
         }
     }

@@ -9,19 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Quick formatting fix.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/CurrencyTextFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/NumberTextFilter.java" afterDir="false" />
+    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Made multiple formatting adjustments to the various text boxes, as well as continued work on the Scheduled Payment system. Also improved general readability of code across a few areas.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/AdditionalWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/AdditionalWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Colors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CurrencyTextFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CurrencyTextFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Deposit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Deposit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ExcelSpreadsheet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ExcelSpreadsheet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Expenditure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Expenditure.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/MenuOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MenuOption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/NumberTextFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/NumberTextFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ScheduledPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ScheduledPayment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,14 +143,9 @@
       <workItem from="1677422743747" duration="7000" />
       <workItem from="1677432440000" duration="53000" />
       <workItem from="1677433401746" duration="18286000" />
-      <workItem from="1677466395882" duration="747000" />
-    </task>
-    <task id="LOCAL-00002" summary="Project Created.">
-      <created>1671685122489</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1671685122489</updated>
+      <workItem from="1677466395882" duration="1917000" />
+      <workItem from="1677468845751" duration="1568000" />
+      <workItem from="1677509952548" duration="3281000" />
     </task>
     <task id="LOCAL-00003" summary="Project Created.">
       <created>1671686449651</created>
@@ -494,7 +483,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677102571971</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Made multiple formatting adjustments to the various text boxes, as well as continued work on the Scheduled Payment system. Also improved general readability of code across a few areas.">
+      <created>1677467273129</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1677467273129</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -516,7 +512,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Fixed a bug in the FinancialManagementSystem class where if the last date of a spreadsheet was the last day of that year (I.e. 12/31/2022), the program would enter all of the information for the following year (I.e. 2023) in that spreadsheet, and continue endlessly. It now functions as expected and will simply create a new spreadsheet for the following year in such an event. Also continued work on the U.I. in both the UserInterface and Deposit class, as well as adjusted the Fonts interface to include different size options for the Roboto font." />
     <MESSAGE value="Turns out there was still a problem with the Pie chart displaying colors correctly, fixed all bugs in that department, and now it will always color the spent percentage red, and the saved percentage blue." />
     <MESSAGE value="Improved rendering of the balance text by making its size and position dynamic, based on how large it's quantity is, so the text always appears mostly centered. Also began work on the Expenditure class, and made an icon for the new window. It's JFrame appearance will be more or less the same as the Deposit class, with minor differences where necessary." />
     <MESSAGE value="Continued work on the Deposit class." />
@@ -541,6 +536,7 @@
     <MESSAGE value="Started work on basic error-handling in the ScheduledPayment class, as well as finished refactoring all instances of 'MonthlyPayment' to 'ScheduledPayment' to better reflect the purpose of the new feature. Massive UI changes to-be done in the ScheduledPayment class, so that all the necessary information may be collected." />
     <MESSAGE value="Optimized the UserInterface class by adding a MenuOption class, which handles all of the repetitive details involved in created a new 'menu option' automatically." />
     <MESSAGE value="Quick formatting fix." />
-    <option name="LAST_COMMIT_MESSAGE" value="Quick formatting fix." />
+    <MESSAGE value="Made multiple formatting adjustments to the various text boxes, as well as continued work on the Scheduled Payment system. Also improved general readability of code across a few areas." />
+    <option name="LAST_COMMIT_MESSAGE" value="Made multiple formatting adjustments to the various text boxes, as well as continued work on the Scheduled Payment system. Also improved general readability of code across a few areas." />
   </component>
 </project>

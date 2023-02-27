@@ -25,7 +25,7 @@ public class Deposit extends AdditionalWindow{
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == confirmButton){
             try {
-                if(Double.valueOf(currencyTextField.getText()) <= 0.00){
+                if(Double.valueOf(currencyTextField.getText()) == 0.00){
                     JOptionPane.showMessageDialog(this, "ERROR: You must enter a dollar " +
                             "amount above 0 to make a new deposit.", "Invalid Amount", JOptionPane.ERROR_MESSAGE);
                     return;

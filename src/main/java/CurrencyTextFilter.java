@@ -57,6 +57,12 @@ public class CurrencyTextFilter extends DocumentFilter {
                 }
             }
 
+            //Fixes a small bug encountered where you could past in decimals, resulting in more than one '.' in the
+            //text field, which would obviously throw a NumberFormatException.
+            if(string.contains(".") && filterBypass.getDocument().getText(0, filterBypass.getDocument().getLength()).contains(".")){
+                return;
+            }
+
             super.replace(filterBypass, offset, length, string, attributeSet);
         }
     }
