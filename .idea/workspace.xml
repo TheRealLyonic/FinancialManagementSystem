@@ -9,16 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment=".gitIgnore updates">
-      <change afterPath="$PROJECT_DIR$/serialized/scheduled_payment_0.ser" afterDir="false" />
+    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Continued work on implementing the ScheduledPayments functionality, and settled upon using a system of serialization to create multiple 'Scheduled Payments'.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CurrencyTextFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CurrencyTextFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/NumberTextFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/NumberTextFilter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ScheduledPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ScheduledPayment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Serializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Serializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,14 +142,7 @@
       <workItem from="1677433401746" duration="18286000" />
       <workItem from="1677466395882" duration="1917000" />
       <workItem from="1677468845751" duration="1568000" />
-      <workItem from="1677509952548" duration="12704000" />
-    </task>
-    <task id="LOCAL-00005" summary="Added some small improvements to the spreadsheet class.">
-      <created>1671696708588</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1671696708588</updated>
+      <workItem from="1677509952548" duration="13141000" />
     </task>
     <task id="LOCAL-00006" summary="Updated .gitIgnore">
       <created>1671701197520</created>
@@ -493,7 +480,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677513723466</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="Continued work on implementing the ScheduledPayments functionality, and settled upon using a system of serialization to create multiple 'Scheduled Payments'.">
+      <created>1677530012211</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1677530012211</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -515,7 +509,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Continued work on the Deposit class." />
     <MESSAGE value="Added purchase summary JTextArea in the Expenditure class." />
     <MESSAGE value="Added functionality for the confirm button in both the Deposit and Expenditure class. Balance will now automatically refresh upon submitting a new deposit or expenditure, the pie-chart, however, will not. Lots of problems trying to get that to work, removed all efforts for now, will have to return to this problem later. Everything else looking great, will probably aim to get purchase summaries working next." />
     <MESSAGE value="The primary UserInterface now refreshes when a new expenditure is added, so both the balance text and pie-chart is updated without needing additional methods for each of them. Also implemented the correct functionality for adding purchase descriptions, and made the program display a basic error message within the Expenditure JFrame if the user tries to submit a new expenditure with the default text in the TextArea. The Error message is displayed in a new color added to the Colors interface, ERROR_RED." />
@@ -540,6 +533,7 @@
     <MESSAGE value="Made multiple formatting adjustments to the various text boxes, as well as continued work on the Scheduled Payment system. Also improved general readability of code across a few areas." />
     <MESSAGE value="Fixed some small bugs across the program" />
     <MESSAGE value=".gitIgnore updates" />
-    <option name="LAST_COMMIT_MESSAGE" value=".gitIgnore updates" />
+    <MESSAGE value="Continued work on implementing the ScheduledPayments functionality, and settled upon using a system of serialization to create multiple 'Scheduled Payments'." />
+    <option name="LAST_COMMIT_MESSAGE" value="Continued work on implementing the ScheduledPayments functionality, and settled upon using a system of serialization to create multiple 'Scheduled Payments'." />
   </component>
 </project>

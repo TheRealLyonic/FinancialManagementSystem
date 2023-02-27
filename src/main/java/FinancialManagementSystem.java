@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.IOException;
+import java.io.InvalidClassException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DateFormat;
@@ -139,8 +140,14 @@ public class FinancialManagementSystem{
             return; //This shouldn't be necessary, since showErrorMessage ends the program, but just in-case.
         }
 
-        for(int i = 0; i < directoryFiles.length; i++){
-            scheduledPayments.add( (ScheduledPayment) SERIALIZER.deserializeObject("serialized\\scheduled_payment_" + i + ".ser") );
+        try{
+            for(int i = 0; i < directoryFiles.length; i++){
+                scheduledPayments.add( (ScheduledPayment) SERIALIZER.deserializeObject("serialized\\scheduled_payment_" + i + ".ser") );
+            }
+        }catch(InvalidClassException e){
+            UserInterface.showErrorMessage("Invalid Class Exception", "ERROR: Cannot " +
+                    "deserialize the provided .ser file into a ScheduledPayment instance because the classes " +
+                    "do not match.");
         }
     }
 

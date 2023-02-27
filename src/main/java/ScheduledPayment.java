@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.HashMap;
 
 public class ScheduledPayment extends AdditionalWindow implements Colors, Serializable {
 
