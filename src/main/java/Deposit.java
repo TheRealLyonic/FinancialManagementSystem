@@ -1,9 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class Deposit extends AdditionalWindow implements ActionListener{
+public class Deposit extends AdditionalWindow{
 
     Deposit(){
         this.setTitle("New Deposit");
@@ -37,11 +36,12 @@ public class Deposit extends AdditionalWindow implements ActionListener{
                 }
 
                 FinancialManagementSystem.addDeposit(currencyTextField.getText());
+                FinancialManagementSystem.addSummary(currencyTextField.getText(), summaryTextArea.getText(), "Deposit");
                 UserInterface.refreshWindow();
                 this.dispose();
-            } catch(NumberFormatException | IOException ex){
-                JOptionPane.showMessageDialog(this, "ERROR: You must enter a valid number " +
-                        "to make a new deposit.", "Format Exception", JOptionPane.ERROR_MESSAGE);
+            } catch(IOException ex){
+                JOptionPane.showMessageDialog(this, "ERROR: An I/o exception occurred.",
+                        "I/o Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

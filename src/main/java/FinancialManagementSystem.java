@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
@@ -13,6 +12,7 @@ import java.util.Date;
 public class FinancialManagementSystem{
 
     private static ExcelSpreadsheet spreadsheet;
+    private static final int NUM_OF_COLUMNS = 7; //The number of used columns in the spreadsheet
     private static double startingBalance, balance;
     private static double spentSinceLastDeposit;
     private static int lastDepositRow;
@@ -20,18 +20,18 @@ public class FinancialManagementSystem{
     private static LocalDate lastSpreadsheetDate;
 
     FinancialManagementSystem() throws IOException, ParseException {
+        //Basic variable assignments and operations needed for the program to begin, keep in mind that the order of
+        //these is important, because some of these methods require variables assigned in earlier methods to work.
         updateCurrentDate();
-
-        //Finds the correct spreadsheet for the program to first begin operation.
         findSpreadsheet();
-
-        //Necessary for successfully running the lastEntryIsCurrent() and addMissingEntries() methods.
+        updateInformation(); //Update info. is called twice here so that all relevant information is updated after
+        checkForMissingEntries(); //Missing entries are accounted for.
         updateInformation();
 
-        checkForMissingEntries();
-
-        //Once we're sure all missing dates are accounted for, we can update all the class' variables again.
-        updateInformation();
+        //Ensures that all column widths are correct when the program begins, doesn't actually effect anything program
+        //side, but it does make sure that column widths inside the spreadsheet will always be correct, even if the
+        //user manually edits a purchase or deposit summary.
+        autoSizeColumns();
 
         new UserInterface();
     }
@@ -39,7 +39,7 @@ public class FinancialManagementSystem{
     //Will loop through all the years (Starting at the system's current year) until 2000 checking for a spreadsheet
     //with the name of that given year.
     private void findSpreadsheet(){
-        for(int spreadsheetYear = currentLocalDate.getYear(); spreadsheetYear > 2000; spreadsheetYear--){
+        for(int spreadsheetYear = currentLocalDate.getYear(); spreadsheetYear >= 2000; spreadsheetYear--){
             File spreadsheetFile = new File("data\\" + spreadsheetYear + ".xlsx");
 
             if(spreadsheetFile.exists()){
@@ -49,7 +49,7 @@ public class FinancialManagementSystem{
         }
     }
 
-    //Updates all the basic information for the program
+    //!Update information stuff!
     private static void updateInformation() throws IOException, ParseException {
         updateLastSpreadsheetDate();
         updateBalance();
@@ -59,11 +59,17 @@ public class FinancialManagementSystem{
         updateCurrentDate();
     }
 
-    //Checks to see if there is more than a one-day gap between the last entry in the spreadsheet and the current
-    //day. If there is, the addMissingEntries() method is called.
-    private void checkForMissingEntries() throws IOException, ParseException {
-        if(!lastEntryIsCurrent() && lastSpreadsheetDate.plusDays(1) != currentLocalDate){
-            addMissingEntries();
+    private static void updateLastSpreadsheetDate() throws IOException, ParseException {
+        //This little work around is needed to essentially convert the given instance of the Date class to an instance
+        //of the localDate class, which is far easier to work with and read dates from.
+
+        DateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
+
+        try{
+            Date rawSpreadsheetDate = formatter.parse(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 0));
+            lastSpreadsheetDate = LocalDate.ofInstant(rawSpreadsheetDate.toInstant(), ZoneId.systemDefault());
+        }catch(ParseException e){
+            UserInterface.showErrorMessage("Invalid Date", "ERROR: Invalid date entered into spreadsheet.");
         }
     }
 
@@ -93,8 +99,8 @@ public class FinancialManagementSystem{
         }
     }
 
-    //Updates the spentSinceLastDeposit variable, by adding up all of the costs since your last deposit. Useful pretty
-    //much exclusively for the PieChart to be generated later.
+        //Updates the spentSinceLastDeposit variable, by adding up all of the costs since your last deposit. Useful pretty
+        //much exclusively for the PieChart to be generated later.
     public static void updateTotalSpentSinceLastDeposit() throws IOException {
         spentSinceLastDeposit = 0.00;
 
@@ -117,16 +123,6 @@ public class FinancialManagementSystem{
         currentLocalDate = LocalDate.now();
     }
 
-    private static void updateLastSpreadsheetDate() throws IOException, ParseException {
-        //This little work around is needed to essentially convert the given instance of the Date class to an instance
-        //of the localDate class, which is far easier to work with and read dates from.
-
-        DateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
-
-        Date rawSpreadsheetDate = formatter.parse(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 0));
-        lastSpreadsheetDate = LocalDate.ofInstant(rawSpreadsheetDate.toInstant(), ZoneId.systemDefault());
-    }
-
     private boolean lastEntryIsCurrent(){
         boolean yearMatch = lastSpreadsheetDate.getYear() == currentLocalDate.getYear();
         boolean monthMatch = lastSpreadsheetDate.getMonthValue() == currentLocalDate.getMonthValue();
@@ -136,6 +132,15 @@ public class FinancialManagementSystem{
             return false;
         }else{
             return true;
+        }
+    }
+
+    //!Missing entries stuff!
+        //Checks to see if there is more than a one-day gap between the last entry in the spreadsheet and the current
+        //day. If there is, the addMissingEntries() method is called.
+    private void checkForMissingEntries() throws IOException, ParseException {
+        if(!lastEntryIsCurrent() && lastSpreadsheetDate.plusDays(1) != currentLocalDate){
+            addMissingEntries();
         }
     }
 
@@ -173,7 +178,7 @@ public class FinancialManagementSystem{
         }
     }
 
-    //Completes the entries for the rest of the year in the currently accessed spreadsheet.
+        //Completes the entries for the rest of the year in the currently accessed spreadsheet.
     private void fillRestOfYear() throws IOException{
         LocalDate lastDayOfYear = LocalDate.of(lastSpreadsheetDate.getYear(), 1, 1).with(TemporalAdjusters.lastDayOfYear());
         int row = spreadsheet.getLastRow() + 1;
@@ -201,11 +206,13 @@ public class FinancialManagementSystem{
         spreadsheet.writeToSpreadsheet(row, 3, "0", "Number");
         //Remaining Balance
         spreadsheet.writeToSpreadsheet(row, 4, String.valueOf(balance), "Number");
+        //Deposit Descriptions
+        spreadsheet.writeToSpreadsheet(row, 5, "No deposits for this day.", "String");
         //Purchase Descriptions
-        spreadsheet.writeToSpreadsheet(row, 5, "No purchases for this day.", "String");
+        spreadsheet.writeToSpreadsheet(row, 6, "No purchases for this day.", "String");
     }
 
-    //Handles all of the necessary actions for entering a new year, including creating a new spreadsheet.
+        //Handles all of the necessary actions for entering a new year, including creating a new spreadsheet.
     private void enterNewYear(String newYear) throws IOException, ParseException {
         LocalDate firstDayOfYear = LocalDate.of(Integer.parseInt(newYear), 1, 1);
 
@@ -216,7 +223,7 @@ public class FinancialManagementSystem{
         checkForMissingEntries();
     }
 
-    //Creates a new entry for today's date, to be used if there is not currently an entry.
+        //Creates a new entry for today's date, to be used if there is not currently an entry.
     private void createNewEntry() throws IOException {
         int row = spreadsheet.getLastRow() + 1;
 
@@ -231,33 +238,35 @@ public class FinancialManagementSystem{
         //Remaining Balance
         updateBalance();
         spreadsheet.writeToSpreadsheet(row, 4, String.valueOf(balance), "Number");
+        //Deposit Descriptions
+        spreadsheet.writeToSpreadsheet(row, 5, "No deposits for this day.", "String");
         //Purchase Descriptions
-        spreadsheet.writeToSpreadsheet(row, 5, "No purchases for this day.", "String");
+        spreadsheet.writeToSpreadsheet(row, 6, "No purchases for this day.", "String");
     }
 
+    //!Formatting stuff!
+        //Formats a newly created spreadsheet with all of the correct columns, to be used when a new spreadsheet is
+        //first created.
     public static void setupSheet(ExcelSpreadsheet spreadsheet) throws IOException {
-        //Every entry here has two writeToSpreadsheet calls so that the column width is properly set, didn't like
-        //cluttering up the titles of each row with the actual formatting specifications, so this approach was taken
-        //instead.
-        spreadsheet.writeToSpreadsheet(0, 0, "12/31/9999", "Starting_Value");
         spreadsheet.writeToSpreadsheet(0, 0, "Date", "String");
-
-        spreadsheet.writeToSpreadsheet(0, 1, "Starting BalanceX", "Starting_Value");
         spreadsheet.writeToSpreadsheet(0, 1, "Starting Balance", "String");
-
-        spreadsheet.writeToSpreadsheet(0, 2, "CostsXXXXXXXXXXXX", "Starting_Value");
         spreadsheet.writeToSpreadsheet(0, 2, "Costs", "String");
-
-        spreadsheet.writeToSpreadsheet(0, 3, "DepositsXXXXXXXXX", "Starting_Value");
         spreadsheet.writeToSpreadsheet(0, 3, "Deposits", "String");
-
-        spreadsheet.writeToSpreadsheet(0, 4, "Remaining Balance", "Starting_Value");
         spreadsheet.writeToSpreadsheet(0, 4, "Remaining Balance", "String");
+        spreadsheet.writeToSpreadsheet(0, 5, "Deposit Descriptions", "String");
+        spreadsheet.writeToSpreadsheet(0, 6, "Purchase Descriptions", "String");
 
-        spreadsheet.writeToSpreadsheet(0, 5, "Purchase Descriptions DEFAULT TEXT FOR EXPANDING THE CURRENT WIDTH OF THE COLUMN.", "Starting_Value");
-        spreadsheet.writeToSpreadsheet(0, 5, "Purchase Descriptions", "String");
+        autoSizeColumns();
     }
 
+        //Automatically formats the width of each column to perfectly fit the entered text.
+    public static void autoSizeColumns() throws IOException {
+        for(int i = 0; i < NUM_OF_COLUMNS; i++){
+            spreadsheet.writeToSpreadsheet(0, i, spreadsheet.readFromSpreadsheet(0, i) + "            ", "Format");
+        }
+    }
+
+    //!Add new information stuff!
     public static void addDeposit(String amount) throws IOException{
         if(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 3)) == 0.00){
             spreadsheet.writeToSpreadsheet(spreadsheet.getLastRow(), 3, amount, "Number");
@@ -286,7 +295,23 @@ public class FinancialManagementSystem{
         updateBalance();
     }
 
-    public static void addPurchaseSummary(String amount, String description) throws IOException{
+    public static void addSummary(String amount, String description, String summaryType) throws IOException {
+        String summaryDefault;
+        int cellNumber;
+
+        if(summaryType.toLowerCase().equals("purchase")){
+            summaryDefault = "No purchases for this day.";
+            cellNumber = 6;
+        }else if(summaryType.toLowerCase().equals("deposit")){
+            summaryDefault = "No deposits for this day.";
+            cellNumber = 5;
+        }else{
+            summaryDefault = "ERROR";
+            cellNumber = 9999;
+            UserInterface.showErrorMessage("Invalid summaryType", "ERROR: Class gave invalid " +
+                    "summaryType when trying to create a new summary in the spreadsheet.");
+            System.exit(1);
+        }
 
         if(Double.valueOf(amount) < 0.00){
             amount = String.valueOf(Double.valueOf(amount) * -1);
@@ -294,13 +319,14 @@ public class FinancialManagementSystem{
 
         String fullString = "";
 
-        if(!spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 5).equals("No purchases for this day.")){
-            fullString = spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 5);
+        if(!spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), cellNumber).equals(summaryDefault)){
+            fullString = spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), cellNumber);
         }
 
         fullString += "$" + amount + " - " + description + " || ";
 
-        spreadsheet.writeToSpreadsheet(spreadsheet.getLastRow(), 5, fullString, "String");
+        spreadsheet.writeToSpreadsheet(spreadsheet.getLastRow(), cellNumber, fullString, "String");
+        spreadsheet.writeToSpreadsheet(spreadsheet.getLastRow(), cellNumber, spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), cellNumber), "Format");
     }
 
     //Getters + Setters

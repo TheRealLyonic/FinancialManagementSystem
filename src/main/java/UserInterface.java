@@ -17,6 +17,7 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
     UserInterface() throws IOException {
         frame = this;
 
+        //!Basic JFrame stuff!
         frame.setTitle("Financial Management System");
         frame.setSize(850, 850);
         frame.setIconImage(new ImageIcon("resources/icon.png").getImage());
@@ -24,29 +25,35 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         frame.setLayout(null);
         frame.getContentPane().setBackground(FINANCIAL_BLUE);
 
-        //Pie-Chart stuff, the Dataset hashmap is used as reference for what to add to the pie-chart later
+        //!Pie-Chart stuff!
         updatePercentSpentAndSaved();
 
+            //The 'dataSet' hashmap is used as reference for what to add to the pie-chart later.
         dataSet = new HashMap();
         dataSet.put("Spent (" + percentSpent + "%)", percentSpent);
         dataSet.put("Saved (" + percentSaved + "%)", percentSaved);
         pieChart = new PieChart("Weekly Update", dataSet, 490, 0, 350, 300);
 
-        //Menu Options
+        //!Menu Option stuff!
         newDepositOption = new MenuOption(this, 25, 55, "New Deposit", new ImageIcon("resources\\new_deposit_icon.png"));
         newExpenditureOption = new MenuOption(this, 25, 165, "New Expenditure", new ImageIcon("resources\\new_expenditure_icon.png"));
         newScheduledPaymentOption = new MenuOption(this, 25, 340, "New Scheduled Payment", new ImageIcon("resources\\new_scheduled_payment_icon.png"));
 
-        //Balance Display Stuff
+        //!Balance Display Stuff!
         double balance = FinancialManagementSystem.getBalance();
 
         balanceText = new JLabel("Balance: " + NumberFormat.getCurrencyInstance().format(balance));
         balanceText.setFont(ROBOTO_LARGE);
-        balanceText.setForeground(SUBDUED_WHITE);
 
-        //Changes the size and location of the balanceText object depending on the rough dollar amount. This is so that
-        //regardless of what your current balance is (within reasonable standard), it will still appear relatively
-        //centered within the JFrame.
+        if(balance < 0.00){
+            balanceText.setForeground(NEGATIVE_RED);
+        }else{
+            balanceText.setForeground(SUBDUED_WHITE);
+        }
+
+            //Changes the size and location of the balanceText object depending on the rough dollar amount. This is so that
+            //regardless of what your current balance is (within reasonable standard), it will still appear relatively
+            //centered within the JFrame.
         if(balance < 1000.00){
             balanceText.setSize(700, 700);
             balanceText.setLocation(155, 295);
@@ -58,26 +65,28 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
             balanceText.setLocation(75, 295);
         }
 
-        //Final JFrame preparations
+        //!Final JFrame stuff!
         frame.setLocationRelativeTo(null);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frame.add(pieChart.getChartPanel());
+
+            //Primary text elements
+        frame.add(balanceText);
+            //Menu Options
         frame.add(newDepositOption);
         frame.add(newExpenditureOption);
         frame.add(newScheduledPaymentOption);
-        frame.add(balanceText);
+            //Other
+        frame.add(pieChart.getChartPanel());
+
         frame.setVisible(true);
     }
 
-    public static void refreshWindow() throws IOException {
-        frame.dispose();
-        new UserInterface();
-    }
-
+    //Updates the variables necessary for the creation of the Pie-chart.
     public static void updatePercentSpentAndSaved() throws IOException {
         percentSpent = (int) ((FinancialManagementSystem.getSpentSinceLastDeposit() / FinancialManagementSystem.getLastDeposit()) * 100);
         percentSaved = 100 - percentSpent;
 
+        //Check ensuring the if either value is over 100, it will max out at 100%
         if(FinancialManagementSystem.getSpentSinceLastDeposit() <= 0){
             percentSpent = 0;
             percentSaved = 100;
@@ -85,6 +94,16 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
             percentSpent = 100;
             percentSaved = 0;
         }
+    }
+
+    public static void refreshWindow() throws IOException {
+        frame.dispose();
+        new UserInterface();
+    }
+
+    public static void showErrorMessage(String errorTitle, String errorMessage){
+        JOptionPane.showMessageDialog(frame, errorMessage, errorTitle, JOptionPane.ERROR_MESSAGE);
+        System.exit(1);
     }
 
     @Override

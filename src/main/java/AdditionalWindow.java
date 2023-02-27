@@ -1,10 +1,11 @@
 import javax.swing.*;
+import javax.swing.text.AbstractDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class AdditionalWindow extends JFrame implements Colors, Fonts, ActionListener {
+public class AdditionalWindow extends JFrame implements Colors, Fonts, ActionListener{
 
     protected JLabel headingText;
     protected JTextField currencyTextField;
@@ -31,6 +32,8 @@ public class AdditionalWindow extends JFrame implements Colors, Fonts, ActionLis
         currencyTextField.setSize(325, 95);
         currencyTextField.setFont(ROBOTO_MEDIUM);
         currencyTextField.setLocation(125, 85);
+            //Limits the amount of characters that may be entered in the TextField.
+        ( (AbstractDocument) currencyTextField.getDocument()).setDocumentFilter(new CurrencyTextFilter());
 
         //Default summaryTextArea stuff
         summaryTextArea = new JTextArea("Default Summary");

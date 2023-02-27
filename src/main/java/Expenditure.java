@@ -1,9 +1,8 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 
-public class Expenditure extends AdditionalWindow implements ActionListener{
+public class Expenditure extends AdditionalWindow{
 
     Expenditure(){
         this.setTitle("New Expenditure");
@@ -39,14 +38,12 @@ public class Expenditure extends AdditionalWindow implements ActionListener{
                 }
 
                 FinancialManagementSystem.addExpenditure(currencyTextField.getText());
-                FinancialManagementSystem.addPurchaseSummary(currencyTextField.getText(), summaryTextArea.getText());
+                FinancialManagementSystem.addSummary(currencyTextField.getText(), summaryTextArea.getText(), "Purchase");
                 UserInterface.refreshWindow();
                 this.dispose();
             }catch(IOException ex){
-                throw new RuntimeException(ex);
-            }catch(NumberFormatException ex){
-                JOptionPane.showMessageDialog(this, "ERROR: You must enter a valid number " +
-                        "to make a new expenditure.", "Format Exception", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "ERROR: An I/o exception occurred.",
+                        "I/o Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

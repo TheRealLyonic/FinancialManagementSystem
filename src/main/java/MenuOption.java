@@ -10,7 +10,7 @@ public class MenuOption extends JLabel implements Fonts, Colors{
         this.setSize(frame.getWidth(), frame.getHeight());
         this.setLocation(0, 0);
 
-        //Button stuff
+        //!Button stuff!
         optionButton = new JButton();
         optionButton.setIcon(optionIcon);
         optionButton.setFocusable(false);
@@ -19,7 +19,7 @@ public class MenuOption extends JLabel implements Fonts, Colors{
         optionButton.setOpaque(false);
         optionButton.setContentAreaFilled(false);
 
-        //Tries to automatically add the given frame as the action listener to the JButton
+            //Tries to automatically add the given frame as the action listener to the JButton
         try{
             optionButton.addActionListener((ActionListener) frame);
         }catch(ClassCastException e){
@@ -28,7 +28,7 @@ public class MenuOption extends JLabel implements Fonts, Colors{
             System.exit(1);
         }
 
-        //Text stuff
+        //!Text stuff!
         optionText = new JLabel(optionName);
         optionText.setFont(ROBOTO_SMALL);
         optionText.setForeground(SUBDUED_WHITE);

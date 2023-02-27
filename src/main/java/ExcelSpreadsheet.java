@@ -81,7 +81,7 @@ public class ExcelSpreadsheet{
             cell.setCellStyle(cellStyle);
         }else if(valueType.equals("string")){
             cell.setCellValue(cellValue);
-        }else if(valueType.equals("starting_value")){
+        }else if(valueType.equals("format")){
             cell.setCellValue(cellValue);
             sheet.autoSizeColumn(cellNumber);
         }else{
