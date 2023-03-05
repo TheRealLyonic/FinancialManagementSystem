@@ -19,6 +19,7 @@ public class ScheduledPayment extends AdditionalWindow implements Colors, Serial
     private JLabel frequencyDisplayText, notifyTypeDisplayText;
     private JTextField frequencyTextField;
     private LocalDate startDate;
+    private double amount;
     private String measureOfFrequency;
     private int quantityOfFrequency;
 
@@ -108,6 +109,7 @@ public class ScheduledPayment extends AdditionalWindow implements Colors, Serial
 
             quantityOfFrequency = Integer.parseInt(frequencyTextField.getText());
             measureOfFrequency = frequencyDropdownBox.getSelectedItem().toString();
+            amount = Double.valueOf(currencyTextField.getText());
 
             try {
                 FinancialManagementSystem.addScheduledPayment(this);
@@ -126,6 +128,10 @@ public class ScheduledPayment extends AdditionalWindow implements Colors, Serial
 
     public LocalDate getStartDate(){
         return startDate;
+    }
+
+    public double getAmount(){
+        return amount;
     }
 
     public int getQuantityOfFrequency(){

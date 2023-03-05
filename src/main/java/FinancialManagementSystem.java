@@ -333,18 +333,20 @@ public class FinancialManagementSystem{
         String summaryDefault;
         int cellNumber;
 
-        if(summaryType.equalsIgnoreCase("purchase")){
-            summaryDefault = "No purchases for this day.";
-            cellNumber = 6;
-        }else if(summaryType.equalsIgnoreCase("deposit")){
-            summaryDefault = "No deposits for this day.";
-            cellNumber = 5;
-        }else{
-            summaryDefault = "ERROR";
-            cellNumber = 9999;
-            UserInterface.showErrorMessage("Invalid summaryType", "ERROR: Class gave invalid " +
-                    "summaryType when trying to create a new summary in the spreadsheet.");
-            System.exit(1);
+        switch(summaryType.toLowerCase()){
+            case "purchase":
+                summaryDefault = "No purchases for this day.";
+                cellNumber = 6;
+                break;
+            case "deposit":
+                summaryDefault = "No deposits for this day.";
+                cellNumber = 5;
+                break;
+            default:
+                summaryDefault = "ERROR";
+                cellNumber = 9999;
+                UserInterface.showErrorMessage("Invalid summaryType", "ERROR: Class gave invalid " +
+                        "summaryType when trying to create a new summary in the spreadsheet.");
         }
 
         String fullString = "";

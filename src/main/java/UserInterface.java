@@ -10,7 +10,7 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
     private static JFrame frame;
     private HashMap dataSet;
     private static PieChart pieChart;
-    private MenuOption newDepositOption, newExpenditureOption, newScheduledPaymentOption;
+    private MenuOption newDepositOption, newExpenditureOption, newScheduledPaymentOption, viewActiveScheduledPaymentsOption;
     private static JLabel balanceText;
     private static int percentSpent, percentSaved;
 
@@ -38,6 +38,7 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         newDepositOption = new MenuOption(this, 25, 55, "New Deposit", new ImageIcon("resources\\new_deposit_icon.png"));
         newExpenditureOption = new MenuOption(this, 25, 165, "New Expenditure", new ImageIcon("resources\\new_expenditure_icon.png"));
         newScheduledPaymentOption = new MenuOption(this, 25, 340, "New Scheduled Payment", new ImageIcon("resources\\new_scheduled_payment_icon.png"));
+        viewActiveScheduledPaymentsOption = new MenuOption(this, 25, 450, "View Active Scheduled Payments", new ImageIcon("resources\\view_active_scheduled_payments_icon.png"));
 
         //!Balance Display Stuff!
         double balance = FinancialManagementSystem.getBalance();
@@ -75,19 +76,11 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         frame.add(newDepositOption);
         frame.add(newExpenditureOption);
         frame.add(newScheduledPaymentOption);
+        frame.add(viewActiveScheduledPaymentsOption);
             //Other
         frame.add(pieChart.getChartPanel());
 
         frame.setVisible(true);
-
-
-        if(FinancialManagementSystem.getScheduledPayments().size() != 0){
-            for(ScheduledPayment scheduledPayment : FinancialManagementSystem.getScheduledPayments()){
-                System.out.println(scheduledPayment.getStartDate());
-                System.out.println(scheduledPayment.getQuantityOfFrequency());
-                System.out.println(scheduledPayment.getMeasureOfFrequency());
-            }
-        }
     }
 
     //Updates the variables necessary for the creation of the Pie-chart.
@@ -123,6 +116,8 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
             new Expenditure();
         }else if(e.getSource() == newScheduledPaymentOption.getOptionButton()){
             new ScheduledPayment();
+        }else if(e.getSource() == viewActiveScheduledPaymentsOption.getOptionButton()){
+            new ViewActiveScheduledPayments(FinancialManagementSystem.getScheduledPayments());
         }
     }
 

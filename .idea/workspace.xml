@@ -9,10 +9,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Continued work on implementing the ScheduledPayments functionality, and settled upon using a system of serialization to create multiple 'Scheduled Payments'.">
+    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Fixed some minor bugs.">
+      <change afterPath="$PROJECT_DIR$/resources/view_active_scheduled_payments_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ViewActiveScheduledPayments.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/serialized/scheduled_payment_0.ser" beforeDir="false" afterPath="$PROJECT_DIR$/serialized/scheduled_payment_0.ser" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ScheduledPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ScheduledPayment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,14 +146,17 @@
       <workItem from="1677433401746" duration="18286000" />
       <workItem from="1677466395882" duration="1917000" />
       <workItem from="1677468845751" duration="1568000" />
-      <workItem from="1677509952548" duration="13141000" />
-    </task>
-    <task id="LOCAL-00006" summary="Updated .gitIgnore">
-      <created>1671701197520</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1671701197520</updated>
+      <workItem from="1677509952548" duration="13214000" />
+      <workItem from="1677533247614" duration="59000" />
+      <workItem from="1677554841975" duration="1736000" />
+      <workItem from="1677613883855" duration="1228000" />
+      <workItem from="1677639768812" duration="3574000" />
+      <workItem from="1677700794309" duration="2699000" />
+      <workItem from="1677835964477" duration="31000" />
+      <workItem from="1677900470518" duration="1274000" />
+      <workItem from="1677902130035" duration="560000" />
+      <workItem from="1677986043357" duration="292000" />
+      <workItem from="1678044976100" duration="6573000" />
     </task>
     <task id="LOCAL-00007" summary="Updated .gitIgnore">
       <created>1671701341069</created>
@@ -487,7 +494,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677530012211</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="Fixed some minor bugs.">
+      <created>1677530369949</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1677530369949</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -509,7 +523,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Added purchase summary JTextArea in the Expenditure class." />
     <MESSAGE value="Added functionality for the confirm button in both the Deposit and Expenditure class. Balance will now automatically refresh upon submitting a new deposit or expenditure, the pie-chart, however, will not. Lots of problems trying to get that to work, removed all efforts for now, will have to return to this problem later. Everything else looking great, will probably aim to get purchase summaries working next." />
     <MESSAGE value="The primary UserInterface now refreshes when a new expenditure is added, so both the balance text and pie-chart is updated without needing additional methods for each of them. Also implemented the correct functionality for adding purchase descriptions, and made the program display a basic error message within the Expenditure JFrame if the user tries to submit a new expenditure with the default text in the TextArea. The Error message is displayed in a new color added to the Colors interface, ERROR_RED." />
     <MESSAGE value="Added some more error checks to both the Deposit and Expenditure class, so that now, no matter what input the user tries to give within the text boxes, if it is not usable by the program, it will be rejected with a clear explanation as to why. Also cleaned up some things and added small optimizations all over the map. The project is now officially ready for version 1.0 release. In future version, I'd like to focus primarily on adding new functionality, I.e. a way to view your purchase and deposit history, and maybe even things to keep track of different reoccurring payments. But for the time being, I'm satisfied enough with how things are to officially give the release of the program." />
@@ -534,6 +547,7 @@
     <MESSAGE value="Fixed some small bugs across the program" />
     <MESSAGE value=".gitIgnore updates" />
     <MESSAGE value="Continued work on implementing the ScheduledPayments functionality, and settled upon using a system of serialization to create multiple 'Scheduled Payments'." />
-    <option name="LAST_COMMIT_MESSAGE" value="Continued work on implementing the ScheduledPayments functionality, and settled upon using a system of serialization to create multiple 'Scheduled Payments'." />
+    <MESSAGE value="Fixed some minor bugs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed some minor bugs." />
   </component>
 </project>
