@@ -2,6 +2,6 @@
 /out/
 /target/
 /data/*
-/src/main/java/APIInfo.java
 /serialized/*
+/src/main/java/APIInfo.java
 /.idea/*

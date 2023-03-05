@@ -9,8 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Started work on viewing the saved active payments.">
+    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Updated .Gitignore">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,24 +73,25 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Documents/Java Projects/FinancialManagementSystemPublic&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Documents/Java Projects/FinancialManagementSystemPublic",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "advanced.settings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -151,14 +153,7 @@
       <workItem from="1677900470518" duration="1274000" />
       <workItem from="1677902130035" duration="560000" />
       <workItem from="1677986043357" duration="292000" />
-      <workItem from="1678044976100" duration="6639000" />
-    </task>
-    <task id="LOCAL-00008" summary="Begun work on the FinancialManagementSystem class">
-      <created>1671706486545</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1671706486545</updated>
+      <workItem from="1678044976100" duration="6729000" />
     </task>
     <task id="LOCAL-00009" summary="Program now runs primarily out of the FinancialManagementSystem class, which Main calls when the program is first started. Added a new interface called 'Colors' to hold specialized color choices for the program, I.e. 'Financial Blue' for the JFrame backgrounds. Also begun work on the Deposit class and updated icon images a bit.">
       <created>1671830702050</created>
@@ -496,7 +491,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678060112846</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Updated .Gitignore">
+      <created>1678060174247</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1678060174247</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -518,7 +520,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="The primary UserInterface now refreshes when a new expenditure is added, so both the balance text and pie-chart is updated without needing additional methods for each of them. Also implemented the correct functionality for adding purchase descriptions, and made the program display a basic error message within the Expenditure JFrame if the user tries to submit a new expenditure with the default text in the TextArea. The Error message is displayed in a new color added to the Colors interface, ERROR_RED." />
     <MESSAGE value="Added some more error checks to both the Deposit and Expenditure class, so that now, no matter what input the user tries to give within the text boxes, if it is not usable by the program, it will be rejected with a clear explanation as to why. Also cleaned up some things and added small optimizations all over the map. The project is now officially ready for version 1.0 release. In future version, I'd like to focus primarily on adding new functionality, I.e. a way to view your purchase and deposit history, and maybe even things to keep track of different reoccurring payments. But for the time being, I'm satisfied enough with how things are to officially give the release of the program." />
     <MESSAGE value="Updated to .gitignore and the pom.xml, taken for final release." />
     <MESSAGE value="Fixed mistake with the Expenditure class, where if the user entered letters&#10;into the expenditure text box, the error message that appeared would state&#10;that a valid number is required in order to make a new 'deposit'. Changed&#10;it to say expenditure as it should." />
@@ -543,6 +544,7 @@
     <MESSAGE value="Continued work on implementing the ScheduledPayments functionality, and settled upon using a system of serialization to create multiple 'Scheduled Payments'." />
     <MESSAGE value="Fixed some minor bugs." />
     <MESSAGE value="Started work on viewing the saved active payments." />
-    <option name="LAST_COMMIT_MESSAGE" value="Started work on viewing the saved active payments." />
+    <MESSAGE value="Updated .Gitignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated .Gitignore" />
   </component>
 </project>
