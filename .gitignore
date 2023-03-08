@@ -1,0 +1,7 @@
+# Project exclude paths
+/out/
+/target/
+/data/*
+/serialized/*
+/src/main/java/APIInfo.java
+/.idea/*
