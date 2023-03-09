@@ -69,7 +69,6 @@ public class FinancialManagementSystem{
         //of the localDate class, which is far easier to work with and read dates from.
 
         DateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
-        //
 
         try{
             Date rawSpreadsheetDate = formatter.parse(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 0));

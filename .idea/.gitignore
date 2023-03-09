@@ -1,0 +1,7 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+../data/*
+../serialized/*
+../out/*
+../src/main/java/APIInfo.java
