@@ -30,7 +30,6 @@ public class FinancialManagementSystem{
         updateCurrentDate();
         findSpreadsheet();
         updateInformation(); //Update info. is called twice here so that all relevant information is updated after
-        updateScheduledPayments();
         checkForMissingEntries(); //Missing entries are accounted for.
         updateInformation();
 
@@ -56,13 +55,14 @@ public class FinancialManagementSystem{
     }
 
     //!Update information stuff!
-    private static void updateInformation() throws IOException, ParseException{
+    private static void updateInformation() throws IOException, ParseException, ClassNotFoundException {
         updateLastSpreadsheetDate();
         updateBalance();
         updateStartingBalance();
         updateLastDepositRow();
         updateTotalSpentSinceLastDeposit();
         updateCurrentDate();
+        updateScheduledPayments();
     }
 
     private static void updateLastSpreadsheetDate() throws IOException, ParseException {
@@ -156,11 +156,6 @@ public class FinancialManagementSystem{
                     "deserialize the provided .ser file into a ScheduledPayment instance because the classes " +
                     "do not match.");
         }
-
-        for(int i = 0; i < scheduledPayments.size(); i++){
-            checkIfPaymentDue(scheduledPayments.get(i), currentLocalDate, i);
-        }
-
     }
 
     private boolean lastEntryIsCurrent(){
@@ -210,9 +205,7 @@ public class FinancialManagementSystem{
                     enterDefaultInformation(row, lastSpreadsheetDate, spreadsheet);
                     row++;
 
-                    for(int i = 0; i < scheduledPayments.size(); i++){
-                        checkIfPaymentDue(scheduledPayments.get(i), lastSpreadsheetDate, i);
-                    }
+                    checkIfPaymentDue(lastSpreadsheetDate);
 
                     lastSpreadsheetDate = lastSpreadsheetDate.plusDays(1);
                 }
@@ -234,9 +227,7 @@ public class FinancialManagementSystem{
             enterDefaultInformation(row, lastSpreadsheetDate, spreadsheet);
             row++;
 
-            for(int i = 0; i < scheduledPayments.size(); i++){
-                checkIfPaymentDue(scheduledPayments.get(i), lastSpreadsheetDate, i);
-            }
+            checkIfPaymentDue(lastSpreadsheetDate);
 
             lastSpreadsheetDate = lastSpreadsheetDate.plusDays(1);
         }
@@ -245,21 +236,23 @@ public class FinancialManagementSystem{
         enterDefaultInformation(row, lastSpreadsheetDate, spreadsheet);
     }
 
-    private static void checkIfPaymentDue(ScheduledPayment scheduledPayment, LocalDate date, int fileNumber) throws IOException, ClassNotFoundException {
-        scheduledPayment.updateNextPaymentDate();
+    public static void checkIfPaymentDue(LocalDate date) throws IOException, ClassNotFoundException {
+        for(int i = 0; i < scheduledPayments.size(); i++){
+            scheduledPayments.get(i).updateNextPaymentDate();
 
-        if(date.equals(scheduledPayment.getNextPaymentDate())){
-            String paymentDate = scheduledPayment.getNextPaymentDate().format(DateTimeFormatter.ISO_LOCAL_DATE);
+            if(date.equals(scheduledPayments.get(i).getNextPaymentDate())){
+                String paymentDate = scheduledPayments.get(i).getNextPaymentDate().format(DateTimeFormatter.ISO_LOCAL_DATE);
 
-            if(scheduledPayment.getReminderType().equals("Give Reminder")){
-                UserInterface.showPaymentMessage(paymentDate, "Remind");
-            }else{
-                UserInterface.showPaymentMessage(paymentDate, "Deduct");
-                scheduledPayment.reoccurPayment(date);
+                if(scheduledPayments.get(i).getReminderType().equals("Give Reminder")){
+                    scheduledPayments.get(i).remindPayment(date, paymentDate);
+                }else{
+                    UserInterface.showPaymentMessage(paymentDate, "Deduct");
+                    scheduledPayments.get(i).reoccurPayment(date);
+                }
 
-                File file = new File("serialized\\scheduled_payment_" + fileNumber + ".ser");
+                File file = new File("serialized\\scheduled_payment_" + i + ".ser");
                 file.delete();
-                SERIALIZER.serializeObject(scheduledPayment, "serialized\\scheduled_payment_" + fileNumber + ".ser");
+                SERIALIZER.serializeObject(scheduledPayments.get(i), "serialized\\scheduled_payment_" + i + ".ser");
 
                 updateScheduledPayments();
             }

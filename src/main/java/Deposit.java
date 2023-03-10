@@ -42,6 +42,9 @@ public class Deposit extends AdditionalWindow{
             } catch(IOException ex){
                 JOptionPane.showMessageDialog(this, "ERROR: An I/o exception occurred.",
                         "I/o Exception", JOptionPane.ERROR_MESSAGE);
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(this, "ERROR: A Class Not Found Exception has " +
+                        "occurred.", "Class Not Found Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

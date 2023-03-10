@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Date;
 
 public class ScheduledPayment extends AdditionalWindow implements Colors, Serializable {
 
@@ -162,8 +163,17 @@ public class ScheduledPayment extends AdditionalWindow implements Colors, Serial
         lastPaymentDate = date;
         paymentInformation[1] = lastPaymentDate;
         updateNextPaymentDate();
+
         FinancialManagementSystem.addExpenditure(Double.toString(amount));
         FinancialManagementSystem.addSummary(Double.toString(amount), paymentDescription, "Purchase");
+    }
+
+    public void remindPayment(LocalDate date, String paymentDate){
+        lastPaymentDate = date;
+        paymentInformation[1] = lastPaymentDate;
+        updateNextPaymentDate();
+
+        UserInterface.showPaymentMessage(paymentDate, "Remind");
     }
 
     //Getters + Setters

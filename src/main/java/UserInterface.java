@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.time.LocalDate;
 import java.util.HashMap;
 
 public class UserInterface extends JFrame implements ActionListener, Colors, Fonts{
@@ -14,7 +15,10 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
     private static JLabel balanceText;
     private static int percentSpent, percentSaved;
 
-    UserInterface() throws IOException {
+    UserInterface() throws IOException, ClassNotFoundException {
+
+        FinancialManagementSystem.checkIfPaymentDue(LocalDate.now());
+
         frame = this;
 
         //!Basic JFrame stuff!
@@ -98,7 +102,7 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         }
     }
 
-    public static void refreshWindow() throws IOException {
+    public static void refreshWindow() throws IOException, ClassNotFoundException {
         frame.dispose();
         new UserInterface();
     }
