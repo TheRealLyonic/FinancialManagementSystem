@@ -4,9 +4,12 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
-public class ViewActiveScheduledPayments extends JFrame implements Colors, Fonts{
+public class ViewActiveScheduledPayments extends JFrame implements Colors, Fonts, ActionListener {
 
     private ArrayList<ScheduledPayment> scheduledPayments;
     private final String[] COLUMN_NAMES = {
@@ -18,6 +21,7 @@ public class ViewActiveScheduledPayments extends JFrame implements Colors, Fonts
     private Object[][] data;
     private JScrollPane tableContainer;
     private JTable scheduledPaymentsTable;
+    private JButton[] buttons;
 
     ViewActiveScheduledPayments(ArrayList<ScheduledPayment> scheduledPayments){
         //!Basic JFrame Stuff!
@@ -30,6 +34,7 @@ public class ViewActiveScheduledPayments extends JFrame implements Colors, Fonts
         //!ScheduledPayments stuff!
         this.scheduledPayments = scheduledPayments;
         data = new Object[scheduledPayments.size()][4];
+        buttons = new JButton[scheduledPayments.size()];
         updateData();
 
         //!scheduledPaymentsTable stuff!
@@ -42,14 +47,14 @@ public class ViewActiveScheduledPayments extends JFrame implements Colors, Fonts
 
         //!TableContainer stuff!
         tableContainer = new JScrollPane(scheduledPaymentsTable);
-        tableContainer.setLocation(30, 10);
+        tableContainer.setLocation(62, 10);
         tableContainer.setSize(625, 550);
         scheduledPaymentsTable.setFillsViewportHeight(true);
 
         //!Table layout stuff!
         TableColumn column;
         TableCellRenderer cellRenderer;
-        int width, preferredWidth, maxWidth;
+        int width, preferredWidth, maxWidth, minWidth;
         Component component;
 
         if(!scheduledPayments.isEmpty()){
@@ -60,6 +65,7 @@ public class ViewActiveScheduledPayments extends JFrame implements Colors, Fonts
                 column = scheduledPaymentsTable.getColumnModel().getColumn(i);
                 preferredWidth = column.getMinWidth();
                 maxWidth = column.getMaxWidth();
+                minWidth = 120;
 
                 for(int j = 0; j < scheduledPaymentsTable.getRowCount(); j++){
                     cellRenderer = scheduledPaymentsTable.getCellRenderer(j, i);
@@ -70,11 +76,33 @@ public class ViewActiveScheduledPayments extends JFrame implements Colors, Fonts
                     if(preferredWidth >= maxWidth){
                         preferredWidth = maxWidth;
                         break;
+                    }else if(preferredWidth <= minWidth){
+                        preferredWidth = minWidth;
+                        break;
                     }
                 }
 
                 column.setPreferredWidth(preferredWidth + 40);
             }
+        }
+
+        //!Delete JButtons Stuff!
+        for(int i = 0; i < buttons.length; i++){
+            buttons[i] = new JButton();
+            buttons[i].setIcon(new ImageIcon("resources\\delete_button_icon.png"));
+            buttons[i].setFocusable(false);
+            buttons[i].setSize(22, 15);
+            buttons[i].setOpaque(false);
+            buttons[i].setContentAreaFilled(false);
+            buttons[i].addActionListener(this);
+
+            if(i == 0){
+                buttons[i].setLocation(35, scheduledPaymentsTable.getY() + 30);
+            }else{
+                buttons[i].setLocation(buttons[i - 1].getX(), buttons[i - 1].getY() + 17);
+            }
+
+            this.add(buttons[i]);
         }
 
         this.add(tableContainer);
@@ -91,4 +119,24 @@ public class ViewActiveScheduledPayments extends JFrame implements Colors, Fonts
         }
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        for(int i = 0; i < buttons.length; i++){
+            if(e.getSource().equals(buttons[i])){
+                try {
+                    FinancialManagementSystem.deleteScheduledPayment("serialized\\scheduled_payment_" + i + ".ser");
+                    this.dispose();
+                    FinancialManagementSystem.updateScheduledPayments();
+                    new ViewActiveScheduledPayments(FinancialManagementSystem.getScheduledPayments());
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    UserInterface.showErrorMessage("I/o Exception", "ERROR: An I/o exception " +
+                            "has occurred.");
+                } catch (ClassNotFoundException ex) {
+                    UserInterface.showErrorMessage("Class Not Found", "ERROR: A Class Not Found " +
+                            "Exception has occurred.");
+                }
+            }
+        }
+    }
 }

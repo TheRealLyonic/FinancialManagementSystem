@@ -108,6 +108,11 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         System.exit(1);
     }
 
+    public static void showPaymentMessage(String date){
+        JOptionPane.showMessageDialog(frame, "A subscription due on " + date + " has been renewed, and " +
+                "deducted from your balance accordingly.", "Payment Renewal Notification", JOptionPane.INFORMATION_MESSAGE);
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == newDepositOption.getOptionButton()){

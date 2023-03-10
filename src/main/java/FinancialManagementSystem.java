@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,6 +30,7 @@ public class FinancialManagementSystem{
         updateCurrentDate();
         findSpreadsheet();
         updateInformation(); //Update info. is called twice here so that all relevant information is updated after
+        updateScheduledPayments();
         checkForMissingEntries(); //Missing entries are accounted for.
         updateInformation();
 
@@ -54,14 +56,13 @@ public class FinancialManagementSystem{
     }
 
     //!Update information stuff!
-    private static void updateInformation() throws IOException, ParseException, ClassNotFoundException {
+    private static void updateInformation() throws IOException, ParseException{
         updateLastSpreadsheetDate();
         updateBalance();
         updateStartingBalance();
         updateLastDepositRow();
         updateTotalSpentSinceLastDeposit();
         updateCurrentDate();
-        updateScheduledPayments();
     }
 
     private static void updateLastSpreadsheetDate() throws IOException, ParseException {
@@ -140,6 +141,12 @@ public class FinancialManagementSystem{
             return; //This shouldn't be necessary, since showErrorMessage ends the program, but just in-case.
         }
 
+        //Keep this for ensuring all files are correctly named in terms of numbering, error occurs with deleting
+        //serialized files if we don't have this check.
+        for(int i = 0; i < directoryFiles.length; i++){
+            directoryFiles[i].renameTo(new File("serialized\\scheduled_payment_" + i + ".ser"));
+        }
+
         try{
             for(int i = 0; i < directoryFiles.length; i++){
                 scheduledPayments.add( (ScheduledPayment) SERIALIZER.deserializeObject("serialized\\scheduled_payment_" + i + ".ser") );
@@ -150,12 +157,8 @@ public class FinancialManagementSystem{
                     "do not match.");
         }
 
-        for(ScheduledPayment scheduledPayment : scheduledPayments){
-            scheduledPayment.updateNextPaymentDate();
-
-            if(currentLocalDate.equals(scheduledPayment.getNextPaymentDate())){
-                scheduledPayment.reoccurPayment();
-            }
+        for(int i = 0; i < scheduledPayments.size(); i++){
+            checkIfPaymentDue(scheduledPayments.get(i), currentLocalDate, i);
         }
 
     }
@@ -206,12 +209,34 @@ public class FinancialManagementSystem{
                 while(!lastSpreadsheetDate.equals(currentLocalDate)){
                     enterDefaultInformation(row, lastSpreadsheetDate, spreadsheet);
                     row++;
+
+                    for(int i = 0; i < scheduledPayments.size(); i++){
+                        checkIfPaymentDue(scheduledPayments.get(i), lastSpreadsheetDate, i);
+                    }
+
                     lastSpreadsheetDate = lastSpreadsheetDate.plusDays(1);
                 }
 
                 //Creates a new entry for today's date.
                 createNewEntry();
             }
+        }
+    }
+
+    private static void checkIfPaymentDue(ScheduledPayment scheduledPayment, LocalDate date, int fileNumber) throws IOException, ClassNotFoundException {
+        scheduledPayment.updateNextPaymentDate();
+
+        System.out.println("Date: " + date);
+        System.out.println("Next Payment Date: " + scheduledPayment.getNextPaymentDate());
+        if(date.equals(scheduledPayment.getNextPaymentDate())){
+            UserInterface.showPaymentMessage(scheduledPayment.getNextPaymentDate().format(DateTimeFormatter.ISO_LOCAL_DATE));
+            scheduledPayment.reoccurPayment(date);
+
+            File file = new File("serialized\\scheduled_payment_" + fileNumber + ".ser");
+            file.delete();
+            SERIALIZER.serializeObject(scheduledPayment, "serialized\\scheduled_payment_" + fileNumber + ".ser");
+
+            updateScheduledPayments();
         }
     }
 
@@ -336,6 +361,18 @@ public class FinancialManagementSystem{
     public static void addScheduledPayment(ScheduledPayment scheduledPayment) throws IOException, ClassNotFoundException {
         SERIALIZER.serializeObject(scheduledPayment, "serialized\\scheduled_payment_" + scheduledPayments.size() + ".ser");
         updateScheduledPayments();
+    }
+
+    public static void deleteScheduledPayment(String path){
+        File scheduledPaymentFile = new File(path);
+
+        if(scheduledPaymentFile.exists()){
+            scheduledPaymentFile.delete();
+        }else{
+            UserInterface.showErrorMessage("Nonexistent File", "ERROR: Tried to delete a file" +
+                    " that does not exist.");
+        }
+
     }
 
     public static void addSummary(String amount, String description, String summaryType) throws IOException {

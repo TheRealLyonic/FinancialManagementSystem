@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.text.AbstractDocument;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -155,8 +156,10 @@ public class ScheduledPayment extends AdditionalWindow implements Colors, Serial
         paymentInformation[2] = nextPaymentDate;
     }
 
-    public void reoccurPayment() throws IOException {
-        lastPaymentDate = LocalDate.now();
+    public void reoccurPayment(LocalDate date) throws IOException {
+        lastPaymentDate = date;
+        paymentInformation[1] = lastPaymentDate;
+        updateNextPaymentDate();
         FinancialManagementSystem.addExpenditure(Double.toString(amount));
         FinancialManagementSystem.addSummary(Double.toString(amount), paymentDescription, "Purchase");
     }
