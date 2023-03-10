@@ -223,25 +223,8 @@ public class FinancialManagementSystem{
         }
     }
 
-    private static void checkIfPaymentDue(ScheduledPayment scheduledPayment, LocalDate date, int fileNumber) throws IOException, ClassNotFoundException {
-        scheduledPayment.updateNextPaymentDate();
-
-        System.out.println("Date: " + date);
-        System.out.println("Next Payment Date: " + scheduledPayment.getNextPaymentDate());
-        if(date.equals(scheduledPayment.getNextPaymentDate())){
-            UserInterface.showPaymentMessage(scheduledPayment.getNextPaymentDate().format(DateTimeFormatter.ISO_LOCAL_DATE));
-            scheduledPayment.reoccurPayment(date);
-
-            File file = new File("serialized\\scheduled_payment_" + fileNumber + ".ser");
-            file.delete();
-            SERIALIZER.serializeObject(scheduledPayment, "serialized\\scheduled_payment_" + fileNumber + ".ser");
-
-            updateScheduledPayments();
-        }
-    }
-
         //Completes the entries for the rest of the year in the currently accessed spreadsheet.
-    private void fillRestOfYear() throws IOException{
+    private void fillRestOfYear() throws IOException, ClassNotFoundException {
         LocalDate lastDayOfYear = LocalDate.of(lastSpreadsheetDate.getYear(), 1, 1).with(TemporalAdjusters.lastDayOfYear());
         int row = spreadsheet.getLastRow() + 1;
         lastSpreadsheetDate = lastSpreadsheetDate.plusDays(1);
@@ -250,11 +233,37 @@ public class FinancialManagementSystem{
         while(!lastSpreadsheetDate.equals(lastDayOfYear)){
             enterDefaultInformation(row, lastSpreadsheetDate, spreadsheet);
             row++;
+
+            for(int i = 0; i < scheduledPayments.size(); i++){
+                checkIfPaymentDue(scheduledPayments.get(i), lastSpreadsheetDate, i);
+            }
+
             lastSpreadsheetDate = lastSpreadsheetDate.plusDays(1);
         }
 
         //Enters the default information for the final day of the year.
         enterDefaultInformation(row, lastSpreadsheetDate, spreadsheet);
+    }
+
+    private static void checkIfPaymentDue(ScheduledPayment scheduledPayment, LocalDate date, int fileNumber) throws IOException, ClassNotFoundException {
+        scheduledPayment.updateNextPaymentDate();
+
+        if(date.equals(scheduledPayment.getNextPaymentDate())){
+            String paymentDate = scheduledPayment.getNextPaymentDate().format(DateTimeFormatter.ISO_LOCAL_DATE);
+
+            if(scheduledPayment.getReminderType().equals("Give Reminder")){
+                UserInterface.showPaymentMessage(paymentDate, "Remind");
+            }else{
+                UserInterface.showPaymentMessage(paymentDate, "Deduct");
+                scheduledPayment.reoccurPayment(date);
+
+                File file = new File("serialized\\scheduled_payment_" + fileNumber + ".ser");
+                file.delete();
+                SERIALIZER.serializeObject(scheduledPayment, "serialized\\scheduled_payment_" + fileNumber + ".ser");
+
+                updateScheduledPayments();
+            }
+        }
     }
 
     public static void enterDefaultInformation(int row, LocalDate entryDate, ExcelSpreadsheet spreadsheet) throws IOException {

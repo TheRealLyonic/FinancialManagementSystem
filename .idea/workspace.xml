@@ -9,13 +9,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="General quality of life fixes for the viewing active scheduled payments">
-      <change afterPath="$PROJECT_DIR$/resources/delete_button_icon.png" afterDir="false" />
+    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Improved the Scheduled payment system to automatically deduct any scheduled payments even if the set date has passed. Also added option to remove scheduled payments via the GUI in the ViewActiveScheduledPayments class.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ScheduledPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ScheduledPayment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ViewActiveScheduledPayments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ViewActiveScheduledPayments.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -165,14 +163,8 @@
       <workItem from="1678418590128" duration="5731000" />
       <workItem from="1678424366146" duration="147000" />
       <workItem from="1678455671819" duration="8903000" />
-      <workItem from="1678471515766" duration="2308000" />
-    </task>
-    <task id="LOCAL-00014" summary="Added functionality to correctly enter default information for missing entries.">
-      <created>1672264418515</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1672264418515</updated>
+      <workItem from="1678471515766" duration="2411000" />
+      <workItem from="1678474040440" duration="1454000" />
     </task>
     <task id="LOCAL-00015" summary="Made improvements to date management and the FinancialManagementSystem class in general.">
       <created>1672372671901</created>
@@ -510,7 +502,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678424466364</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="Improved the Scheduled payment system to automatically deduct any scheduled payments even if the set date has passed. Also added option to remove scheduled payments via the GUI in the ViewActiveScheduledPayments class.">
+      <created>1678473919427</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1678473919427</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -532,7 +531,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Officially began work on Version 2.0 of the Financial Management System; which will include a secure login functionality to allow the user's spreadsheet to be stored on a Dropbox server and downloaded anytime they run the application and login. This is so that if one user is using the program between multiple computers, changes made to their financial data on one are uploaded to the server, then downloaded when they run the FMS on the other computer, resulting in consistency between computers without having to manually transfer spreadsheets." />
     <MESSAGE value="Finished work on implementing the basic login, download, and upload systems, and have now begun work on a 'DownloadSpreadsheetPrompt' class, which will allow the user, after they've successfully logged-in, to decide if they want to download the most recent version of the spreadsheet on the server to replace the one currently on their computer." />
     <MESSAGE value="Fixed the expiring credentials problem with the Dropbox API, access token is now refreshed automatically when the program is run, and validity of that token is checked just before any API call is made, ensuring an expired token will never be an issue. Also re-formatted and added some new colors to the color class, and touched on visually displaying errors that may occur throughout the registration and login processes." />
     <MESSAGE value="Finished the GetUser() method in the Login class, and made general improvements to methods in both the ExcelSpreadsheet and the FinancialManagementSystem class." />
@@ -557,7 +555,8 @@
     <MESSAGE value="Got a basic table-display system working for viewing Active Scheduled Payments" />
     <MESSAGE value="Continued work on the Scheduled Payments system." />
     <MESSAGE value="General quality of life fixes for the viewing active scheduled payments" />
-    <option name="LAST_COMMIT_MESSAGE" value="General quality of life fixes for the viewing active scheduled payments" />
+    <MESSAGE value="Improved the Scheduled payment system to automatically deduct any scheduled payments even if the set date has passed. Also added option to remove scheduled payments via the GUI in the ViewActiveScheduledPayments class." />
+    <option name="LAST_COMMIT_MESSAGE" value="Improved the Scheduled payment system to automatically deduct any scheduled payments even if the set date has passed. Also added option to remove scheduled payments via the GUI in the ViewActiveScheduledPayments class." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

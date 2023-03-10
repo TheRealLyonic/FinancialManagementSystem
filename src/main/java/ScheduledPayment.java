@@ -24,6 +24,7 @@ public class ScheduledPayment extends AdditionalWindow implements Colors, Serial
     private double amount;
     private String measureOfFrequency;
     private String paymentDescription;
+    private String reminderType;
     private int quantityOfFrequency;
     private Object[] paymentInformation = new Object[4];
 
@@ -120,6 +121,7 @@ public class ScheduledPayment extends AdditionalWindow implements Colors, Serial
                 paymentDescription = summaryTextArea.getText();
                 quantityOfFrequency = Integer.parseInt(frequencyTextField.getText());
                 measureOfFrequency = frequencyDropdownBox.getSelectedItem().toString();
+                reminderType = notifyTypeDropdownBox.getSelectedItem().toString();
 
                 paymentInformation[0] = currencyTextField.getText();
                 paymentInformation[1] = startDate;
@@ -171,6 +173,10 @@ public class ScheduledPayment extends AdditionalWindow implements Colors, Serial
 
     public Object[] getPaymentInformation(){
         return paymentInformation;
+    }
+
+    public String getReminderType(){
+        return reminderType;
     }
 
 }

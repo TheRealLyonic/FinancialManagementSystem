@@ -108,9 +108,20 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         System.exit(1);
     }
 
-    public static void showPaymentMessage(String date){
-        JOptionPane.showMessageDialog(frame, "A subscription due on " + date + " has been renewed, and " +
-                "deducted from your balance accordingly.", "Payment Renewal Notification", JOptionPane.INFORMATION_MESSAGE);
+    public static void showPaymentMessage(String date, String paymentType){
+        if(paymentType.equalsIgnoreCase("Remind")){
+            JOptionPane.showMessageDialog(frame, "A subscription due on " + date + " should be accounted for " +
+                    "in the spreadsheet, as the program has not been told to automatically deduct the set amount.",
+                    "Payment Renewal Notification", JOptionPane.INFORMATION_MESSAGE);
+        }else if(paymentType.equalsIgnoreCase("Deduct")){
+            JOptionPane.showMessageDialog(frame, "A subscription due on " + date + " has been renewed, and " +
+                    "deducted from your balance accordingly.", "Payment Renewal Notification", JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(frame, "Non-Critical ERROR: The method showPaymentMessage() has been " +
+                    "passed an illegal parameter, and the scheduled notification could not be displayed. Just know that " +
+                    "a scheduled payment is due and should be accounted for manually.", "Invalid parameter",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     @Override
