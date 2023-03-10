@@ -126,13 +126,11 @@ public class ScheduledPayment extends AdditionalWindow implements Colors, Serial
                 paymentInformation[3] = paymentDescription;
 
                 FinancialManagementSystem.addScheduledPayment(this);
-                UserInterface.refreshWindow();
-
                 FinancialManagementSystem.addExpenditure(currencyTextField.getText());
                 FinancialManagementSystem.addSummary(currencyTextField.getText(), paymentDescription, "Purchase");
-                UserInterface.refreshWindow();
 
                 this.dispose();
+                UserInterface.refreshWindow();
             }
 
         }catch(IOException ex){
