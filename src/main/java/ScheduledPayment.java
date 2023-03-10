@@ -1,12 +1,9 @@
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;
-import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class ScheduledPayment extends AdditionalWindow implements Colors, Serializable {
 

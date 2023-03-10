@@ -9,13 +9,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Basic implementation of the ScheduledPayment system should be finished, only refinements left. Should be finished soon.">
+    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="The ScheduledPayment system should now be acceptably operational in all daily program usages, as the first major bug-sweep has been conducted, and the found bugs have been fixed. Will continue to test for quality control and last minute additions.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Deposit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Deposit.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Expenditure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Expenditure.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ScheduledPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ScheduledPayment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ViewActiveScheduledPayments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ViewActiveScheduledPayments.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,14 +165,7 @@
       <workItem from="1678471515766" duration="2411000" />
       <workItem from="1678474040440" duration="2950000" />
       <workItem from="1678479943537" duration="7082000" />
-      <workItem from="1678487804799" duration="326000" />
-    </task>
-    <task id="LOCAL-00016" summary="Fixed a bug in the ExcelSpreadsheet class where trying to display pure text information from a spreadsheet would cause an error. Also cleared out the addMissingEntries() method in the FinancialManagementSystem class to begin a complete rework on how the process is handled.">
-      <created>1672381976880</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1672381976880</updated>
+      <workItem from="1678487804799" duration="977000" />
     </task>
     <task id="LOCAL-00017" summary="Started work on accounting for missing entries.">
       <created>1672429308575</created>
@@ -513,7 +503,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678475546026</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="The ScheduledPayment system should now be acceptably operational in all daily program usages, as the first major bug-sweep has been conducted, and the found bugs have been fixed. Will continue to test for quality control and last minute additions.">
+      <created>1678488288037</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1678488288037</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -535,7 +532,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Fixed the expiring credentials problem with the Dropbox API, access token is now refreshed automatically when the program is run, and validity of that token is checked just before any API call is made, ensuring an expired token will never be an issue. Also re-formatted and added some new colors to the color class, and touched on visually displaying errors that may occur throughout the registration and login processes." />
     <MESSAGE value="Finished the GetUser() method in the Login class, and made general improvements to methods in both the ExcelSpreadsheet and the FinancialManagementSystem class." />
     <MESSAGE value="Updated the DownloadSpreadsheetPrompt class to the SpreadsheetDownloader class, and added its base functionality. A user could now login securely, and then decide whether or not to download the last uploaded version of their spreadsheet from the database before opening the main portion of the program." />
     <MESSAGE value="Added the SpreadsheetUploader class as well as implemented its core functionality. The program is now runnable from start to finish with the new changes and everything works as expected." />
@@ -560,7 +556,8 @@
     <MESSAGE value="General quality of life fixes for the viewing active scheduled payments" />
     <MESSAGE value="Improved the Scheduled payment system to automatically deduct any scheduled payments even if the set date has passed. Also added option to remove scheduled payments via the GUI in the ViewActiveScheduledPayments class." />
     <MESSAGE value="Basic implementation of the ScheduledPayment system should be finished, only refinements left. Should be finished soon." />
-    <option name="LAST_COMMIT_MESSAGE" value="Basic implementation of the ScheduledPayment system should be finished, only refinements left. Should be finished soon." />
+    <MESSAGE value="The ScheduledPayment system should now be acceptably operational in all daily program usages, as the first major bug-sweep has been conducted, and the found bugs have been fixed. Will continue to test for quality control and last minute additions." />
+    <option name="LAST_COMMIT_MESSAGE" value="The ScheduledPayment system should now be acceptably operational in all daily program usages, as the first major bug-sweep has been conducted, and the found bugs have been fixed. Will continue to test for quality control and last minute additions." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
