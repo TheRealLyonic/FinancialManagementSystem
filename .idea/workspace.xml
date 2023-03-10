@@ -9,11 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Merge Conflicts Fix">
-      <change afterPath="$PROJECT_DIR$/resources/view_active_scheduled_payments_window_icon.png" afterDir="false" />
+    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Got a basic table-display system working for viewing Active Scheduled Payments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ScheduledPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ScheduledPayment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MenuOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MenuOption.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ViewActiveScheduledPayments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ViewActiveScheduledPayments.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -161,14 +159,7 @@
       <workItem from="1678394357652" duration="66000" />
       <workItem from="1678394530382" duration="1415000" />
       <workItem from="1678400456244" duration="10205000" />
-      <workItem from="1678418590128" duration="848000" />
-    </task>
-    <task id="LOCAL-00011" summary="Update Date method added to FMS">
-      <created>1672253659928</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1672253659928</updated>
+      <workItem from="1678418590128" duration="3188000" />
     </task>
     <task id="LOCAL-00012" summary="Begun work on keeping track of dates and adding entries for missed days.">
       <created>1672256893764</created>
@@ -506,7 +497,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678386656951</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="Got a basic table-display system working for viewing Active Scheduled Payments">
+      <created>1678419546802</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1678419546802</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -528,7 +526,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Updated to .gitignore and the pom.xml, taken for final release." />
     <MESSAGE value="Fixed mistake with the Expenditure class, where if the user entered letters&#10;into the expenditure text box, the error message that appeared would state&#10;that a valid number is required in order to make a new 'deposit'. Changed&#10;it to say expenditure as it should." />
     <MESSAGE value="Added a file to gitIgnore." />
     <MESSAGE value="Officially began work on Version 2.0 of the Financial Management System; which will include a secure login functionality to allow the user's spreadsheet to be stored on a Dropbox server and downloaded anytime they run the application and login. This is so that if one user is using the program between multiple computers, changes made to their financial data on one are uploaded to the server, then downloaded when they run the FMS on the other computer, resulting in consistency between computers without having to manually transfer spreadsheets." />
@@ -553,6 +550,17 @@
     <MESSAGE value="Started work on viewing the saved active payments." />
     <MESSAGE value="Updated .Gitignore" />
     <MESSAGE value="Merge Conflicts Fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge Conflicts Fix" />
+    <MESSAGE value="Got a basic table-display system working for viewing Active Scheduled Payments" />
+    <option name="LAST_COMMIT_MESSAGE" value="Got a basic table-display system working for viewing Active Scheduled Payments" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.StackOverflowError" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

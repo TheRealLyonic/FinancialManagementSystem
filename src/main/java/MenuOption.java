@@ -32,8 +32,9 @@ public class MenuOption extends JLabel implements Fonts, Colors{
         optionText = new JLabel(optionName);
         optionText.setFont(ROBOTO_SMALL);
         optionText.setForeground(SUBDUED_WHITE);
-        optionText.setLocation(xPos + 65, yPos + 4);
+        optionText.setLocation(xPos + 65, yPos - 2);
         optionText.setSize(optionText.getPreferredSize());
+        optionText.setSize(optionText.getWidth() + 15, optionText.getHeight() + 15);
 
         this.add(optionButton);
         this.add(optionText);

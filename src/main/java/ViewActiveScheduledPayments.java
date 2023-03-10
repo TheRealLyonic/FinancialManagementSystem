@@ -1,6 +1,8 @@
 import javax.swing.*;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableModel;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -35,6 +37,7 @@ public class ViewActiveScheduledPayments extends JFrame implements Colors, Fonts
         scheduledPaymentsTable.setBackground(Color.black);
         scheduledPaymentsTable.setForeground(SUBDUED_WHITE);
         scheduledPaymentsTable.setFont(ROBOTO_BUTTON);
+        scheduledPaymentsTable.setEnabled(false);
 
         //!TableContainer stuff!
         tableContainer = new JScrollPane(scheduledPaymentsTable);
