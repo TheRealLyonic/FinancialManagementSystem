@@ -149,6 +149,15 @@ public class FinancialManagementSystem{
                     "deserialize the provided .ser file into a ScheduledPayment instance because the classes " +
                     "do not match.");
         }
+
+        for(ScheduledPayment scheduledPayment : scheduledPayments){
+            scheduledPayment.updateNextPaymentDate();
+
+            if(currentLocalDate.equals(scheduledPayment.getNextPaymentDate())){
+                scheduledPayment.reoccurPayment();
+            }
+        }
+
     }
 
     private boolean lastEntryIsCurrent(){

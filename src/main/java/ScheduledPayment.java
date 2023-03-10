@@ -1,5 +1,6 @@
 import javax.swing.*;
 import javax.swing.text.AbstractDocument;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.Serializable;
@@ -18,10 +19,12 @@ public class ScheduledPayment extends AdditionalWindow implements Colors, Serial
     });
     private JLabel frequencyDisplayText, notifyTypeDisplayText;
     private JTextField frequencyTextField;
-    private LocalDate startDate;
+    private LocalDate startDate, lastPaymentDate, nextPaymentDate;
     private double amount;
     private String measureOfFrequency;
+    private String paymentDescription;
     private int quantityOfFrequency;
+    private Object[] paymentInformation = new Object[4];
 
     ScheduledPayment(){
         this.setTitle("New Scheduled Payment");
@@ -30,6 +33,8 @@ public class ScheduledPayment extends AdditionalWindow implements Colors, Serial
         this.getContentPane().setBackground(FINANCIAL_ORANGE);
 
         startDate = LocalDate.now();
+        lastPaymentDate = LocalDate.now();
+        nextPaymentDate = LocalDate.now();
 
         //Frequency display text stuff
         frequencyDisplayText = new JLabel("Occurs Every:");
@@ -95,51 +100,76 @@ public class ScheduledPayment extends AdditionalWindow implements Colors, Serial
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == confirmButton){
 
-            if(Double.valueOf(currencyTextField.getText()) == 0.00){
-                JOptionPane.showMessageDialog(this, "ERROR: You must enter a dollar amount " +
-                        "above zero to create a new scheduled payment.", "Invalid Amount", JOptionPane.ERROR_MESSAGE);
-                return;
-            }else if(summaryTextArea.getText().equals("Payment Summary")){
-                JOptionPane.showMessageDialog(this, "ERROR: You must provide a payment " +
-                        "summary in order to add a new scheduled payment.", "No Payment Summary", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
+        try{
 
-            quantityOfFrequency = Integer.parseInt(frequencyTextField.getText());
-            measureOfFrequency = frequencyDropdownBox.getSelectedItem().toString();
-            amount = Double.valueOf(currencyTextField.getText());
+            if(e.getSource() == confirmButton){
 
-            try {
+                if(Double.valueOf(currencyTextField.getText()) == 0.00){
+                    JOptionPane.showMessageDialog(this, "ERROR: You must enter a dollar amount " +
+                            "above zero to create a new scheduled payment.", "Invalid Amount", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }else if(summaryTextArea.getText().equals("Payment Summary")){
+                    JOptionPane.showMessageDialog(this, "ERROR: You must provide a payment " +
+                            "summary in order to add a new scheduled payment.", "No Payment Summary", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                amount = Double.valueOf(currencyTextField.getText());
+                paymentDescription = summaryTextArea.getText();
+                quantityOfFrequency = Integer.parseInt(frequencyTextField.getText());
+                measureOfFrequency = frequencyDropdownBox.getSelectedItem().toString();
+
+                paymentInformation[0] = currencyTextField.getText();
+                paymentInformation[1] = startDate;
+                paymentInformation[2] = startDate;
+                paymentInformation[3] = paymentDescription;
+
                 FinancialManagementSystem.addScheduledPayment(this);
                 UserInterface.refreshWindow();
-            } catch (IOException ex) {
-                UserInterface.showErrorMessage("I/o Exception", "ERROR: An I/o Exception " +
-                        "has occurred.");
-            } catch (ClassNotFoundException ex) {
-                UserInterface.showErrorMessage("Class Not Found", "ERROR: The ScheduledPayment " +
-                        "class was not found.");
+
+                FinancialManagementSystem.addExpenditure(currencyTextField.getText());
+                FinancialManagementSystem.addSummary(currencyTextField.getText(), paymentDescription, "Purchase");
+                UserInterface.refreshWindow();
+
+                this.dispose();
             }
 
-            this.dispose();
+        }catch(IOException ex){
+            UserInterface.showErrorMessage("I/o Exception", "ERROR: An I/o Exception has occurred.");
+        }catch(ClassNotFoundException ex){
+            UserInterface.showErrorMessage("Missing Class Exception", "ERROR: The Scheduled Payment " +
+                    "class was not found.");
         }
+
+
     }
 
-    public LocalDate getStartDate(){
-        return startDate;
+    public void updateNextPaymentDate(){
+        if(measureOfFrequency.equals("Day(s)")){
+            nextPaymentDate = lastPaymentDate.plusDays(quantityOfFrequency);
+        }else if(measureOfFrequency.equals("Month(s)")){
+            nextPaymentDate = lastPaymentDate.plusMonths(quantityOfFrequency);
+        }else{
+            nextPaymentDate = lastPaymentDate.plusYears(quantityOfFrequency);
+        }
+
+        paymentInformation[2] = nextPaymentDate;
     }
 
-    public double getAmount(){
-        return amount;
+    public void reoccurPayment() throws IOException {
+        lastPaymentDate = LocalDate.now();
+        FinancialManagementSystem.addExpenditure(Double.toString(amount));
+        FinancialManagementSystem.addSummary(Double.toString(amount), paymentDescription, "Purchase");
     }
 
-    public int getQuantityOfFrequency(){
-        return quantityOfFrequency;
+    //Getters + Setters
+    public LocalDate getNextPaymentDate(){
+        return nextPaymentDate;
     }
 
-    public String getMeasureOfFrequency(){
-        return measureOfFrequency;
+    public Object[] getPaymentInformation(){
+        return paymentInformation;
     }
 
 }
