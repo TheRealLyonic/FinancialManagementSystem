@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.HashMap;
 
@@ -11,7 +12,7 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
     private static JFrame frame;
     private HashMap dataSet;
     private static PieChart pieChart;
-    private MenuOption newDepositOption, newExpenditureOption, newScheduledPaymentOption, viewActiveScheduledPaymentsOption;
+    private MenuOption newDepositOption, newExpenditureOption, viewHistoryOption, newScheduledPaymentOption, viewActiveScheduledPaymentsOption;
     private static JLabel balanceText;
     private static int percentSpent, percentSaved;
 
@@ -39,10 +40,12 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         pieChart = new PieChart("Weekly Update", dataSet, 490, 0, 350, 300);
 
         //!Menu Option stuff!
+            //Plus 110 to the y each time.
         newDepositOption = new MenuOption(this, 25, 55, "New Deposit", new ImageIcon("resources\\new_deposit_icon.png"));
         newExpenditureOption = new MenuOption(this, 25, 165, "New Expenditure", new ImageIcon("resources\\new_expenditure_icon.png"));
-        newScheduledPaymentOption = new MenuOption(this, 25, 340, "New Scheduled Payment", new ImageIcon("resources\\new_scheduled_payment_icon.png"));
-        viewActiveScheduledPaymentsOption = new MenuOption(this, 25, 450, "View Active Scheduled Payments", new ImageIcon("resources\\view_active_scheduled_payments_icon.png"));
+        viewHistoryOption = new MenuOption(this, 25, 275, "View Financial History", new ImageIcon("resources\\view_history_option_icon.png"));
+        newScheduledPaymentOption = new MenuOption(this, 25, 385, "New Scheduled Payment", new ImageIcon("resources\\new_scheduled_payment_icon.png"));
+        viewActiveScheduledPaymentsOption = new MenuOption(this, 25, 495, "View Active Scheduled Payments", new ImageIcon("resources\\view_active_scheduled_payments_icon.png"));
 
         //!Balance Display Stuff!
         double balance = FinancialManagementSystem.getBalance();
@@ -79,6 +82,7 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
             //Menu Options
         frame.add(newDepositOption);
         frame.add(newExpenditureOption);
+        frame.add(viewHistoryOption);
         frame.add(newScheduledPaymentOption);
         frame.add(viewActiveScheduledPaymentsOption);
             //Other
@@ -102,8 +106,9 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
         }
     }
 
-    public static void refreshWindow() throws IOException, ClassNotFoundException {
+    public static void refreshWindow() throws IOException, ClassNotFoundException, ParseException {
         frame.dispose();
+        FinancialManagementSystem.addHistoryData();
         new UserInterface();
     }
 
@@ -134,6 +139,8 @@ public class UserInterface extends JFrame implements ActionListener, Colors, Fon
             new Deposit();
         }else if(e.getSource() == newExpenditureOption.getOptionButton()){
             new Expenditure();
+        }else if(e.getSource() == viewHistoryOption.getOptionButton()){
+            new ViewHistory(FinancialManagementSystem.getHistoryData());
         }else if(e.getSource() == newScheduledPaymentOption.getOptionButton()){
             new ScheduledPayment();
         }else if(e.getSource() == viewActiveScheduledPaymentsOption.getOptionButton()){

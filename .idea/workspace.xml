@@ -9,9 +9,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="The ScheduledPayment system should now be acceptably operational in all daily program usages, as the first major bug-sweep has been conducted, and the found bugs have been fixed. Will continue to test for quality control and last minute additions.">
+    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Finished last-minute optimizations, version 2.0 of the program should now be ready for release.">
+      <change afterPath="$PROJECT_DIR$/resources/view_history_icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/HistoryData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/ViewHistory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Colors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Deposit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Deposit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Expenditure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Expenditure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ScheduledPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ScheduledPayment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UserInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ViewActiveScheduledPayments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ViewActiveScheduledPayments.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,25 +81,25 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Documents/Java Projects/FinancialManagementSystemPublic&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;advanced.settings&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "D:/Documents/Java Projects/FinancialManagementSystemPublic",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "advanced.settings",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -165,14 +173,11 @@
       <workItem from="1678471515766" duration="2411000" />
       <workItem from="1678474040440" duration="2950000" />
       <workItem from="1678479943537" duration="7082000" />
-      <workItem from="1678487804799" duration="977000" />
-    </task>
-    <task id="LOCAL-00017" summary="Started work on accounting for missing entries.">
-      <created>1672429308575</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1672429308575</updated>
+      <workItem from="1678487804799" duration="1209000" />
+      <workItem from="1678491572753" duration="76000" />
+      <workItem from="1678493126095" duration="3208000" />
+      <workItem from="1678496442058" duration="928000" />
+      <workItem from="1678502560160" duration="5986000" />
     </task>
     <task id="LOCAL-00018" summary="Continued losing my mind trying to fix the addMissingEntries() method, but made progress and got the enterNewYear() method working completely as expected.">
       <created>1672430604751</created>
@@ -510,7 +515,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678488288037</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="Finished last-minute optimizations, version 2.0 of the program should now be ready for release.">
+      <created>1678488852338</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1678488852338</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -532,7 +544,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Finished the GetUser() method in the Login class, and made general improvements to methods in both the ExcelSpreadsheet and the FinancialManagementSystem class." />
     <MESSAGE value="Updated the DownloadSpreadsheetPrompt class to the SpreadsheetDownloader class, and added its base functionality. A user could now login securely, and then decide whether or not to download the last uploaded version of their spreadsheet from the database before opening the main portion of the program." />
     <MESSAGE value="Added the SpreadsheetUploader class as well as implemented its core functionality. The program is now runnable from start to finish with the new changes and everything works as expected." />
     <MESSAGE value="New Project Directory Created." />
@@ -557,7 +568,8 @@
     <MESSAGE value="Improved the Scheduled payment system to automatically deduct any scheduled payments even if the set date has passed. Also added option to remove scheduled payments via the GUI in the ViewActiveScheduledPayments class." />
     <MESSAGE value="Basic implementation of the ScheduledPayment system should be finished, only refinements left. Should be finished soon." />
     <MESSAGE value="The ScheduledPayment system should now be acceptably operational in all daily program usages, as the first major bug-sweep has been conducted, and the found bugs have been fixed. Will continue to test for quality control and last minute additions." />
-    <option name="LAST_COMMIT_MESSAGE" value="The ScheduledPayment system should now be acceptably operational in all daily program usages, as the first major bug-sweep has been conducted, and the found bugs have been fixed. Will continue to test for quality control and last minute additions." />
+    <MESSAGE value="Finished last-minute optimizations, version 2.0 of the program should now be ready for release." />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished last-minute optimizations, version 2.0 of the program should now be ready for release." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

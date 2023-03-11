@@ -37,7 +37,7 @@ public class ViewActiveScheduledPayments extends JFrame implements Colors, Fonts
 
         //!scheduledPaymentsTable stuff!
         scheduledPaymentsTable = new JTable(data, COLUMN_NAMES);
-        scheduledPaymentsTable.setBackground(Color.black);
+        scheduledPaymentsTable.setBackground(DEFAULT_BLACK);
         scheduledPaymentsTable.setForeground(SUBDUED_WHITE);
         scheduledPaymentsTable.setFont(ROBOTO_BUTTON);
         scheduledPaymentsTable.setEnabled(false);

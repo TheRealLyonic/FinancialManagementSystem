@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.text.ParseException;
 
 public class Expenditure extends AdditionalWindow{
 
@@ -47,6 +48,9 @@ public class Expenditure extends AdditionalWindow{
             } catch (ClassNotFoundException ex) {
                 JOptionPane.showMessageDialog(this, "ERROR: A Class Not Found Exception has " +
                         "occurred.", "Class Not Found Exception", JOptionPane.ERROR_MESSAGE);
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(this, "ERROR: A Parse Exception has occurred.",
+                        "Parse Exception", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

@@ -14,15 +14,14 @@ import java.util.Date;
 
 public class FinancialManagementSystem{
 
-    private static ExcelSpreadsheet spreadsheet;
-    private static double startingBalance, balance;
-    private static double spentSinceLastDeposit;
-    private static int lastDepositRow;
-    private static LocalDate currentLocalDate;
-    private static LocalDate lastSpreadsheetDate;
-    private static final int NUM_OF_COLUMNS = 7; //The number of used columns in the spreadsheet
     private static final Serializer SERIALIZER = new Serializer();
+    private static final int NUM_OF_COLUMNS = 7; //The number of used columns in the spreadsheet
+    private static ExcelSpreadsheet spreadsheet;
+    private static int lastDepositRow;
+    private static double startingBalance, balance, spentSinceLastDeposit;
+    private static LocalDate currentLocalDate, lastSpreadsheetDate;
     private static ArrayList<ScheduledPayment> scheduledPayments = new ArrayList();
+    private static ArrayList<HistoryData> historyData = new ArrayList();
 
     FinancialManagementSystem() throws IOException, ParseException, ClassNotFoundException {
         //Basic variable assignments and operations needed for the program to begin, keep in mind that the order of
@@ -37,6 +36,8 @@ public class FinancialManagementSystem{
         //side, but it does make sure that column widths inside the spreadsheet will always be correct, even if the
         //user manually edits a purchase or deposit summary.
         autoSizeColumns();
+
+        addHistoryData();
 
         new UserInterface();
     }
@@ -56,6 +57,8 @@ public class FinancialManagementSystem{
 
     //!Update information stuff!
     private static void updateInformation() throws IOException, ParseException, ClassNotFoundException {
+        //Worth noting here that the order of these should not be changed for any reason, as some of these functions
+        //are dependent on the proper values from the earlier ones.
         updateLastSpreadsheetDate();
         updateBalance();
         updateStartingBalance();
@@ -66,22 +69,13 @@ public class FinancialManagementSystem{
     }
 
     private static void updateLastSpreadsheetDate() throws IOException, ParseException {
-        //This little work around is needed to essentially convert the given instance of the Date class to an instance
-        //of the localDate class, which is far easier to work with and read dates from.
-
-        DateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
-
-        try{
-            Date rawSpreadsheetDate = formatter.parse(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 0));
-            lastSpreadsheetDate = LocalDate.ofInstant(rawSpreadsheetDate.toInstant(), ZoneId.systemDefault());
-        }catch(ParseException e){
-            UserInterface.showErrorMessage("Invalid Date", "ERROR: Invalid date entered into spreadsheet.");
-        }
+        lastSpreadsheetDate = convertToLocalDate(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 0));
     }
 
     public static void updateBalance() throws IOException {
         updateStartingBalance();
 
+        //BigDecimal class is used to avoid losing precision with decimal point math.
         double costs = new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 2))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
         double deposits = new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 3))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
 
@@ -179,6 +173,11 @@ public class FinancialManagementSystem{
         }
     }
 
+    /*
+    Adds any missing entries in the spreadsheet from the last time it was run. So if the program was last run on
+    March 4th, and the currentLocalDate is the 15th of the same month and year, then the 'Missing Entries' would
+    be those from March 5th-14th.
+    */
     private void addMissingEntries() throws IOException, ParseException, ClassNotFoundException {
         if(lastSpreadsheetDate.plusDays(1).equals(currentLocalDate) && lastSpreadsheetDate.getYear() == currentLocalDate.getYear()){
             createNewEntry();
@@ -205,6 +204,7 @@ public class FinancialManagementSystem{
                     enterDefaultInformation(row, lastSpreadsheetDate, spreadsheet);
                     row++;
 
+                    //Ensures that any scheduled payments are not missed while the rest of the year is being filled.
                     checkIfPaymentDue(lastSpreadsheetDate);
 
                     lastSpreadsheetDate = lastSpreadsheetDate.plusDays(1);
@@ -236,6 +236,8 @@ public class FinancialManagementSystem{
         enterDefaultInformation(row, lastSpreadsheetDate, spreadsheet);
     }
 
+    //Standard method for evaluating a given date for any due scheduled payments. This includes handling the payment
+    //if it is due on the given date, and informing the user of the activity via JOptionPanes.
     public static void checkIfPaymentDue(LocalDate date) throws IOException, ClassNotFoundException {
         for(int i = 0; i < scheduledPayments.size(); i++){
             scheduledPayments.get(i).updateNextPaymentDate();
@@ -243,6 +245,8 @@ public class FinancialManagementSystem{
             if(date.equals(scheduledPayments.get(i).getNextPaymentDate())){
                 String paymentDate = scheduledPayments.get(i).getNextPaymentDate().format(DateTimeFormatter.ISO_LOCAL_DATE);
 
+                //Response to the scheduled payment varies depending on the notification-type set by the user when
+                //they created the Scheduled Payment.
                 if(scheduledPayments.get(i).getReminderType().equals("Give Reminder")){
                     scheduledPayments.get(i).remindPayment(date, paymentDate);
                 }else{
@@ -308,7 +312,42 @@ public class FinancialManagementSystem{
         spreadsheet.writeToSpreadsheet(row, 6, "No purchases for this day.", "String");
     }
 
+    public static void addHistoryData() throws IOException, ParseException {
+        historyData.clear();
+
+        for(int i = 1; i <= spreadsheet.getLastRow(); i++){
+            LocalDate date = convertToLocalDate(spreadsheet.readFromSpreadsheet(i, 0));
+            double startingBalance = new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(i, 1))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+            double costTotal = new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(i, 2))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+
+            if(costTotal < 0.00){
+                costTotal *= -1; //Makes the costTotal appear as a non-negative value in the table.
+            }
+
+            double depositTotal = new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(i, 3))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+            double remainingBalance = new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(i, 4))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
+            String depositDescriptions = spreadsheet.readFromSpreadsheet(i, 5);
+            String purchaseDescriptions = spreadsheet.readFromSpreadsheet(i, 6);
+
+            if(costTotal == 0.00 && depositTotal == 0.00 && !date.equals(LocalDate.of(date.getYear(), 1, 1))){
+                continue;
+            }
+
+            HistoryData historyDataInstance = new HistoryData(date, startingBalance, costTotal, depositTotal, remainingBalance, depositDescriptions, purchaseDescriptions);
+
+            historyData.add(historyDataInstance);
+        }
+    }
+
     //!Formatting stuff!
+    private static LocalDate convertToLocalDate(String spreadsheetDate) throws IOException, ParseException {
+        //This little work around is needed to essentially convert the given instance of the Date class to an instance
+        //of the localDate class, which is far easier to work with and read dates from.
+        DateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");
+        Date rawSpreadsheetDate = formatter.parse(spreadsheetDate);
+        return LocalDate.ofInstant(rawSpreadsheetDate.toInstant(), ZoneId.systemDefault());
+    }
+
         //Formats a newly created spreadsheet with all of the correct columns, to be used when a new spreadsheet is
         //first created.
     public static void setupSheet(ExcelSpreadsheet spreadsheet) throws IOException {
@@ -377,6 +416,7 @@ public class FinancialManagementSystem{
 
     }
 
+    //General method to be used for adding a summary to the spreadsheet. Works for both purchase and deposit summaries.
     public static void addSummary(String amount, String description, String summaryType) throws IOException {
         String summaryDefault;
         int cellNumber;
@@ -427,6 +467,10 @@ public class FinancialManagementSystem{
 
     public static ArrayList<ScheduledPayment> getScheduledPayments(){
         return scheduledPayments;
+    }
+
+    public static ArrayList<HistoryData> getHistoryData(){
+        return historyData;
     }
 
 }

@@ -3,6 +3,7 @@ import javax.swing.text.AbstractDocument;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.ParseException;
 import java.time.LocalDate;
 
 public class ScheduledPayment extends AdditionalWindow implements Colors, Serializable {
@@ -139,6 +140,8 @@ public class ScheduledPayment extends AdditionalWindow implements Colors, Serial
         }catch(ClassNotFoundException ex){
             UserInterface.showErrorMessage("Missing Class Exception", "ERROR: The Scheduled Payment " +
                     "class was not found.");
+        } catch (ParseException ex) {
+            UserInterface.showErrorMessage("Parse Exception", "ERROR: A Parse Exception has occurred.");
         }
 
 
