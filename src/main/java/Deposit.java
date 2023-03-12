@@ -38,8 +38,8 @@ public class Deposit extends AdditionalWindow{
 
                 FinancialManagementSystem.addDeposit(currencyTextField.getText());
                 FinancialManagementSystem.addSummary(currencyTextField.getText(), summaryTextArea.getText(), "Deposit");
-                UserInterface.refreshWindow();
                 this.dispose();
+                UserInterface.refreshWindow();
             } catch(IOException ex){
                 JOptionPane.showMessageDialog(this, "ERROR: An I/o exception occurred.",
                         "I/o Exception", JOptionPane.ERROR_MESSAGE);

@@ -40,8 +40,8 @@ public class Expenditure extends AdditionalWindow{
 
                 FinancialManagementSystem.addExpenditure(currencyTextField.getText());
                 FinancialManagementSystem.addSummary(currencyTextField.getText(), summaryTextArea.getText(), "Purchase");
-                UserInterface.refreshWindow();
                 this.dispose();
+                UserInterface.refreshWindow();
             }catch(IOException ex){
                 JOptionPane.showMessageDialog(this, "ERROR: An I/o exception occurred.",
                         "I/o Exception", JOptionPane.ERROR_MESSAGE);
