@@ -2,11 +2,9 @@ import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class ViewHistory extends JFrame implements Colors, Fonts, ActionListener {
+public class ViewHistory extends JFrame implements Colors, Fonts{
 
     private ArrayList<HistoryData> historyData;
     private JTable historyTable;
@@ -114,8 +112,4 @@ public class ViewHistory extends JFrame implements Colors, Fonts, ActionListener
         }
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
 }

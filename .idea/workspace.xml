@@ -9,10 +9,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Just some small bug fixes.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/ColoredCellRenderer.java" afterDir="false" />
+    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Drastically improved table formatting and readability.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Colors.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ViewActiveScheduledPayments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ViewActiveScheduledPayments.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ViewHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ViewHistory.java" afterDir="false" />
@@ -183,7 +181,11 @@
       <workItem from="1678662445219" duration="496000" />
       <workItem from="1678667551489" duration="29000" />
       <workItem from="1678670233312" duration="5000" />
-      <workItem from="1678670399714" duration="5156000" />
+      <workItem from="1678670399714" duration="5758000" />
+      <workItem from="1678687306724" duration="7000" />
+      <workItem from="1678687470415" duration="192000" />
+      <workItem from="1678724956567" duration="530000" />
+      <workItem from="1678727256395" duration="1018000" />
     </task>
     <task id="LOCAL-00020" summary="The program can now account for any missing dates within a given spreadsheet. Additionally, if the program hasn't been used since the previous year, and there does not exist a spreadsheet with the system's current year as it's name, an error will no longer be thrown. Instead, the findSpreadsheet() method which has been added to the FinancialManagementSystem class will now use a for-loop (Starting at the system's current year and ending at the year 2001) to decrement through previous years until it finds an Excel file with the given year as its name. As of now, regardless of how long it has been since the user has last used the program, everything should run correctly, and then continue as normal after a new spreadsheet has been created for that year, and all missing entries have been accounted for in all spreadsheets in-between.">
       <created>1674231322745</created>
@@ -191,13 +193,6 @@
       <option name="presentableId" value="LOCAL-00020" />
       <option name="project" value="LOCAL" />
       <updated>1674231322745</updated>
-    </task>
-    <task id="LOCAL-00023" summary="Fixed a bug in the FinancialManagementSystem class where if the last date of a spreadsheet was the last day of that year (I.e. 12/31/2022), the program would enter all of the information for the following year (I.e. 2023) in that spreadsheet, and continue endlessly. It now functions as expected and will simply create a new spreadsheet for the following year in such an event. Also continued work on the U.I. in both the UserInterface and Deposit class, as well as adjusted the Fonts interface to include different size options for the Roboto font.">
-      <created>1672646635502</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1672646635502</updated>
     </task>
     <task id="LOCAL-00024" summary="Turns out there was still a problem with the Pie chart displaying colors correctly, fixed all bugs in that department, and now it will always color the spent percentage red, and the saved percentage blue.">
       <created>1672658673700</created>
@@ -528,7 +523,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678662474622</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="Drastically improved table formatting and readability.">
+      <created>1678676381317</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1678676381318</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -550,7 +552,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Removed remnants of previous version of project." />
     <MESSAGE value="Begun work on monthly payment functionality, and removed additional resources used for deprecated login system." />
     <MESSAGE value="Continued work on monthly payments, beginning to optimize the way error handling works, by replacing the 'WarningText' objects with error dialogs via the JOptionPane class" />
     <MESSAGE value="Finally optimized the way in which additional windows are created within the program, so that any class which requires its own interface will extend AdditionalWindow.java as opposed to the JFrame class itself, so that the more redundant operations and common formatting are taken care of without repeated lines of code in each class." />
@@ -575,7 +576,8 @@
     <MESSAGE value="Implemented basic system for viewing financial history data. This basically covers all of the information in the spreadsheet, but the information for any given day will only be added if it contains at least one deposit/withdrawal, or if it is the first day of the year." />
     <MESSAGE value="Taking a small break, pushing this just to maintain progress until next session." />
     <MESSAGE value="Just some small bug fixes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Just some small bug fixes." />
+    <MESSAGE value="Drastically improved table formatting and readability." />
+    <option name="LAST_COMMIT_MESSAGE" value="Drastically improved table formatting and readability." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InvalidClassException;
@@ -248,23 +247,25 @@ public class FinancialManagementSystem{
     //if it is due on the given date, and informing the user of the activity via JOptionPanes.
     public static void checkIfPaymentDue(LocalDate date) throws IOException, ClassNotFoundException {
         for(int i = 0; i < scheduledPayments.size(); i++){
-            scheduledPayments.get(i).updateNextPaymentDate();
+            ScheduledPayment payment = scheduledPayments.get(i);
 
-            if(date.equals(scheduledPayments.get(i).getNextPaymentDate())){
-                String paymentDate = scheduledPayments.get(i).getNextPaymentDate().format(DateTimeFormatter.ISO_LOCAL_DATE);
+            payment.updateNextPaymentDate();
+
+            if(date.equals(payment.getNextPaymentDate())){
+                String paymentDate = payment.getNextPaymentDate().format(DateTimeFormatter.ISO_LOCAL_DATE);
 
                 //Response to the scheduled payment varies depending on the notification-type set by the user when
                 //they created the Scheduled Payment.
-                if(scheduledPayments.get(i).getReminderType().equals("Give Reminder")){
-                    scheduledPayments.get(i).remindPayment(date, paymentDate);
+                if(payment.getReminderType().equals("Give Reminder")){
+                    payment.remindPayment(date, paymentDate);
                 }else{
                     UserInterface.showPaymentMessage(paymentDate, "Deduct");
-                    scheduledPayments.get(i).reoccurPayment(date);
+                    payment.reoccurPayment(date);
                 }
 
                 File file = new File("serialized\\scheduled_payment_" + i + ".ser");
                 file.delete();
-                SERIALIZER.serializeObject(scheduledPayments.get(i), "serialized\\scheduled_payment_" + i + ".ser");
+                SERIALIZER.serializeObject(payment, "serialized\\scheduled_payment_" + i + ".ser");
 
                 updateScheduledPayments();
             }
@@ -340,6 +341,8 @@ public class FinancialManagementSystem{
             String depositDescriptions = spreadsheet.readFromSpreadsheet(i, 5);
             String purchaseDescriptions = spreadsheet.readFromSpreadsheet(i, 6);
 
+            //Do not add the entry into our HistoryData if it contains no financial changes and is not the first
+            //day of the year (first entry in the spreadsheet should be added to provide reference for other entries).
             if(costTotal == 0.00 && depositTotal == 0.00 && !date.equals(LocalDate.of(date.getYear(), 1, 1))){
                 continue;
             }
@@ -351,7 +354,7 @@ public class FinancialManagementSystem{
     }
 
     //!Formatting stuff!
-    private static LocalDate convertToLocalDate(String spreadsheetDate) throws IOException, ParseException {
+    private static LocalDate convertToLocalDate(String spreadsheetDate) throws ParseException {
         //This little work around is needed to essentially convert the given instance of the Date class to an instance
         //of the localDate class, which is far easier to work with and read dates from.
         DateFormat formatter = new SimpleDateFormat("EEE MMM dd HH:mm:ss zzz yyyy");

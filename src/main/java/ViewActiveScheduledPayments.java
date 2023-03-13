@@ -138,7 +138,6 @@ public class ViewActiveScheduledPayments extends JFrame implements Colors, Fonts
                     FinancialManagementSystem.updateScheduledPayments();
                     new ViewActiveScheduledPayments(FinancialManagementSystem.getScheduledPayments());
                 } catch (IOException ex) {
-                    ex.printStackTrace();
                     UserInterface.showErrorMessage("I/o Exception", "ERROR: An I/o exception " +
                             "has occurred.");
                 } catch (ClassNotFoundException ex) {
