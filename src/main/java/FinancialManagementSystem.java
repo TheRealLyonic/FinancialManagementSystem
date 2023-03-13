@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InvalidClassException;
@@ -201,6 +202,13 @@ public class FinancialManagementSystem{
                 lastSpreadsheetDate = lastSpreadsheetDate.plusDays(1);
 
                 while(!lastSpreadsheetDate.equals(currentLocalDate)){
+
+                    if(lastSpreadsheetDate.isAfter(currentLocalDate)){
+                        UserInterface.showErrorMessage("Critical Error", "ERROR: For whatever " +
+                                "reason, the program has filled the spreadsheet beyond the current date. Please " +
+                                "check your local spreadsheet for any signs of damage, and re-run the program.");
+                    }
+
                     enterDefaultInformation(row, lastSpreadsheetDate, spreadsheet);
                     row++;
 

@@ -7,4 +7,5 @@ public interface Colors {
     Color FINANCIAL_ORANGE = new Color(222, 125, 51);
     Color FINANCIAL_GREEN = new Color(36, 138, 29);
     Color NEGATIVE_RED = new Color(176, 35, 49);
+    Color STANDARD_PURPLE = new Color(128, 50, 173);
 }

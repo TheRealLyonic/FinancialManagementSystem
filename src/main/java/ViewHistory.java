@@ -29,6 +29,7 @@ public class ViewHistory extends JFrame implements Colors, Fonts, ActionListener
         this.setSize(710, 620);
         this.getContentPane().setBackground(FINANCIAL_GREEN);
         this.setLayout(null);
+        this.setResizable(false);
 
         //!HistoryData Stuff!
         this.historyData = historyData;
@@ -41,6 +42,7 @@ public class ViewHistory extends JFrame implements Colors, Fonts, ActionListener
         historyTable.setForeground(SUBDUED_WHITE);
         historyTable.setFont(ROBOTO_BUTTON);
         historyTable.setEnabled(false);
+        historyTable.setRowHeight(25);
         historyTable.getTableHeader().setReorderingAllowed(false);
 
         //!TableContainer Stuff!
@@ -80,6 +82,21 @@ public class ViewHistory extends JFrame implements Colors, Fonts, ActionListener
                 }
 
                 column.setPreferredWidth(preferredWidth + 40);
+
+                Color columnColor;
+                //Normally I'd use a switch statement for this, but the or-conditionals make it more efficient to
+                //use an if here for me.
+                if(i == 0){
+                    columnColor = FINANCIAL_BLUE;
+                }else if(i == 1 || i == 4){
+                    columnColor = STANDARD_PURPLE;
+                }else if(i == 2 || i == 6){
+                    columnColor = NEGATIVE_RED;
+                }else{
+                    columnColor = FINANCIAL_GREEN;
+                }
+
+                column.setCellRenderer(new ColoredCellRenderer(columnColor));
             }
         }
 

@@ -41,6 +41,7 @@ public class ViewActiveScheduledPayments extends JFrame implements Colors, Fonts
         scheduledPaymentsTable.setForeground(SUBDUED_WHITE);
         scheduledPaymentsTable.setFont(ROBOTO_BUTTON);
         scheduledPaymentsTable.setEnabled(false);
+        scheduledPaymentsTable.setRowHeight(25);
         scheduledPaymentsTable.getTableHeader().setReorderingAllowed(false);
 
         //!TableContainer stuff!
@@ -81,6 +82,16 @@ public class ViewActiveScheduledPayments extends JFrame implements Colors, Fonts
                 }
 
                 column.setPreferredWidth(preferredWidth + 40);
+
+                Color columnColor;
+
+                if(i == 0 || i == 3){
+                    columnColor = NEGATIVE_RED;
+                }else{
+                    columnColor = FINANCIAL_BLUE;
+                }
+
+                column.setCellRenderer(new ColoredCellRenderer(columnColor));
             }
         }
 
@@ -95,9 +106,9 @@ public class ViewActiveScheduledPayments extends JFrame implements Colors, Fonts
             buttons[i].addActionListener(this);
 
             if(i == 0){
-                buttons[i].setLocation(35, scheduledPaymentsTable.getY() + 30);
+                buttons[i].setLocation(35, scheduledPaymentsTable.getY() + 35);
             }else{
-                buttons[i].setLocation(buttons[i - 1].getX(), buttons[i - 1].getY() + 17);
+                buttons[i].setLocation(buttons[i - 1].getX(), buttons[i - 1].getY() + 25);
             }
 
             this.add(buttons[i]);
