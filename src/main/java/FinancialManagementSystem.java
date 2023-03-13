@@ -37,7 +37,7 @@ public class FinancialManagementSystem{
         //user manually edits a purchase or deposit summary.
         autoSizeColumns();
 
-        addHistoryData();
+        createHistoryData();
 
         new UserInterface();
     }
@@ -321,7 +321,7 @@ public class FinancialManagementSystem{
         spreadsheet.writeToSpreadsheet(row, 6, "No purchases for this day.", "String");
     }
 
-    public static void addHistoryData() throws IOException, ParseException {
+    public static void createHistoryData() throws IOException, ParseException{
         historyData.clear();
 
         for(int i = 1; i <= spreadsheet.getLastRow(); i++){
@@ -351,6 +351,21 @@ public class FinancialManagementSystem{
 
             historyData.add(historyDataInstance);
         }
+    }
+
+    public static void addHistoryData() throws IOException{
+        //Definitely a bit messy, but it seemed better than creating single-use variables for every one of these.
+        HistoryData addedHistoryData = new HistoryData(
+                currentLocalDate,
+                new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 1))).setScale(2, RoundingMode.HALF_EVEN).doubleValue(),
+                new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 2))).setScale(2, RoundingMode.HALF_EVEN).doubleValue(),
+                new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 3))).setScale(2, RoundingMode.HALF_EVEN).doubleValue(),
+                new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 4))).setScale(2, RoundingMode.HALF_EVEN).doubleValue(),
+                spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 5),
+                spreadsheet.readFromSpreadsheet(spreadsheet.getLastRow(), 6)
+        );
+
+        historyData.add(addedHistoryData);
     }
 
     //!Formatting stuff!

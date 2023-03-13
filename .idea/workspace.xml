@@ -9,11 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Drastically improved table formatting and readability.">
+    <list default="true" id="04659ad5-ff63-42de-afb2-679c39f6f02c" name="Changes" comment="Few more bug fixes and optimizations, should be ready for 2.0 release now.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/FinancialManagementSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ViewActiveScheduledPayments.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ViewActiveScheduledPayments.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ViewHistory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ViewHistory.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +183,8 @@
       <workItem from="1678687306724" duration="7000" />
       <workItem from="1678687470415" duration="192000" />
       <workItem from="1678724956567" duration="530000" />
-      <workItem from="1678727256395" duration="1018000" />
+      <workItem from="1678727256395" duration="1486000" />
+      <workItem from="1678729176339" duration="669000" />
     </task>
     <task id="LOCAL-00020" summary="The program can now account for any missing dates within a given spreadsheet. Additionally, if the program hasn't been used since the previous year, and there does not exist a spreadsheet with the system's current year as it's name, an error will no longer be thrown. Instead, the findSpreadsheet() method which has been added to the FinancialManagementSystem class will now use a for-loop (Starting at the system's current year and ending at the year 2001) to decrement through previous years until it finds an Excel file with the given year as its name. As of now, regardless of how long it has been since the user has last used the program, everything should run correctly, and then continue as normal after a new spreadsheet has been created for that year, and all missing entries have been accounted for in all spreadsheets in-between.">
       <created>1674231322745</created>
@@ -193,13 +192,6 @@
       <option name="presentableId" value="LOCAL-00020" />
       <option name="project" value="LOCAL" />
       <updated>1674231322745</updated>
-    </task>
-    <task id="LOCAL-00024" summary="Turns out there was still a problem with the Pie chart displaying colors correctly, fixed all bugs in that department, and now it will always color the spent percentage red, and the saved percentage blue.">
-      <created>1672658673700</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1672658673700</updated>
     </task>
     <task id="LOCAL-00025" summary="Improved rendering of the balance text by making its size and position dynamic, based on how large it's quantity is, so the text always appears mostly centered. Also began work on the Expenditure class, and made an icon for the new window. It's JFrame appearance will be more or less the same as the Deposit class, with minor differences where necessary.">
       <created>1672662993719</created>
@@ -530,7 +522,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678676381318</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="Few more bug fixes and optimizations, should be ready for 2.0 release now.">
+      <created>1678728391675</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1678728391676</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -552,7 +551,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Begun work on monthly payment functionality, and removed additional resources used for deprecated login system." />
     <MESSAGE value="Continued work on monthly payments, beginning to optimize the way error handling works, by replacing the 'WarningText' objects with error dialogs via the JOptionPane class" />
     <MESSAGE value="Finally optimized the way in which additional windows are created within the program, so that any class which requires its own interface will extend AdditionalWindow.java as opposed to the JFrame class itself, so that the more redundant operations and common formatting are taken care of without repeated lines of code in each class." />
     <MESSAGE value="Started work on basic error-handling in the ScheduledPayment class, as well as finished refactoring all instances of 'MonthlyPayment' to 'ScheduledPayment' to better reflect the purpose of the new feature. Massive UI changes to-be done in the ScheduledPayment class, so that all the necessary information may be collected." />
@@ -577,7 +575,8 @@
     <MESSAGE value="Taking a small break, pushing this just to maintain progress until next session." />
     <MESSAGE value="Just some small bug fixes." />
     <MESSAGE value="Drastically improved table formatting and readability." />
-    <option name="LAST_COMMIT_MESSAGE" value="Drastically improved table formatting and readability." />
+    <MESSAGE value="Few more bug fixes and optimizations, should be ready for 2.0 release now." />
+    <option name="LAST_COMMIT_MESSAGE" value="Few more bug fixes and optimizations, should be ready for 2.0 release now." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
