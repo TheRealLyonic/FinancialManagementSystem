@@ -316,6 +316,9 @@ public class FinancialManagementSystem{
         historyData.clear();
 
         for(int i = 1; i <= spreadsheet.getLastRow(); i++){
+            //Adds all of the information from the spreadsheet into local variables, and then uses those variables
+            //to create a HistoryData object, which is then added to the ArrayList. Repeat this for each entry in the
+            //spreadsheet. This feels a little slow...But it runs fine, so I'm okay with it for now.
             LocalDate date = convertToLocalDate(spreadsheet.readFromSpreadsheet(i, 0));
             double startingBalance = new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(i, 1))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
             double costTotal = new BigDecimal(Double.parseDouble(spreadsheet.readFromSpreadsheet(i, 2))).setScale(2, RoundingMode.HALF_EVEN).doubleValue();
